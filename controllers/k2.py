@@ -2,17 +2,8 @@
 
 import json
 from databases.test import Testencio
-from pymongo import MongoClient
+import base64
 
-def getCommunity():
-    valor = int("0")
-    print request.vars["texto"]
-    if "texto" in request.vars:
-        print "Texto existe"
-    for k,v in request.vars.iteritems():
-        print k + " " + v
-        valor = v
-    return response.json({"Clave": valor,"Key":"Value"})
 
 def testCan():
     test = Testencio()
@@ -21,6 +12,28 @@ def testCan():
 def getDocument():
     file = open("/home/kevin/texto.txt","rt")
     return file.read()
+
+def getFileInBytes():
+    file = open("/home/kevin/Notebook.3DS","rb")
+    return file.read()
+
+def getFileEncoding():
+    name = "Notebook.3DS"
+    file = open("/home/kevin/" + name, "rb" ).read()
+    encodeFile = base64.b64encode(file)
+    #response.headers["Content-Type"] = "application/octet-stream"
+    response.headers["Content-Type"] = "application/octet-stream"
+    return response.json({name:encodeFile})
+
+def getFileDecoding():
+    if len(request.vars) <= 0:
+        return "No he recibido ningun parametro"
+    if not "file" in request.vars:
+        return "No he recibido ningún archivo"
+    encodeStr = str(request.vars["file"])
+    encodeFile = base64.b64decode(file)
+    response.headers["Content-Type"] = "application/octet-stream"
+    return encodeFile
 
 def getJson():
     file = open("/home/kevin/jsonInput","rt")
@@ -62,44 +75,3 @@ def insertDatabase():
             except Exception , e:
                 print "parse Error" TODO '''
     return "Todo ha sido guardado"
-
-def insertCommunity():
-    if len(request.vars) <= 0:
-        return "No he recibido ningun parametro"
-    if not "community" in request.vars:
-        return "No he recibido ninguna comunidad"
-    connection = MongoClient("localhost", 27017)
-    db = connection["warehouse"]
-    col = db["Communities"]
-    try:
-        parse = json.loads(str(request.vars["community"]))
-        col.insert(parse)
-    except Exception, e:
-        print e
-    return "Exito"
-
-def insertPost():
-    if len(request.vars) <= 0:
-        return "No he recibido ningun post"
-    if not "post" in request.vars:
-        return "No he recibido ningun post"
-    connection = MongoClient("localhost", 27017)
-    db = connection["warehouse"]
-    col = db["Posts"]
-    try:
-        parse = json.loads(str(request.vars["post"]))
-        col.insert(parse)
-    except Exception, e:
-        print e
-    return "Exito"
-
-def getPosts():
-    if not "id_community" in request.vars:
-        return "No he recibido la id por parametro"
-    listaPosts = []
-    connection = MongoClient("localhost", 27017)
-    db = connection["warehouse"]
-    for d in col.find({},{"_id":0}):
-        lista.append(d)
-    return response.json(lista)
-    return "Exito"
