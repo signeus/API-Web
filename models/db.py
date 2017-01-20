@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from http.http_method_constraint import HTTP_METHOD_CONSTRAINT
 from pymongo import MongoClient
 
 # -------------------------------------------------------------------------

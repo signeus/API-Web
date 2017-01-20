@@ -1,20 +1,35 @@
 # -*- coding: utf-8 -*-
 import json
+from datetime import datetime
+from pymongo.collection import ReturnDocument
 
-def prueba():
-    return request.env.request_method
-
+@HTTP_METHOD_CONSTRAINT("GET", request)
 def getCommunity():
-    valor = int("0")
-    print request.vars["texto"]
-    if "texto" in request.vars:
-        print "Texto existe"
-    for k,v in request.vars.iteritems():
-        print k + " " + v
-        valor = v
-    return response.json({"Clave": valor,"Key":"Value"})
+    if len(request.vars) <= 0:
+        return "No he recibido ningún parametro"
+    if not "id" in request.vars:
+        return "No he recibido ningún Id"
+    id = request.vars["id"]
+    connection = MongoClient("localhost", 27017)
+    db = connection["warehouse"]
+    col = db["Communities"]
+    value = col.find_one({"id": id},{"_id":0})
+    return response.json(value)
 
-def insertCommunity():
+@HTTP_METHOD_CONSTRAINT("GET", request)
+def getCommunities():
+    lista = []
+    connection = MongoClient("localhost", 27017)
+    db = connection["warehouse"]
+    col = db["Communities"]
+    lista = [elem for elem in col.find({},{"_id":0})]
+    #for d in col.find({},{"_id":0}):
+    #    lista.append(d)
+    return response.json(lista)
+
+#{id:ex, name:Java developer}
+@HTTP_METHOD_CONSTRAINT("POST", request)
+def newCommunity():
     if len(request.vars) <= 0:
         return "No he recibido ningun parametro"
     if not "community" in request.vars:
@@ -24,16 +39,42 @@ def insertCommunity():
     col = db["Communities"]
     try:
         parse = json.loads(str(request.vars["community"]))
+        parse["date"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print parse
         col.insert(parse)
     except Exception, e:
         print e
     return "Exito"
 
-def getCommunities():
-    lista = []
+@HTTP_METHOD_CONSTRAINT("POST", request)
+def updateCommunity():
+    if len(request.vars) <= 1:
+        return "No he recibido ningun parametro"
+    if not "id" in request.vars:
+        return "No he recibido ninguna Id"
+    if not "name" in request.vars:
+        return "No he recibido ningún parametro de modificación"
+    id = request.vars["id"]
+    name = request.vars["name"]
     connection = MongoClient("localhost", 27017)
     db = connection["warehouse"]
     col = db["Communities"]
-    for d in col.find({},{"_id":0}):
-        lista.append(d)
-    return response.json(lista)
+    value = col.find_one_and_update({"id" : id},{'$set' : {'name': name}}, return_document=ReturnDocument.AFTER)
+    print value
+    return value
+
+def deleteCommunity():
+    if len(request.vars) <= 0:
+        return "No he recibido ningun parametro"
+    if not "id" in request.vars:
+        return "No he recibido ningún id"
+    id = request.vars["id"]
+    connection = MongoClient("localhost", 27017)
+    db = connection["warehouse"]
+    col = db["Communities"]
+    if col.count({"id": id}) <= 0:
+        return "No existe ese registro"
+    result = col.delete_one({"id": id})
+    if result.deleted_count >= 1:
+        return "Exito, comunidad eliminada"
+    return "No ha sido eliminado ese elemento"
