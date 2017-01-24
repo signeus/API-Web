@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from http.http_method_constraint import HTTP_METHOD_CONSTRAINT
-from pymongo import MongoClient
+from decorators.check_parameters import CHECK_PARAMETERS
+from core.core import Core
 
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too

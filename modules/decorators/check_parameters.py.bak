@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+from k_exception.check_exception import CheckException
+
+class CHECK_PARAMETERS:
+	def __init__(self, reqVars, params, method):
+		self.reqVars = reqVars
+		self.params = params
+		self.method = method
+
+	def __call__(self, function):
+		def wrapped_func():
+			print "Nothing"
+			if len(self.reqVars) <= 0:
+                raise CheckException(self.method, {}, "EMPTY")
+			for k, v in self.params.iteritems():
+				if v == "mandatory":
+					if not k in self.requestVars:
+						return "tomate"
+						raise CheckException(self.method, {k:v}, "NOT_FOUND")
+			return function()
+		return wrapped_func

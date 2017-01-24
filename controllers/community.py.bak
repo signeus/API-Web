@@ -2,8 +2,10 @@
 import json
 from datetime import datetime
 from pymongo.collection import ReturnDocument
+from decorators.check_parameters import CHECK_PARAMETERS
 
 @HTTP_METHOD_CONSTRAINT("GET", request)
+@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"getCommunity")
 def getCommunity():
     if len(request.vars) <= 0:
         return "No he recibido ningún parametro"
@@ -63,6 +65,7 @@ def updateCommunity():
     print value
     return value
 
+@HTTP_METHOD_CONSTRAINT("DELETE", request)
 def deleteCommunity():
     if len(request.vars) <= 0:
         return "No he recibido ningun parametro"

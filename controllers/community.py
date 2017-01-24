@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
 from datetime import datetime
-from pymongo.collection import ReturnDocument
 
 @HTTP_METHOD_CONSTRAINT("GET", request)
+@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"getCommunity")
 def getCommunity():
     if len(request.vars) <= 0:
         return "No he recibido ningún parametro"
@@ -29,22 +29,11 @@ def getCommunities():
 
 #{id:ex, name:Java developer}
 @HTTP_METHOD_CONSTRAINT("POST", request)
+@CHECK_PARAMETERS(request.vars,{"community":"mandatory"},"newCommunity")
 def newCommunity():
-    if len(request.vars) <= 0:
-        return "No he recibido ningun parametro"
-    if not "community" in request.vars:
-        return "No he recibido ninguna comunidad"
-    connection = MongoClient("localhost", 27017)
-    db = connection["warehouse"]
-    col = db["Communities"]
-    try:
-        parse = json.loads(str(request.vars["community"]))
-        parse["date"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print parse
-        col.insert(parse)
-    except Exception, e:
-        print e
-    return "Exito"
+	myCore = Core()
+	result = myCore.CommunityOperation("createCommunity", request.vars)
+	return result
 
 @HTTP_METHOD_CONSTRAINT("POST", request)
 def updateCommunity():
