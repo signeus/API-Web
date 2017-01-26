@@ -49,7 +49,6 @@ def updateCommunity():
     db = connection["warehouse"]
     col = db["Communities"]
     value = col.find_one_and_update({"id" : id},{'$set' : {'name': name}}, return_document=ReturnDocument.AFTER)
-    print value
     return value
 
 @HTTP_METHOD_CONSTRAINT("DELETE", request)

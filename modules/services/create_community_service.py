@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from interfaces.i_service import IService
+from services.databases.db_service import DBService
 
 class CreateCommunityService (IService):
 	def __init__(self, core, parameters):
@@ -8,13 +9,10 @@ class CreateCommunityService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		connection = MongoClient("localhost", 27017)
-		db = connection["warehouse"]
-		col = db["Communities"]
 		try:
 			parse = json.loads(str(self.parameters["community"]))
 			parse["date"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-			#col.insert(parse)
+			service.insertIn2Collection("Communities",)
 		except Exception, e:
 			print e
 			return "Ha habido un error al crear la comunidad"
