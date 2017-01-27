@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from dbservices.user.create_user_service import CreateUserService
+#from dbservices.user.create_user_service import CreateUserService
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
 from dbservices.community.get_all_community_service import GetAllCommunityService

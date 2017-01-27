@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
-from services.databases.db_service import DBService
+from services.dbservices.db_service import DBService
 
 class GetByIdCommunityService (IService):
 	def __init__(self, core, parameters):

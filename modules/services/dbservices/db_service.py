@@ -25,7 +25,7 @@ class DBService:
 		data_completed = insertDateModified(new_values)
 		value = col.find_one_and_update(
 										{"_id"   : CasterObjectId().castHex2ObjectId(_id)},
-										{'$set' : new_values},
+										{'$set'  : new_values},
 										return_document=ReturnDocument.AFTER
 									   )
 		return value

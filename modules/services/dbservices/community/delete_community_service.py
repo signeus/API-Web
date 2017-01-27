@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from service.interfaces.i_service import IService
-from services.databases.db_service import DBService
+from services.interfaces.i_service import IService
+from services.dbservices.db_service import DBService
 
 class DeleteCommunityService (IService):
 	def __init__(self, core, parameters):
