@@ -20,8 +20,10 @@ class CheckException(Exception):
 			for k, v in self.parameters.iteritems():
 				values += " " + k
 			msg += values
+		print msg
 		return msg
 		
 	def __str__(self):
+		print self.message
 		return self.message
 

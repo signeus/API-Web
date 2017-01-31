@@ -1,11 +1,27 @@
 # -*- coding: utf-8 -*-
 import types
 import json
+from datetime import datetime
 from databases.mongo_database_manager import MongoDatabaseManager
 from casters.caster_object_id import CasterObjectId
 from pymongo.collection import ReturnDocument
 
 class DBService:
+	
+	def insertDateCreated(self, data):
+		try:
+			data["date_created"] = datetime.now()#.strftime('%Y-%m-%d %H:%M:%S')
+			data["date_modified"] = datetime.now()#.strftime('%Y-%m-%d %H:%M:%S')
+			return data
+		except Exception, e:
+			return "Has been appears a issue with the Json 'Date_Created'\n Exception: " + e.message
+			
+	def insertDateModified(self, data):
+		try:
+			data["date_modified"] = datetime.now()#.strftime('%Y-%m-%d %H:%M:%S')
+			return data
+		except Exception, e:
+			return "Has been appears a issue with the Json 'Date_Modified'\n Exception: " + e.message
 	
 	def openCollection(self, collection):
 		db = MongoDatabaseManager().connect2Database("warehouse")
@@ -15,14 +31,19 @@ class DBService:
 	def insertIn2Collection(self, collection, data):
 		db = MongoDatabaseManager().connect2Database("warehouse")
 		col = db[collection]
-		data_completed = insertDateCreated(data)
+		data_completed = self.insertDateCreated(data)
 		result = col.insert(data_completed)
-		return result
+		print result
+		if len(result) <= 0:
+			raise Exception("Error inserting")
+		return data_completed
+		
+		
 
 	def updateIn2Collection(self, collection, _id, new_values):
 		db = MongoDatabaseManager().connect2Database("warehouse")
 		col = db[collection]
-		data_completed = insertDateModified(new_values)
+		data_completed = self.insertDateModified(new_values)
 		value = col.find_one_and_update(
 										{"_id"   : CasterObjectId().castHex2ObjectId(_id)},
 										{'$set'  : new_values},
@@ -37,9 +58,9 @@ class DBService:
 		db = MongoDatabaseManager().connect2Database("warehouse")
 		col = db[collection]
 		if col.count({"_id": CasterObjectId().castHex2ObjectId(_id)}) <= 0:
-			return "No existe ese registro"
+			return "Not founded that id"
 		result = col.delete_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
-		return result
+		return result.deleted_count
 
 	def getFirstByFields(self, collection, fields, filters):
 		db = MongoDatabaseManager().connect2Database("warehouse")
@@ -78,21 +99,3 @@ class DBService:
 				rowResult.update({str(key):str(value)})
 			result.append(rowResult)
 		return result
-
-
-	def insertDateCreated(self, data):
-		try:
-			parse = json.loads(str(data))
-			parse["date_created"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-			parse["date_modified"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-			return parse
-		except Exception, e:
-			return "Has been appears a issue with the Json 'Date_Created': Exception" + e.message
-			
-	def insertDateModified(self, data):
-		try:
-			parse = json.loads(str(data))
-			parse["date_modified"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-			return parse
-		except Exception, e:
-			return "Has been appears a issue with the Json 'Date_Modified': Exception" + e.message

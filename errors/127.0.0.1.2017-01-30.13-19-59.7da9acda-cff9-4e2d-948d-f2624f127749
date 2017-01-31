@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S'<class \'pymongo.errors.OperationFailure\'> exception: Modifiers operate on fields but we found a String instead. For example: {$mod: {<field>: ...}} not {$set: "{"name":"Pepe"}"}'
+p3
+sS'layer'
+p4
+S'/home/kevin/web2py/applications/kayoo/controllers/user.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\nimport json\nfrom core.core import Core\n\n@HTTP_METHOD_CONSTRAINT("GET", request)\ndef getFirstByFieldsUser():\n    core = Core()\n    result = core.UserOperation("getFirstByFieldsUser", request.vars)\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("GET", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"getByIdUser")\ndef getByIdUser():\n    _id = request.vars["id"]\n    core = Core()\n    result = core.UserOperation("getByIdUser", {"_id":_id})\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("GET", request)\ndef getUsers():\n    core = Core()\n    result = core.UserOperation("getAllUser", {})\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("DELETE", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"deleteUser")\ndef deleteUser():\n    _id = request.vars["id"]\n    core = Core()\n    result = core.UserOperation("deleteUser", {"_id":_id})\n    if result >= 1:\n        return "Success"\n    return "Failed"\n\n@HTTP_METHOD_CONSTRAINT("POST", request)\ndef newUser():\n    core = Core()\n    result = core.UserOperation("createUser", request.vars)\n    return result\n\n@HTTP_METHOD_CONSTRAINT("POST", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updateUser")\ndef updateUser():\n    _id = request.vars["id"]\n    _new_values = request.vars["new_values"]\n    core = Core()\n    result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})\n    return response.json(result)\n\nresponse._vars=response._caller(updateUser)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/kevin/web2py/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/kevin/web2py/applications/kayoo/controllers/user.py", line 50, in <module>\n  File "/home/kevin/web2py/gluon/globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "applications/kayoo/modules/http/http_method_constraint.py", line 11, in wrapped_func\n  File "applications/kayoo/modules/decorators/check_parameters.py", line 50, in wrapped_func\n    return function()\n  File "/home/kevin/web2py/applications/kayoo/controllers/user.py", line 47, in updateUser\n    result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})\n  File "applications/kayoo/modules/core/core.py", line 6, in UserOperation\n    return self.FactoryOperation(serviceName, parameters)\n  File "applications/kayoo/modules/core/core.py", line 12, in FactoryOperation\n    return ServiceFactory(serviceName, self, parameters).run()\n  File "applications/kayoo/modules/services/dbservices/user/update_user_service.py", line 12, in run\n    return DBService().updateIn2Collection(\'Users\', self.parameters[\'_id\'], self.parameters[\'new_values\'])\n  File "applications/kayoo/modules/services/dbservices/db_service.py", line 47, in updateIn2Collection\n    return value\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/collection.py", line 2422, in find_one_and_update\n    sort, upsert, return_document, **kwargs)\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/collection.py", line 2198, in __find_and_modify\n    collation=collation)\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/collection.py", line 232, in _command\n    collation=collation)\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/pool.py", line 419, in command\n    collation=collation)\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/network.py", line 116, in command\n    parse_write_concern_error=parse_write_concern_error)\n  File "/home/kevin/.local/lib/python2.7/site-packages/pymongo/helpers.py", line 210, in _check_command_response\n    raise OperationFailure(msg % errmsg, code, response)\nOperationFailure: exception: Modifiers operate on fields but we found a String instead. For example: {$mod: {<field>: ...}} not {$set: "{"name":"Pepe"}"}\n'
+p11
+s.
