@@ -61,8 +61,8 @@ def newPost():
     response.headers['Access-Control-Allow-Credentials'] = True
     response.headers['Access-Control-Allow-Headers']= "origin, content-type, accept"
     response.headers['Access-Control-Allow-Methods']= "GET, POST, OPTIONS, DELETE"
-    result = core.PostOperation("createPost", request.vars)
-    return result
+    result = core.PostOperation("createPost", dict(request.vars))
+    return json.dumps(result)
 
 @HTTP_METHOD_CONSTRAINT("POST", request)
 @CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updatePost")
