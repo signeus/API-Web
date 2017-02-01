@@ -5,6 +5,7 @@ from dbservices.user.delete_user_service import DeleteUserService
 from dbservices.user.get_all_user_service import GetAllUserService
 from dbservices.user.get_by_id_user_service import GetByIdUserService
 from dbservices.user.get_first_by_fields_user_service import GetFirstByFieldsUserService
+from dbservices.user.suscribe_user_to_community import SuscribeUser2Community
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -30,6 +31,7 @@ class ServiceFactory (object):
 			"getAllUser" 				: GetAllUserService,
 			"getByIdUser"				: GetByIdUserService,
 			"getFirstByFieldsUser" 		: GetFirstByFieldsUserService,
+			"suscribeUser2Community"	: SuscribeUser2Community,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,

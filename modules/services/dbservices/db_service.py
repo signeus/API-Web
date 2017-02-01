@@ -70,8 +70,9 @@ class DBService:
         result = {}
         values["date_created"] = int(values["date_created"].strftime("%s"))
         values["date_modified"] = int(values["date_modified"].strftime("%s"))
+        values["_id"] = CasterObjectId().castObjectId2Hex(values["_id"])
         for key, value in values.iteritems():
-            result.update({str(key): str(value)})
+            result.update({str(key): value})
         return result
 
     def getFirstByFields(self, collection, fields, filters):
@@ -83,7 +84,7 @@ class DBService:
             return "Not founded results"
         result = {}
         for key,value in values.iteritems():
-            result.update({str(key):str(value)})
+            result.update({str(key):value})
         return result
 
     def getAll(self, collection):

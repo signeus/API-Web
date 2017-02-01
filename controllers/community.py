@@ -14,12 +14,20 @@ def getFirstByFieldsCommunity():
 def getByIdCommunity():
     _id = request.vars["id"]
     core = Core()
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = True
+    response.headers['Access-Control-Allow-Headers'] = "origin, content-type, accept"
+    response.headers['Access-Control-Allow-Methods'] = "GET, POST, OPTIONS, DELETE"
     result = core.CommunityOperation("getByIdCommunity", {"_id":_id})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT("GET", request)
 def getCommunities():
     core = Core()
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = True
+    response.headers['Access-Control-Allow-Headers'] = "origin, content-type, accept"
+    response.headers['Access-Control-Allow-Methods'] = "GET, POST, OPTIONS, DELETE"
     result = core.CommunityOperation("getAllCommunity", {})
     return response.json(result)
 

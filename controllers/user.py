@@ -52,4 +52,6 @@ def updateUser():
     return response.json(result)
 
 def suscribeUser2Community():
+    core = Core()
+    result = core.UserOperation("suscribeUser2Community", dict(request.vars))
     return "Suscrito"
