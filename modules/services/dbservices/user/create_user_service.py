@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 from services.dbservices.db_service import DBService
+import base64
 
 class CreateUserService (IService):
 	def __init__(self, core, parameters):
@@ -9,11 +10,15 @@ class CreateUserService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		_id = DBService().insertIn2Collection("Users", self.parameters)
+		image = self.parameters["avatar"]
+		del self.parameters["avatar"]
+		record = DBService().insertIn2Collection("Users", self.parameters)
 		##Saving the image
-		avatarFile = open("/home/kevin/Pictures/avatares/" + _id + ".png","wb")
-		avatarFile.write(self.parameters["avatar"])
+		path = "/home/kevin/Pictures/avatares/" + str(record["_id"]) + ".png"
+		avatarFile = open(path,"wb")
+		decodeFile = base64.b64decode(image)
+		##encodeFile = base64.b64encode(self.parameters["avatar"])
+		avatarFile.write(decodeFile)
 		avatarFile.close()
 		##End Saving the image
-		del self.parameters["avatar"]
-		return _id
+		return record

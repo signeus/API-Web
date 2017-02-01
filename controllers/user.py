@@ -13,6 +13,10 @@ def getFirstByFieldsUser():
 def getByIdUser():
     _id = request.vars["id"]
     core = Core()
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = True
+    response.headers['Access-Control-Allow-Headers']= "origin, content-type, accept"
+    response.headers['Access-Control-Allow-Methods']= "GET, POST, OPTIONS, DELETE"
     result = core.UserOperation("getByIdUser", {"_id":_id})
     return response.json(result)
 
@@ -36,7 +40,7 @@ def deleteUser():
 def newUser():
     core = Core()
     result = core.UserOperation("createUser", request.vars)
-    return result
+    return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT("POST", request)
 @CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updateUser")
@@ -46,3 +50,6 @@ def updateUser():
     core = Core()
     result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})
     return response.json(result)
+
+def suscribeUser2Community():
+    return "Suscrito"

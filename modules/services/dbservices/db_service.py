@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import types
-import json
 from datetime import datetime
 from databases.mongo_database_manager import MongoDatabaseManager
 from casters.caster_object_id import CasterObjectId
@@ -35,6 +34,9 @@ class DBService:
         result = col.insert(data_completed)
         if len(str(result)) <= 0:
             raise Exception("Error inserting")
+        data_completed["_id"] = str(result)
+        data_completed["date_created"] = int(data_completed["date_created"].strftime("%s"))
+        data_completed["date_modified"] = int(data_completed["date_modified"].strftime("%s"))
         return data_completed
 
     def updateIn2Collection(self, collection, _id, new_values):
@@ -59,40 +61,42 @@ class DBService:
         result = col.delete_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
         return result.deleted_count
 
-	def getFirstByFields(self, collection, fields, filters):
-		db = MongoDatabaseManager().connect2Database("warehouse")
-		col = db[collection]
-		#TODO: The filters
-		values = col.find_one(fields)
-		if type(values) == types.NoneType or len(values) <= 0:
-			return "Not founded results"
-		result = {}
-		for key,value in values.iteritems():
-			result.update({str(key):str(value)})
-		return result
+    def getById(self, collection, _id):
+        db = MongoDatabaseManager().connect2Database("warehouse")
+        col = db[collection]
+        values = col.find_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
+        if type(values) == types.NoneType or len(values) <= 0:
+            return "Not founded results"
+        result = {}
+        values["date_created"] = int(values["date_created"].strftime("%s"))
+        values["date_modified"] = int(values["date_modified"].strftime("%s"))
+        for key, value in values.iteritems():
+            result.update({str(key): str(value)})
+        return result
 
-	def getById(self, collection, _id):
-		db = MongoDatabaseManager().connect2Database("warehouse")
-		col = db[collection]
-		values = col.find_one({"_id" : CasterObjectId().castHex2ObjectId(_id)})
-		if type(values) == types.NoneType or len(values) <= 0:
-			return "Not founded results"
-		result = {}
-		for key,value in values.iteritems():
-			result.update({str(key):str(value)})
-		return result
+    def getFirstByFields(self, collection, fields, filters):
+        db = MongoDatabaseManager().connect2Database("warehouse")
+        col = db[collection]
+        #TODO: The filters
+        values = col.find_one(fields)
+        if type(values) == types.NoneType or len(values) <= 0:
+            return "Not founded results"
+        result = {}
+        for key,value in values.iteritems():
+            result.update({str(key):str(value)})
+        return result
 
-	def getAll(self, collection):
-		db = MongoDatabaseManager().connect2Database("warehouse")
-		col = db[collection]
-		values = col.find({})
-		if type(values) == types.NoneType:
-			return "Not founded results"
-		lista = [elem for elem in col.find({})]
-		result = []
-		for row in lista:
-			rowResult = {}
-			for key, value in row.iteritems():
-				rowResult.update({str(key):str(value)})
-			result.append(rowResult)
-		return result
+    def getAll(self, collection):
+        db = MongoDatabaseManager().connect2Database("warehouse")
+        col = db[collection]
+        values = col.find({})
+        if type(values) == types.NoneType:
+            return "Not founded results"
+        lista = [elem for elem in col.find({})]
+        result = []
+        for row in lista:
+            rowResult = {}
+            for key, value in row.iteritems():
+                rowResult.update({str(key):str(value)})
+            result.append(rowResult)
+        return result

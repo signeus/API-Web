@@ -36,7 +36,11 @@ def deleteCommunity():
 @HTTP_METHOD_CONSTRAINT("POST", request)
 def newCommunity():
     core = Core()
-    result = core.CommunityOperation("createCommunity", request.vars)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = True
+    response.headers['Access-Control-Allow-Headers'] = "origin, content-type, accept"
+    response.headers['Access-Control-Allow-Methods'] = "GET, POST, OPTIONS, DELETE"
+    result = core.CommunityOperation("createCommunity", dict(request.vars))
     return result
 
 @HTTP_METHOD_CONSTRAINT("POST", request)
