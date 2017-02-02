@@ -10,15 +10,17 @@ class CreateUserService (IService):
 		self.parameters = parameters
 		
 	def run(self):
+		image = None
 		image = self.parameters["avatar"]
 		del self.parameters["avatar"]
 		record = DBService().insertIn2Collection("Users", self.parameters)
-		##Saving the image
-		path = "/home/kevin/Pictures/avatares/" + str(record["_id"]) + ".png"
-		avatarFile = open(path,"wb")
-		decodeFile = base64.b64decode(image)
-		##encodeFile = base64.b64encode(self.parameters["avatar"])
-		avatarFile.write(decodeFile)
-		avatarFile.close()
-		##End Saving the image
+		if image:
+			##Saving the image
+			path = "/home/kevin/Pictures/avatares/" + str(record["_id"]) + ".png"
+			avatarFile = open(path,"wb")
+			decodeFile = base64.b64decode(image)
+			##encodeFile = base64.b64encode(self.parameters["avatar"])
+			avatarFile.write(decodeFile)
+			avatarFile.close()
+			##End Saving the image
 		return record
