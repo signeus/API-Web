@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from http.http_method_constraint import HTTP_METHOD_CONSTRAINT
 from decorators.check_parameters import CHECK_PARAMETERS
+from decorators.cross_domain import CROSS_DOMAIN
+from decorators.http_method_not_allowed_constraint import HTTP_METHOD_NOT_ALLOWED_CONSTRAINT
 from core.core import Core
 
 # -------------------------------------------------------------------------
