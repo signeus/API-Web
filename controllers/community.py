@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from decorators.prueba import p_decorate
-
 
 @HTTP_METHOD_CONSTRAINT("GET", request)
 @CROSS_DOMAIN(response)

@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<class 'applications.kayoo.modules.http.http_exception.HttpException'> 405 METHOD NOT ALLOWED"
+p3
+sS'layer'
+p4
+S'/home/kevin/web2py/applications/kayoo/controllers/community.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n@HTTP_METHOD_CONSTRAINT("GET", request)\n@CROSS_DOMAIN(response)\n#@CHECK_PARAMETERS(request.vars,{"id":"optional"},"getFirstByFieldsCommunity")\ndef getFirstByFieldsCommunity():\n    core = Core()\n    result = core.CommunityOperation("getFirstByFieldsCommunity", request.vars)\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("GET", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"getByIdCommunity")\n@CROSS_DOMAIN(response)\ndef getByIdCommunity():\n    _id = request.vars["id"]\n    core = Core()\n    result = core.CommunityOperation("getByIdCommunity", {"_id":_id})\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("GET", request)\n@CROSS_DOMAIN(response)\ndef getCommunities():\n    core = Core()\n    result = core.CommunityOperation("getAllCommunity", {})\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("DELETE", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"deleteCommunity")\n@CROSS_DOMAIN(response)\ndef deleteCommunity():\n    _id = request.vars["id"]\n    core = Core()\n    result = core.CommunityOperation("deleteCommunity", {"_id":_id})\n    if result >= 1:\n        return "Success"\n    return "Failed"\n\n@HTTP_METHOD_CONSTRAINT(["POST","OPTIONS"], request)\n@HTTP_METHOD_NOT_ALLOWED_CONSTRAINT(request, response)\n@CROSS_DOMAIN(response)\ndef newCommunity():\n    core = Core()\n    result = core.CommunityOperation("createCommunity", dict(request.vars))\n    return response.json(result)\n\n@HTTP_METHOD_CONSTRAINT("POST", request)\n@CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updateCommunity")\n@CROSS_DOMAIN(response)\ndef updateCommunity():\n    _id = request.vars["id"]\n    _new_values = request.vars["new_values"]\n    core = Core()\n    result = core.CommunityOperation("updateCommunity", {"_id":_id, "new_values":_new_values})\n    return response.json(result)\n\nresponse._vars=response._caller(newCommunity)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/kevin/web2py/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/kevin/web2py/applications/kayoo/controllers/community.py", line 55, in <module>\n  File "/home/kevin/web2py/gluon/globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "applications/kayoo/modules/http/http_method_constraint.py", line 10, in wrapped_func\nHttpException: 405 METHOD NOT ALLOWED\n'
+p11
+s.
