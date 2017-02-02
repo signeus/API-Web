@@ -10,9 +10,9 @@ class CreateCommunityService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		image = None
-		image = self.parameters["banner"]
-		del self.parameters["banner"]
+		image = self.parameters.get("banner", None)
+		self.parameters.pop("banner", None)
+		#del self.parameters["banner"]
 		record =  DBService().insertIn2Collection("Communities", self.parameters)
 		if image:
 			##Saving the image

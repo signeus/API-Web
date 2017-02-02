@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decorators.prueba import p_decorate
+
 
 @HTTP_METHOD_CONSTRAINT("GET", request)
 @CROSS_DOMAIN(response)
@@ -35,12 +37,13 @@ def deleteCommunity():
         return "Success"
     return "Failed"
 
-@HTTP_METHOD_CONSTRAINT("POST", request)
+#@HTTP_METHOD_CONSTRAINT(["POST","OPTIONS"], request)
+@HTTP_METHOD_NOT_ALLOWED_CONSTRAINT(request, response)
 @CROSS_DOMAIN(response)
 def newCommunity():
     core = Core()
     result = core.CommunityOperation("createCommunity", dict(request.vars))
-    return result
+    return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT("POST", request)
 @CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updateCommunity")
