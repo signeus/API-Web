@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from casters.caster_object_id import CasterObjectId
 from services.interfaces.i_service import IService
 from services.dbservices.db_service import DBService
 from datetime import datetime
@@ -14,7 +15,7 @@ class SuscribeUser2Community (IService):
 			user = self.core.UserOperation("getByIdUser", {"_id":self.parameters["id_user"]})
 			user["communities_suscribed"] = user.get("communities_suscribed", []) + [self.parameters["id_community"]]
 			result = self.core.UserOperation("updateUser", {
-															"_id": str(self.parameters["id_user"]),
+															"_id": CasterObjectId().castHex2ObjectId(self.parameters["id_user"]),
 															"new_values": {
 																			"communities_suscribed"	:	user["communities_suscribed"],
 																			"date_modified"			:	datetime.now()
