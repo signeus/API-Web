@@ -38,9 +38,11 @@ def deletePost():
         return "Success"
     return "Failed"
 
-@HTTP_METHOD_CONSTRAINT(["POST", "OPTIONS"], request)
-@HTTP_METHOD_NOT_ALLOWED_CONSTRAINT(request, response)
-@CROSS_DOMAIN(response)
+#@HTTP_METHOD_CONSTRAINT(["POST", "OPTIONS"], request)
+#@HTTP_METHOD_NOT_ALLOWED_CONSTRAINT(request, response)
+#@CROSS_DOMAIN(response)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newPost():
     core = Core()
     result = core.PostOperation("createPost", dict(request.vars))

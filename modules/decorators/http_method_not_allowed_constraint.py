@@ -1,7 +1,7 @@
 from http.http_exception import HttpException
 
 
-class HTTP_METHOD_NOT_ALLOWED_CONSTRAINT:
+class HTTP_METHOD_NOT_ALLOWED_CONSTRAINT_DECORATOR:
     def __init__(self, *args):
         self.args = args
 
