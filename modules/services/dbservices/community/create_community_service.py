@@ -14,6 +14,7 @@ class CreateCommunityService (IService):
 		self.parameters.pop("banner", None)
 		#del self.parameters["banner"]
 		record =  DBService().insertIn2Collection("Communities", self.parameters)
+		result = self.core.UserOperation("suscribeUser2Community", {"id_user":record["id_creator"],"id_community":record["_id"]})
 		if image:
 			##Saving the image
 			path = "/home/kevin/Pictures/banners/" + str(record["_id"]) + ".png"

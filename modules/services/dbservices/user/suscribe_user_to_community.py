@@ -23,4 +23,4 @@ class SuscribeUser2Community (IService):
 											 )
 		except Exception, ex:
 			print "Suscribe User to Community has failed, " + ex.message
-		return "suscribe"
+		return result
