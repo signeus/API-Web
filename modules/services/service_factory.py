@@ -6,6 +6,7 @@ from dbservices.user.get_all_user_service import GetAllUserService
 from dbservices.user.get_by_id_user_service import GetByIdUserService
 from dbservices.user.get_first_by_fields_user_service import GetFirstByFieldsUserService
 from dbservices.user.suscribe_user_to_community import SuscribeUser2Community
+from dbservices.user.get_user_suscribed_communities import GetUserSuscribedCommunities
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -25,13 +26,14 @@ class ServiceFactory (object):
 	def __new__(cls, serviceName, core, parameters):
 		services = {
 			######Users#########
-            "createUser"      			: CreateUserService,
-			"updateUser"				: UpdateUserService,
-			"deleteUser" 				: DeleteUserService,
-			"getAllUser" 				: GetAllUserService,
-			"getByIdUser"				: GetByIdUserService,
-			"getFirstByFieldsUser" 		: GetFirstByFieldsUserService,
-			"suscribeUser2Community"	: SuscribeUser2Community,
+            "createUser"      				: CreateUserService,
+			"updateUser"					: UpdateUserService,
+			"deleteUser" 					: DeleteUserService,
+			"getAllUser" 					: GetAllUserService,
+			"getByIdUser"					: GetByIdUserService,
+			"getFirstByFieldsUser" 			: GetFirstByFieldsUserService,
+			"suscribeUser2Community"		: SuscribeUser2Community,
+			"getUserSuscribedCommunities"	: GetUserSuscribedCommunities,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,

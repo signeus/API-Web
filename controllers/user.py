@@ -60,3 +60,10 @@ def suscribeUser2Community():
     core = Core()
     result = core.UserOperation("suscribeUser2Community", dict(request.vars))
     return "Suscrito"
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getUserSuscribedCommunities():
+    core = Core()
+    result = core.UserOperation("getUserSuscribedCommunities", dict(request.vars))
+    return "result"
