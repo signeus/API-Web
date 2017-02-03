@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from decorators.generic_decorator import GENERIC_DECORATOR
 from http.http_exception import HttpException
 

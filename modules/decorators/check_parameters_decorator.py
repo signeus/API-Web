@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from k_exception.check_exception import CheckException
 from decorators.generic_decorator import GENERIC_DECORATOR
 

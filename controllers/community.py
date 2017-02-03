@@ -1,32 +1,32 @@
 # -*- coding: utf-8 -*-
 
-#@HTTP_METHOD_CONSTRAINT("GET", request)
-#@CROSS_DOMAIN(response)
-#@CHECK_PARAMETERS(request.vars,{"id":"optional"},"getFirstByFieldsCommunity")
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"optional"}, "getFirstByFieldsCommunity")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getFirstByFieldsCommunity():
     core = Core()
     result = core.CommunityOperation("getFirstByFieldsCommunity", request.vars)
     return response.json(result)
 
-#@HTTP_METHOD_CONSTRAINT("GET", request)
-#@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"getByIdCommunity")
-#@CROSS_DOMAIN(response)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdCommunity")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdCommunity():
     _id = request.vars["id"]
     core = Core()
     result = core.CommunityOperation("getByIdCommunity", {"_id":_id})
     return response.json(result)
 
-#@HTTP_METHOD_CONSTRAINT("GET", request)
-#@CROSS_DOMAIN(response)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunities():
     core = Core()
     result = core.CommunityOperation("getAllCommunity", {})
     return response.json(result)
 
-#@HTTP_METHOD_CONSTRAINT("DELETE", request)
-#@CHECK_PARAMETERS(request.vars,{"id":"mandatory"},"deleteCommunity")
-#@CROSS_DOMAIN(response)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "deleteCommunity")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deleteCommunity():
     _id = request.vars["id"]
     core = Core()
@@ -43,9 +43,9 @@ def newCommunity():
     result = core.CommunityOperation("createCommunity", dict(request.vars))
     return response.json(result)
 
-#@HTTP_METHOD_CONSTRAINT("POST", request)
-#@CHECK_PARAMETERS(request.vars,{"id":"mandatory", "new_values":"mandatory"},"updateCommunity")
-#@CROSS_DOMAIN(response)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updateCommunity")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def updateCommunity():
     _id = request.vars["id"]
     _new_values = request.vars["new_values"]
