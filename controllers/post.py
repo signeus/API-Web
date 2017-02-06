@@ -9,10 +9,10 @@ def getFirstByFieldsPost():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdPost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "getByIdPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdPost():
-    _id = request.vars["id"]
+    _id = request.vars["_id"]
     header(response)
     core = Core()
     result = core.PostOperation("getByIdPost", {"_id":_id})
@@ -27,10 +27,10 @@ def getPosts():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "deletePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "deletePost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deletePost():
-    _id = request.vars["id"]
+    _id = request.vars["_id"]
     core = Core()
     header(response)
     result = core.PostOperation("deletePost", {"_id":_id})
@@ -49,9 +49,9 @@ def newPost():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updatePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory", "new_values":"mandatory"}, "updatePost")
 def updatePost():
-    _id = request.vars["id"]
+    _id = request.vars["_id"]
     _new_values = request.vars["new_values"]
     core = Core()
     header(response)
