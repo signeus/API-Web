@@ -50,6 +50,12 @@ class DBService:
 									   )
         return value
 
+    def updateMultiByFieldWithDelete(self, collection, field, id):
+        db = MongoDatabaseManager().connect2Database("warehouse")
+        col = db[collection]
+        result = col.update({ field : { "$in" : [CasterObjectId().castHex2ObjectId(id)]} },{"$pull" : { field : CasterObjectId().castHex2ObjectId(id)}}, multi=True)
+        return result
+
     """
         return: the count of rows affected.
     """

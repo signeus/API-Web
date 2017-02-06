@@ -11,6 +11,7 @@ from dbservices.user.get_user_suscribed_communities import GetUserSuscribedCommu
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
+from dbservices.community.delete_community_unsuscribe_service import DeleteCommunityUnsuscribeService
 from dbservices.community.get_all_community_service import GetAllCommunityService
 from dbservices.community.get_by_id_community_service import GetByIdCommunityService
 from dbservices.community.get_first_by_fields_community_service import GetFirstByFieldsCommunityService
@@ -40,6 +41,7 @@ class ServiceFactory (object):
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
             "deleteCommunity" 			: DeleteCommunityService,
+            "deleteCommunityUnsuscribe" : DeleteCommunityUnsuscribeService,
             "getAllCommunity" 			: GetAllCommunityService,
             "getByIdCommunity"			: GetByIdCommunityService,
             "getFirstByFieldsCommunity" : GetFirstByFieldsCommunityService,

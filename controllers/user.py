@@ -61,6 +61,8 @@ def suscribeUser2Community():
     result = core.UserOperation("suscribeUser2Community", dict(request.vars))
     return response.json(result)
 
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def unsuscribeUser2Community():
     core = Core()
     result = core.UserOperation("unsuscribeUser2Community", dict(request.vars))
