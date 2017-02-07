@@ -99,11 +99,11 @@ class DBService:
         values = col.find({})
         if type(values) == types.NoneType:
             return "Not founded results"
-        lista = [elem for elem in col.find({})]
-        result = []
-        for row in lista:
-            rowResult = {}
-            for key, value in row.iteritems():
-                rowResult.update({str(key):str(value)})
-            result.append(rowResult)
+        result = [c for c in values]
         return result
+
+    def getAllByFilter(self, collection, filter):
+        db = MongoDatabaseManager().connect2Database("warehouse")
+        col = db[collection]
+        values = col.find(filter)
+        return [c for c in values]

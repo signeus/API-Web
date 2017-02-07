@@ -23,6 +23,7 @@ from dbservices.post.delete_post_service import DeletePostService
 from dbservices.post.get_all_post_service import GetAllPostService
 from dbservices.post.get_by_id_post_service import GetByIdPostService
 from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPostService
+from dbservices.post.get_post_by_community_id_service import GetPostByCommunityId
 
 class ServiceFactory (object):
 	def __new__(cls, serviceName, core, parameters):
@@ -51,7 +52,8 @@ class ServiceFactory (object):
 			"deletePost" 			: DeletePostService,
 			"getAllPost" 			: GetAllPostService,
 			"getByIdPost"			: GetByIdPostService,
-			"getFirstByFieldsPost" : GetFirstByFieldsPostService,
+			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
+			"getPostByCommunityId"	: GetPostByCommunityId,
 		}
 		return services[serviceName](core, parameters)
 
