@@ -74,3 +74,8 @@ def getUser():
     core = Core()
     result = core.UserOperation("getUserSuscribedCommunities", dict(request.vars))
     return response.json(result)
+
+def getAllUsersFiltered():
+    core Core()
+    result = core.UserOperation("getAllUsersFiltered", dict(request.vars))
+    return response.json(result)

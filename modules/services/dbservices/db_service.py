@@ -3,6 +3,7 @@ import types
 from datetime import datetime
 from databases.mongo_database_manager import MongoDatabaseManager
 from casters.caster_object_id import CasterObjectId
+from casters.caster_datetime import CasterDatetime
 from pymongo.collection import ReturnDocument
 
 class DBService:
@@ -35,8 +36,8 @@ class DBService:
         if len(str(result)) <= 0:
             raise Exception("Error inserting")
         data_completed["_id"] = str(result)
-        data_completed["date_created"] = int(data_completed["date_created"].strftime("%s"))
-        data_completed["date_modified"] = int(data_completed["date_modified"].strftime("%s"))
+        data_completed["date_created"] = CasterDatetime().castDateObject2DateTimeStamp(data_completed["date_created"])
+        data_completed["date_modified"] = CasterDatetime().castDateObject2DateTimeStamp(data_completed["date_modified"])
         return data_completed
 
     def updateIn2Collection(self, collection, _id, new_values):
@@ -102,8 +103,8 @@ class DBService:
         result = [c for c in values]
         return result
 
-    def getAllByFilter(self, collection, filter):
+    def getAllByFilter(self, collection, query, opt_filter={}):
         db = MongoDatabaseManager().connect2Database("warehouse")
         col = db[collection]
-        values = col.find(filter)
+        values = col.find(query, opt_filter)
         return [c for c in values]

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from casters.caster_object_id import CasterObjectId
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -60,9 +59,16 @@ def updatePost():
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def getPostByCommunityId():
+def getPostsByCommunityId():
     _id = request.vars["_id"]
     core = Core()
-    result = core.PostOperation("getPostByCommunityId", {"community_id" : _id})
-    result = CasterObjectId().castDictionaryObjectsId2DictionaryHexId(result)
+    result = core.PostOperation("getPostsByCommunityId", {"community_id" : _id})
     return response.json(result)
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getCommunityPosts():
+    _id = request.vars["_id"]
+    core = Core()
+    result = core.PostOperation("getCommunityPosts", {"community_id": _id})
+    return result

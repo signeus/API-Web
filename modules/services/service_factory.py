@@ -8,6 +8,7 @@ from dbservices.user.get_first_by_fields_user_service import GetFirstByFieldsUse
 from dbservices.user.unsuscribe_user_to_community import UnsuscribeUser2Community
 from dbservices.user.suscribe_user_to_community import SuscribeUser2Community
 from dbservices.user.get_user_suscribed_communities import GetUserSuscribedCommunities
+from dbservices.user.get_all_users_filtered import GetAllUsersFiltered
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -23,7 +24,8 @@ from dbservices.post.delete_post_service import DeletePostService
 from dbservices.post.get_all_post_service import GetAllPostService
 from dbservices.post.get_by_id_post_service import GetByIdPostService
 from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPostService
-from dbservices.post.get_post_by_community_id_service import GetPostByCommunityId
+from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityId
+from dbservices.post.get_community_posts_service import GetCommunityPosts
 
 class ServiceFactory (object):
 	def __new__(cls, serviceName, core, parameters):
@@ -38,6 +40,7 @@ class ServiceFactory (object):
 			"suscribeUser2Community"		: SuscribeUser2Community,
 			"unsuscribeUser2Community"		: UnsuscribeUser2Community,
 			"getUserSuscribedCommunities"	: GetUserSuscribedCommunities,
+			"getAllUsersFiltered"			: GetAllUsersFiltered,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -53,7 +56,8 @@ class ServiceFactory (object):
 			"getAllPost" 			: GetAllPostService,
 			"getByIdPost"			: GetByIdPostService,
 			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
-			"getPostByCommunityId"	: GetPostByCommunityId,
+			"getPostsByCommunityId"	: GetPostsByCommunityId,
+			"getCommunityPosts"		: GetCommunityPosts,
 		}
 		return services[serviceName](core, parameters)
 
