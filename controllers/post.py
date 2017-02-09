@@ -71,4 +71,4 @@ def getCommunityPosts():
     _id = request.vars["_id"]
     core = Core()
     result = core.PostOperation("getCommunityPosts", {"community_id": _id})
-    return result
+    return response.json(result)

@@ -75,7 +75,9 @@ def getUser():
     result = core.UserOperation("getUserSuscribedCommunities", dict(request.vars))
     return response.json(result)
 
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getAllUsersFiltered():
-    core Core()
+    core = Core()
     result = core.UserOperation("getAllUsersFiltered", dict(request.vars))
     return response.json(result)
