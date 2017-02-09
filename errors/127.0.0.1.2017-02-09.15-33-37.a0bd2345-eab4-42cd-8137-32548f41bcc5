@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.TypeError'> file() argument 1 must be encoded string without null bytes, not str"
+p3
+sS'layer'
+p4
+S'/home/kevin/web2py/applications/kayoo/controllers/media.py'
+p5
+sS'code'
+p6
+S'\n\ndef getAvatarById():\n    _id = request.vars["_id"]\n    core = Core()\n    result = core.MediaOperation("getAvatarById", {"_id": _id})\n    print \'--------Imprimiendo result-----------\'\n    print result\n    print \'--------Impreso result-----------\'\n    return response.stream(result)\nresponse._vars=response._caller(getAvatarById)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/kevin/web2py/gluon/restricted.py", line 227, in restricted\n    exec ccode in environment\n  File "/home/kevin/web2py/applications/kayoo/controllers/media.py", line 11, in <module>\n  File "/home/kevin/web2py/gluon/globals.py", line 417, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/kevin/web2py/applications/kayoo/controllers/media.py", line 10, in getAvatarById\n    return response.stream(result)\n  File "/home/kevin/web2py/gluon/globals.py", line 588, in stream\n    status=self.status)\n  File "/home/kevin/web2py/gluon/streamer.py", line 58, in stream_file_or_304_or_206\n    fp = open(static_file,\'rb\')\nTypeError: file() argument 1 must be encoded string without null bytes, not str\n'
+p11
+s.

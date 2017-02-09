@@ -27,6 +27,11 @@ from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPos
 from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityId
 from dbservices.post.get_community_posts_service import GetCommunityPosts
 
+from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
+from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
+
+from services.filestype.get_file_type_service import GetFileTypeService
+
 class ServiceFactory (object):
 	def __new__(cls, serviceName, core, parameters):
 		services = {
@@ -58,6 +63,11 @@ class ServiceFactory (object):
 			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
 			"getPostsByCommunityId"	: GetPostsByCommunityId,
 			"getCommunityPosts"		: GetCommunityPosts,
+			######Media#######
+			"getAvatarById"			: GetAvatarByIdService,
+			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
+			#####Files#####
+			"getFileTypeService"		: GetFileTypeService,
 		}
 		return services[serviceName](core, parameters)
 

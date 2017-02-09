@@ -10,9 +10,18 @@ class Core:
 
 	def PostOperation(self, serviceName, parameters):
 		return self.FactoryOperation(serviceName, parameters)
-		
+
+	def MediaOperation(self, serviceName, parameters):
+		return self.FactoryOperation(serviceName, parameters)
+
+	def FilesOperation(self, serviceName, parameters):
+		return self.FactoryOperation(serviceName, parameters)
+
 	def FactoryOperation(self, serviceName, parameters):
 		try:
 			return ServiceFactory(serviceName, self, parameters).run()
 		except Exception, ex:
+			print '------'
+			print ex
+			print '------'
 			return ex.message
