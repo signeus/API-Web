@@ -7,6 +7,8 @@ from casters.caster_datetime import CasterDatetime
 from pymongo.collection import ReturnDocument
 
 class DBService:
+    def __init__(self, core):
+        self.core = core
 
     def insertDateCreated(self, data):
         try:
@@ -24,13 +26,12 @@ class DBService:
             return "Has been appears a issue with the Json 'Date_Modified'\n Exception: " + e.message
 	
     def openCollection(self, collection):
-        db = MongoDatabaseManager().connect2Database("warehouse")
+        db = MongoDatabaseManager(self.core.GetDatabaseResources()).connect2Database()
         collection = db[collection]
         return collection
 
     def insertIn2Collection(self, collection, data):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         data_completed = self.insertDateCreated(data)
         result = col.insert(data_completed)
         if len(str(result)) <= 0:
@@ -41,8 +42,7 @@ class DBService:
         return data_completed
 
     def updateIn2Collection(self, collection, _id, new_values):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         data_completed = self.insertDateModified(new_values)
         value = col.find_one_and_update(
 										{"_id"   : CasterObjectId().castHex2ObjectId(_id)},
@@ -52,8 +52,7 @@ class DBService:
         return value
 
     def updateMultiByFieldWithDelete(self, collection, field, id):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         result = col.update({ field : { "$in" : [CasterObjectId().castHex2ObjectId(id)]} },{"$pull" : { field : CasterObjectId().castHex2ObjectId(id)}}, multi=True)
         return result
 
@@ -61,16 +60,14 @@ class DBService:
         return: the count of rows affected.
     """
     def deleteIn2Collection(self, collection, _id):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         if col.count({"_id": CasterObjectId().castHex2ObjectId(_id)}) <= 0:
             return "Not founded that id"
         result = col.delete_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
         return result.deleted_count
 
     def getById(self, collection, _id):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         values = col.find_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
         if type(values) == types.NoneType or len(values) <= 0:
             return "Not founded results"
@@ -83,8 +80,7 @@ class DBService:
         return result
 
     def getFirstByFields(self, collection, fields, filters):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         #TODO: The filters
         values = col.find_one(fields)
         if type(values) == types.NoneType or len(values) <= 0:
@@ -95,8 +91,7 @@ class DBService:
         return result
 
     def getAll(self, collection):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         values = col.find({})
         if type(values) == types.NoneType:
             return "Not founded results"
@@ -104,7 +99,6 @@ class DBService:
         return result
 
     def getAllByFilter(self, collection, query, opt_filter={}):
-        db = MongoDatabaseManager().connect2Database("warehouse")
-        col = db[collection]
+        col = self.openCollection(collection)
         values = col.find(query, opt_filter)
         return [c for c in values]

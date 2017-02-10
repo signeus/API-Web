@@ -10,4 +10,4 @@ class GetFirstByFieldsPostService (IService):
 		
 	def run(self):
 		#TODO: Filters
-		return DBService().getFirstByFields("Posts", self.parameters['fields'], {})
+		return DBService(self.core).getFirstByFields("Posts", self.parameters['fields'], {})

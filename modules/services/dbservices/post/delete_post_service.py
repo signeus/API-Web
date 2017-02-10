@@ -9,4 +9,4 @@ class DeletePostService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().deleteIn2Collection('Posts', self.parameters['_id'])
+		return DBService(self.core).deleteIn2Collection('Posts', self.parameters['_id'])

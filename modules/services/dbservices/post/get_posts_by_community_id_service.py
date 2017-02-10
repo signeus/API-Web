@@ -13,7 +13,7 @@ class GetPostsByCommunityId(IService):
         self.parameters = parameters
 
     def run(self):
-        result = DBService().getAllByFilter("Posts", self.parameters,  {'community_id':0})
+        result = DBService(self.core).getAllByFilter("Posts", self.parameters,  {'community_id':0})
         #TODO Extract Caster to Service
         result = CasterObjectId().castDictionaryObjectsId2DictionaryHexId(result)
         result = CasterDatetime().castDictionaryDateObject2DateTimeStamp(result)

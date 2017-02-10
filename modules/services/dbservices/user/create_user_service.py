@@ -12,7 +12,7 @@ class CreateUserService (IService):
 	def run(self):
 		image = self.parameters.get("avatar", None)
 		self.parameters.pop("avatar", None)
-		record = DBService().insertIn2Collection("Users", self.parameters)
+		record = DBService(self.core).insertIn2Collection("Users", self.parameters)
 		if image:
 			##Saving the image
 			path = "/home/kevin/Pictures/avatares/" + str(record["_id"]) + ".png"

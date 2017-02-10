@@ -10,7 +10,7 @@ class DeleteCommunityUnsuscribeService(IService):
         self.parameters = parameters
 
     def run(self):
-        result = DBService().updateMultiByFieldWithDelete('Users', self.parameters['field'], self.parameters['_id'])
+        result = DBService(self.core).updateMultiByFieldWithDelete('Users', self.parameters['field'], self.parameters['_id'])
         print '---------'
         print result
         print '---------'

@@ -9,4 +9,4 @@ class GetByIdCommunityService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().getById("Communities", self.parameters['_id'])
+		return DBService(self.core).getById("Communities", self.parameters['_id'])

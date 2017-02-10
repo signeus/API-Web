@@ -9,4 +9,4 @@ class DeleteCommunityService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().deleteIn2Collection('Communities', self.parameters['_id'])
+		return DBService(self.core).deleteIn2Collection('Communities', self.parameters['_id'])

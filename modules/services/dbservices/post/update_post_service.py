@@ -9,4 +9,4 @@ class UpdatePostService (IService):
 		self.parameters = parameters
 
 	def run(self):
-		return DBService().updateIn2Collection('Posts', self.parameters['_id'], self.parameters['new_values'])
+		return DBService(self.core).updateIn2Collection('Posts', self.parameters['_id'], self.parameters['new_values'])

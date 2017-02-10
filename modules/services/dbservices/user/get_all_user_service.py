@@ -9,4 +9,4 @@ class GetAllUserService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().getAll("Users")
+		return DBService(self.core).getAll("Users")

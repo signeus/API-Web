@@ -9,4 +9,4 @@ class GetAllCommunityService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().getAll("Communities")
+		return DBService(self.core).getAll("Communities")

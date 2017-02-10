@@ -10,4 +10,4 @@ class GetFirstByFieldsCommunityService (IService):
 		
 	def run(self):
 		#TODO: Filters
-		return DBService().getFirstByFields("Communities", self.parameters['fields'], {})
+		return DBService(self.core).getFirstByFields("Communities", self.parameters['fields'], {})

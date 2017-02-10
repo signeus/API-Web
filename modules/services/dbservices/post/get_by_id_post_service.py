@@ -9,4 +9,4 @@ class GetByIdPostService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		return DBService().getById("Posts", self.parameters['_id'])
+		return DBService(self.core).getById("Posts", self.parameters['_id'])

@@ -10,7 +10,7 @@ class GetByIdUserService (IService):
 		self.parameters = parameters
 		
 	def run(self):
-		result = DBService().getById("Users", str(self.parameters['_id']))
+		result = DBService(self.core).getById("Users", str(self.parameters['_id']))
 		##Loading the image
 		avatarFile = open("/home/kevin/Pictures/avatares/" + self.parameters["_id"] + ".png","rb")
 		#decodeFile = base64.b64decode(avatarFile.read())

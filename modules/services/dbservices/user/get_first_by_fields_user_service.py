@@ -10,4 +10,4 @@ class GetFirstByFieldsUserService (IService):
 		
 	def run(self):
 		#TODO: Filters
-		return DBService().getFirstByFields("Users", self.parameters['fields'], {})
+		return DBService(self.core).getFirstByFields("Users", self.parameters['fields'], {})

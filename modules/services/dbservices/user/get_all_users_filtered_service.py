@@ -12,7 +12,7 @@ class GetAllUsersFiltered(IService):
         self.parameters = parameters
 
     def run(self):
-        result = DBService().getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))
+        result = DBService(self.core).getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))
         result = CasterObjectId().castDictionaryObjectsId2DictionaryHexId(result)
         result = CasterCursor().castList2FormatDictionary(result)
 
