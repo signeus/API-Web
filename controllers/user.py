@@ -53,6 +53,7 @@ def updateUser():
     result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})
     return response.json(result)
 
+##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id_user":"mandatory", "id_community":"mandatory"}, "suscribeUser2Community")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -68,6 +69,7 @@ def unsuscribeUser2Community():
     result = core.UserOperation("unsuscribeUser2Community", dict(request.vars))
     return response.json(result)
 
+##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getUser():

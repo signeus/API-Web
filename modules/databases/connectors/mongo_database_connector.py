@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
 
-#dev = {"ip":"localhost", "port":27017, "database":"warehouse"}
-
 class MongoDatabaseConnector:
 	def __init__(self, resourceManagerParameters):
 		self.ip = resourceManagerParameters["ip_database"]

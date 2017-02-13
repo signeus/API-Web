@@ -29,6 +29,7 @@ from dbservices.post.get_community_posts_service import GetCommunityPosts
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
+from dbservices.media.get_media_route import GetMediaRoute
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -66,6 +67,7 @@ class ServiceFactory (object):
 			######Media#######
 			"getAvatarById"			: GetAvatarByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
+			"getMediaRoute"			: GetMediaRoute,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 		}

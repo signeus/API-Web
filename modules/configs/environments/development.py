@@ -9,7 +9,8 @@ class Development(IEnvironment):
                                 'name_database':'warehouse',
                                 'ip_app': '192.168.1.176',
                                 'port_app':'8001',
-                                'application':'kayoo2'
+                                'name_app':'kayoo2',
+                                'protocol_app':'http'
                             }
 
     def config(self):

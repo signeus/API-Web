@@ -21,14 +21,17 @@ class Core:
     def FilesOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters)
 
-    def FactoryOperation(self, serviceName, parameters):
+    def InternalOperation(self, serviceName, parameters):
+        return self.FactoryOperation(serviceName, parameters, True)
+
+    def FactoryOperation(self, serviceName, parameters, internalContext=False):
         try:
             return ServiceFactory(serviceName, self, parameters).run()
         except Exception, ex:
             print '------'
             print ex
             print '------'
-            return ex.message
+            return {"result":1, "message":ex.message}
 
     def GetMediaResources(self):
         try:

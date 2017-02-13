@@ -38,6 +38,7 @@ def deletePost():
         return "Success"
     return "Failed"
 
+##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -49,9 +50,9 @@ def newPost():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory", "new_values":"mandatory"}, "updatePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updatePost")
 def updatePost():
-    _id = request.vars["_id"]
+    _id = request.vars["id"]
     _new_values = request.vars["new_values"]
     core = Core()
     result = core.PostOperation("updatePost", {"_id":_id, "new_values":_new_values})
@@ -65,6 +66,7 @@ def getPostsByCommunityId():
     result = core.PostOperation("getPostsByCommunityId", {"community_id" : _id})
     return response.json(result)
 
+##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunityPosts():
@@ -72,3 +74,16 @@ def getCommunityPosts():
     core = Core()
     result = core.PostOperation("getCommunityPosts", {"community_id": _id})
     return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "post":"mandatory"}, "updatePostContent")
+def updatePostContent():
+    _id = request.vars["id"]
+    _post = request.vars["post"]
+    result = Core().PostOperation("updatePost", {"_id":_id, "new_values":{"post":str(_post)}})
+    if not result:
+        return response.json({"result":1})
+    return response.json({"result":0})
