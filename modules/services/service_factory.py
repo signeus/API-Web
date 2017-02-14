@@ -33,6 +33,7 @@ from dbservices.media.get_media_route import GetMediaRoute
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
+
 class ServiceFactory (object):
 	def __new__(cls, serviceName, core, parameters):
 		services = {
