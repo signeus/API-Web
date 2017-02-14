@@ -76,7 +76,7 @@ def getCommunityPosts():
     return response.json(result)
 
 ##Used from Front##
-@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+#@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "post":"mandatory"}, "updatePostContent")
@@ -86,4 +86,5 @@ def updatePostContent():
     result = Core().PostOperation("updatePost", {"_id":_id, "new_values":{"post":str(_post)}})
     if not result:
         return response.json({"result":1})
-    return response.json({"result":0})
+    result['result'] = 0
+    return response.json(result)

@@ -13,7 +13,7 @@ class GetAllUsersFiltered(IService):
 
     def run(self):
         result = DBService(self.core).getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))
-        result = CasterObjectId().castDictionaryObjectsId2DictionaryHexId(result)
+        result = CasterObjectId().castListObjectsId2DictionaryHexId(result)
         result = CasterCursor().castList2FormatDictionary(result)
         for elems in result:
             result[elems]["avatar"] = self.core.MediaOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elems)}})

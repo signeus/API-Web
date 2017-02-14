@@ -8,7 +8,7 @@ result = DBService().getAllByFilter("Posts",{"community_id" : "5898ae82481f3445c
 #result = DBService().getAllByFilter("Communities",{})
 
 communities = [c for c in result]
-CasterObjectId().castDictionaryObjectsId2DictionaryHexId(communities)
+CasterObjectId().castListObjectsId2DictionaryHexId(communities)
 print communities 
 
 """
