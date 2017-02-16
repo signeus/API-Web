@@ -17,7 +17,7 @@ class CreateCommunityService (IService):
 		#del self.parameters["banner"]
 		try:
 			record =  DBService(self.core).insertIn2Collection("Communities", self.parameters)
-			result = self.core.UserOperation("suscribeUser2Community", {"id_user":record["id_creator"],"id_community":record["_id"]})
+			result = self.core.InternalOperation("suscribeUser2Community", {"id_user":record["id_creator"],"id_community":record["_id"]})
 			if image:
 				##Saving the image
 				image = str(image)

@@ -26,7 +26,10 @@ class Core:
 
     def FactoryOperation(self, serviceName, parameters, internalContext=False):
         try:
-            return ServiceFactory(serviceName, self, parameters).run()
+            serviceResult = ServiceFactory(serviceName, self, parameters).run()
+            if not internalContext:
+                serviceResult['result'] = 0
+            return serviceResult
         except Exception, ex:
             print '------'
             print ex

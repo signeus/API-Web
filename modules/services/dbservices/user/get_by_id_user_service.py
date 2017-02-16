@@ -6,13 +6,12 @@ import base64
 class GetByIdUserService (IService):
 	def __init__(self, core, parameters):
 		super(GetByIdUserService, self).__init__(core, parameters)
-		self.core = core
-		self.parameters = parameters
-		
+
 	def run(self):
-		result = DBService(self.core).getById("Users", str(self.parameters['_id']))
+		_hex_Id = self.core.InternalOperation("castObjectId2Hex",{"id" : self.parameters['_id']})
+		result = DBService(self.core).getById("Users", _hex_Id)
 		##Loading the image
-		avatarFile = open("/home/kevin/Pictures/avatares/" + self.parameters["_id"] + ".png","rb")
+		avatarFile = open("/home/kevin/Pictures/avatares/" + _hex_Id + ".png","rb")
 		#decodeFile = base64.b64decode(avatarFile.read())
 		encodeFile = base64.b64encode(avatarFile.read())
 		avatarFile.close()

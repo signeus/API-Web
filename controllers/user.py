@@ -44,14 +44,19 @@ def newUser():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory", "new_values":"mandatory"}, "updateUser")
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+#@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updateUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def updateUser():
-    _id = request.vars["_id"]
-    _new_values = request.vars["new_values"]
-    core = Core()
-    result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})
-    return response.json(result)
+    print request.vars
+    print request.client
+    #_id = request.vars["_id"]
+    #_new_values = request.vars["new_values"]
+    #core = Core()
+    #result = core.UserOperation("updateUser", {"_id":_id, "new_values":_new_values})
+    #print result
+    #return response.json(result)
+    return "OK"
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)

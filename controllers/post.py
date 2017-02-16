@@ -3,40 +3,39 @@
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getFirstByFieldsPost():
-    header(response)
     core = Core()
     result = core.PostOperation("getFirstByFieldsPost", request.vars)
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "getByIdPost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdPost():
-    _id = request.vars["_id"]
-    header(response)
+    _id = request.vars["id"]
     core = Core()
-    result = core.PostOperation("getByIdPost", {"_id":_id})
+    result = core.PostOperation("getByIdPost", {"id":_id})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getPosts():
     core = Core()
-    header(response)
     result = core.PostOperation("getAllPost", {})
     return response.json(result)
 
-@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "deletePost")
+##Used from Front##
+#@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "deletePost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deletePost():
-    _id = request.vars["_id"]
+    _id = request.vars["id"]
     core = Core()
-    header(response)
     result = core.PostOperation("deletePost", {"_id":_id})
     if result >= 1:
-        return "Success"
-    return "Failed"
+        return response.json({"result":0})
+    return response.json({"result":1})
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
@@ -70,13 +69,13 @@ def getPostsByCommunityId():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunityPosts():
-    _id = request.vars["_id"]
+    _id = request.vars["id"]
     core = Core()
     result = core.PostOperation("getCommunityPosts", {"community_id": _id})
     return response.json(result)
 
 ##Used from Front##
-#@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "post":"mandatory"}, "updatePostContent")
@@ -87,4 +86,21 @@ def updatePostContent():
     if not result:
         return response.json({"result":1})
     result['result'] = 0
+    return response.json(result)
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id_user":"mandatory", "id":"mandatory"}, "like2Post")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def like2Post():
+    core = Core()
+    result = core.PostOperation("like2Post", dict(request.vars))
+    print result
+    return response.json(result)
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id_user":"mandatory", "id":"mandatory"}, "unlike2Post")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def unlike2Post():
+    core = Core()
+    result = core.PostOperation("unlike2Post", dict(request.vars))
     return response.json(result)

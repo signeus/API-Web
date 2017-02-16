@@ -16,6 +16,6 @@ class GetAllUsersFiltered(IService):
         result = CasterObjectId().castListObjectsId2DictionaryHexId(result)
         result = CasterCursor().castList2FormatDictionary(result)
         for elems in result:
-            result[elems]["avatar"] = self.core.MediaOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elems)}})
+            result[elems]["avatar"] = self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elems)}})
 
         return result

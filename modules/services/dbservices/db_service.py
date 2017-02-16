@@ -45,8 +45,8 @@ class DBService:
         col = self.openCollection(collection)
         data_completed = self.insertDateModified(new_values)
         value = col.find_one_and_update(
-										{"_id"   : CasterObjectId().castHex2ObjectId(_id)},
-										{'$set'  : new_values},
+										{"_id"   : self.core.InternalOperation("castHex2ObjectId", {"id":_id})},
+										{'$set'  : data_completed},
 										return_document=ReturnDocument.AFTER
 									   )
         return value

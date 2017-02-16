@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 
-class castDictObjectsId2DictHexIdService (IService):
+class CastDictObjectsId2DictHexIdService (IService):
     def __init__(self, core, parameters):
-        super(castDictObjectsId2DictHexIdService, self).__init__(core, parameters)
-        self.core = core
-        self.parameters = parameters
+        super(CastDictObjectsId2DictHexIdService, self).__init__(core, parameters)
 
     def run(self):
         dictionary = self.parameters.get("dictionary", None)

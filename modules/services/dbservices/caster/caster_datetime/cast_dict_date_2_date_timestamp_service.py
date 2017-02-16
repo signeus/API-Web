@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 
-class castDictDate2DateTimeStamp (IService):
+class CastDictDate2DateTimeStampService (IService):
     def __init__(self, core, parameters):
-        super(castDictDate2DateTimeStamp, self).__init__(core, parameters)
+        super(CastDictDate2DateTimeStampService, self).__init__(core, parameters)
         self.core = core
         self.parameters = parameters
 
@@ -12,7 +12,4 @@ class castDictDate2DateTimeStamp (IService):
         for key,value in dictionary.iteritems():
             if type(value).__name__ == "datetime":
                 dictionary[key] = value.strftime("%s")
-
-
-    def castDateObject2DateTimeStamp(self, dateObject):
-        return int(dateObject.strftime("%s"))
+        return dictionary

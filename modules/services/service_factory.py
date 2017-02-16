@@ -26,12 +26,23 @@ from dbservices.post.get_by_id_post_service import GetByIdPostService
 from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPostService
 from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityId
 from dbservices.post.get_community_posts_service import GetCommunityPosts
+from dbservices.post.like_post_service import Like2PostService
+from dbservices.post.unlike_post_service import Unlike2PostService
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route import GetMediaRoute
 
 from services.filestype.get_file_type_service import GetFileTypeService
+
+from dbservices.caster.caster_object_id.cast_dict_object_id_2_dict_hex_id_service import CastDictObjectsId2DictHexIdService
+from dbservices.caster.caster_object_id.cast_hex_2_object_id_service import CastHex2ObjectIdService
+from dbservices.caster.caster_object_id.cast_list_objects_id_2_list_hex_id_service import CastListObjectsId2ListHexIdService
+from dbservices.caster.caster_object_id.cast_list_dict_objects_id_2_list_dict_hex_id_service import CastListDictObjectsId2ListDictHexIdService
+from dbservices.caster.caster_object_id.cast_object_id_2_hex_service import CastObjectId2HexService
+from dbservices.caster.caster_datetime.cast_dict_date_2_date_timestamp_service import CastDictDate2DateTimeStampService
+from dbservices.caster.caster_datetime.cast_list_date_2_date_timestamp_service import CastListDate2DateTimestampService
+from dbservices.caster.caster_datetime.cast_date_2_date_timestamp_service import CastDate2DateTimestampService
 
 
 class ServiceFactory (object):
@@ -63,14 +74,26 @@ class ServiceFactory (object):
 			"getAllPost" 			: GetAllPostService,
 			"getByIdPost"			: GetByIdPostService,
 			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
-			"getPostsByCommunityId"	: GetPostsByCommunityId,
-			"getCommunityPosts"		: GetCommunityPosts,
+			"getPostsByCommunityId"	: GetPostsByCommunityId,#TODO Service
+			"getCommunityPosts"		: GetCommunityPosts,#TODO Service
+			"like2Post"				: Like2PostService,
+			"unlike2Post"			: Unlike2PostService,
 			######Media#######
 			"getAvatarById"			: GetAvatarByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
-			"getMediaRoute"			: GetMediaRoute,
+			"getMediaRoute"			: GetMediaRoute,#TODO Service
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
+			#####Caster####
+			"castDictObjectsId2DictHexId"			: CastDictObjectsId2DictHexIdService,
+			"castHex2ObjectId"						: CastHex2ObjectIdService,
+			"castListObjectsId2ListHexId"			: CastListObjectsId2ListHexIdService,
+			"castListDictObjectsId2ListDictHexId"	: CastListDictObjectsId2ListDictHexIdService,
+			"castObjectId2Hex"						: CastObjectId2HexService,
+			    ###Date###
+			"castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
+			"castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
+			"castDate2DateTimestamp"				: CastDate2DateTimestampService,
 		}
 		return services[serviceName](core, parameters)
 

@@ -12,6 +12,6 @@ class UpdatePostService (IService):
 
 	def run(self):
 		result = DBService(self.core).updateIn2Collection('Posts', self.parameters['_id'], self.parameters['new_values'])
-		result = CasterObjectId().castDictObjectsId2DictHexId(result)
-		result = CasterDatetime().castDictDateObject2DateTimeStamp(result)
+		#result = CasterObjectId().castDictObjectsId2DictHexId(result) #TODO Utilizar el servicio de DictObjectId2DictHex
+		#result = CasterDatetime().castDictDateObject2DateTimeStamp(result) #TODO Utilizar el servicio de fechas
 		return result

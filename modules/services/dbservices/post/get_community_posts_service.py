@@ -13,8 +13,8 @@ class GetCommunityPosts(IService):
         self.parameters = parameters
 
     def run(self):
-        posts = self.core.PostOperation("getPostsByCommunityId", {"community_id": self.parameters['community_id']})
-        users = self.core.UserOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
+        posts = self.core.InternalOperation("getPostsByCommunityId", {"community_id": self.parameters['community_id']})
+        users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         for key, value in posts.iteritems():
             posts[key].update(users[value['user_id']])
             #TODO Include webservice of image
