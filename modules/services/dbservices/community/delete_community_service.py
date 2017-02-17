@@ -5,8 +5,6 @@ from services.dbservices.db_service import DBService
 class DeleteCommunityService (IService):
 	def __init__(self, core, parameters):
 		super(DeleteCommunityService, self).__init__(core, parameters)
-		self.core = core
-		self.parameters = parameters
 		
 	def run(self):
 		return DBService(self.core).deleteIn2Collection('Communities', self.parameters['_id'])

@@ -16,7 +16,7 @@ class UnsuscribeUser2Community (IService):
 			user["communities_suscribed"] = user.get("communities_suscribed", [])
 			if user["communities_suscribed"] != []:
 				user["communities_suscribed"].remove(CasterObjectId().castHex2ObjectId(id_community))
-			result = self.core.UserOperation("updateUser", {
+			result = self.core.InternalOperation("updateUser", {
 															"_id": CasterObjectId().castHex2ObjectId(self.parameters["id_user"]),
 															"new_values": {
 																			"communities_suscribed"	:	user["communities_suscribed"],

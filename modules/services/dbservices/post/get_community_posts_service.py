@@ -9,8 +9,6 @@ from casters.caster_cursor import CasterCursor
 class GetCommunityPosts(IService):
     def __init__(self, core, parameters):
         super(GetCommunityPosts, self).__init__(core, parameters)
-        self.core = core
-        self.parameters = parameters
 
     def run(self):
         posts = self.core.InternalOperation("getPostsByCommunityId", {"community_id": self.parameters['community_id']})

@@ -6,8 +6,6 @@ from services.dbservices.db_service import DBService
 class DeleteCommunityUnsuscribeService(IService):
     def __init__(self, core, parameters):
         super(DeleteCommunityUnsuscribeService, self).__init__(core, parameters)
-        self.core = core
-        self.parameters = parameters
 
     def run(self):
         result = DBService(self.core).updateMultiByFieldWithDelete('Users', self.parameters['field'], self.parameters['_id'])

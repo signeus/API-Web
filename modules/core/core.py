@@ -28,7 +28,10 @@ class Core:
         try:
             serviceResult = ServiceFactory(serviceName, self, parameters).run()
             if not internalContext:
-                serviceResult['result'] = 0
+                resultDict = {}
+                resultDict["data"] = serviceResult
+                resultDict['result'] = 0
+                return resultDict
             return serviceResult
         except Exception, ex:
             print '------'

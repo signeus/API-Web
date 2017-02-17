@@ -8,8 +8,6 @@ from casters.caster_cursor import CasterCursor
 class GetAllUsersFiltered(IService):
     def __init__(self, core, parameters):
         super(GetAllUsersFiltered, self).__init__(core, parameters)
-        self.core = core
-        self.parameters = parameters
 
     def run(self):
         result = DBService(self.core).getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))

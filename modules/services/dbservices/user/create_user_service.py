@@ -6,8 +6,6 @@ import base64
 class CreateUserService (IService):
 	def __init__(self, core, parameters):
 		super(CreateUserService, self).__init__(core, parameters)
-		self.core = core
-		self.parameters = parameters
 		
 	def run(self):
 		image = self.parameters.get("avatar", None)

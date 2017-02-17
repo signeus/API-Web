@@ -2,18 +2,16 @@
 from services.interfaces.i_service import IService
 from datetime import datetime
 
-class Unlike2PostService (IService):
+class UserUnlike2PostService (IService):
     def __init__(self, core, parameters):
-        super(Unlike2PostService, self).__init__(core, parameters)
-        self.core = core
-        self.parameters = parameters
+        super(UserUnlike2PostService, self).__init__(core, parameters)
 
     def run(self):
         try:
-            _UserObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters["id_user"]})
+            _UserObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters["user_id"]})
             _PostObjectid = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters["id"]})
-            post = self.core.PostOperation("getByIdPost", {"_id": self.parameters["id"]})
-            if not _UserObjectId in post["likes"]:
+            post = self.core.InternalOperation("getByIdPost", {"_id": self.parameters["id"]})
+            if not _UserObjectId in post.get("likes", []):
                 raise Exception("This user hasn't liked the post")
 
             post["likes"] = post.get("likes", []).remove(_UserObjectId)
