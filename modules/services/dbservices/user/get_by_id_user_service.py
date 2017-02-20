@@ -11,7 +11,7 @@ class GetByIdUserService (IService):
 		_hex_Id = self.core.InternalOperation("castObjectId2Hex",{"id" : self.parameters['_id']})
 		result = DBService(self.core).getById("Users", _hex_Id)
 		##Loading the image
-		avatarFile = open("/home/kevin/Pictures/avatares/" + _hex_Id + ".png","rb")
+		avatarFile = open("/home/www/media/avatars/" + _hex_Id + ".png","rb")
 		#decodeFile = base64.b64decode(avatarFile.read())
 		encodeFile = base64.b64encode(avatarFile.read())
 		avatarFile.close()
