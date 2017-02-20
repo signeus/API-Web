@@ -42,10 +42,11 @@ class DBService:
         return data_completed
 
     def updateIn2Collection(self, collection, _id, new_values):
+        _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         col = self.openCollection(collection)
         data_completed = self.insertDateModified(new_values)
         value = col.find_one_and_update(
-										{"_id"   : self.core.InternalOperation("castHex2ObjectId", {"id":_id})},
+										{"_id"   : _ObjectId},
 										{'$set'  : data_completed},
 										return_document=ReturnDocument.AFTER
 									   )
@@ -60,21 +61,22 @@ class DBService:
         return: the count of rows affected.
     """
     def deleteIn2Collection(self, collection, _id):
+        _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         col = self.openCollection(collection)
-        if col.count({"_id": CasterObjectId().castHex2ObjectId(_id)}) <= 0:
+        if col.count({"_id": _ObjectId}) <= 0:
             return "Not founded that id"
-        result = col.delete_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
+        result = col.delete_one({"_id": _ObjectId})
         return result.deleted_count
 
     def getById(self, collection, _id):
+        _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         col = self.openCollection(collection)
-        values = col.find_one({"_id": CasterObjectId().castHex2ObjectId(_id)})
+        values = col.find_one({"_id": _ObjectId})
         if type(values) == types.NoneType or len(values) <= 0:
             return "Not founded results"
         result = {}
         values["date_created"] = int(values["date_created"].strftime("%s"))
         values["date_modified"] = int(values["date_modified"].strftime("%s"))
-        values["_id"] = CasterObjectId().castObjectId2Hex(values["_id"])
         for key, value in values.iteritems():
             result.update({str(key): value})
         return result

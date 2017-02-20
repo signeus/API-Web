@@ -29,6 +29,7 @@ from dbservices.post.get_community_posts_service import GetCommunityPosts
 from dbservices.post.user_like_post_service import UserLike2PostService
 from dbservices.post.user_unlike_post_service import UserUnlike2PostService
 from dbservices.post.like_post_service import Like2PostService
+from dbservices.post.update_post_content_service import UpdatePostContentService
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
@@ -81,6 +82,7 @@ class ServiceFactory (object):
 			"like2Post"				: UserLike2PostService,
 			"unlike2Post"			: UserUnlike2PostService,
 			"likePost"				: Like2PostService,
+			"updatePostContent"		: UpdatePostContentService,
 			######Media#######
 			"getAvatarById"			: GetAvatarByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,

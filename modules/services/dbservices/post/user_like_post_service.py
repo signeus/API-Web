@@ -30,8 +30,8 @@ class UserLike2PostService (IService):
                 dictionaryUser[str(elem)] = {'name':so.pop("name"), 'nick':so.pop("nick")}
             #result["likes"] = self.core.InternalOperation("castListObjectsId2ListHexId", {"lis": result["likes"]})
             result["likes"] = dictionaryUser
-            result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
-            result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
+            #result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
+            #result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
             return result
         except Exception, ex:
             print "Like has failed, " + ex.message

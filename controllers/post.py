@@ -82,10 +82,7 @@ def getCommunityPosts():
 def updatePostContent():
     _id = request.vars["id"]
     _post = request.vars["post"]
-    result = Core().PostOperation("updatePost", {"_id":_id, "new_values":{"post":str(_post)}})
-    if not result:
-        return response.json({"result":1})
-    result['result'] = 0
+    result = Core().PostOperation("updatePostContent", {"id":_id, "post":str(_post)})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)

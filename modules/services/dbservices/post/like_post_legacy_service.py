@@ -22,8 +22,8 @@ class Like2PostService (IService):
                                              )
             result["likes"] = self.core.InternalOperation("castListObjectsId2ListHexId", {"lis": result["likes"]})
 
-            result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
-            result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
+            #result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
+            #result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
             return result
         except Exception, ex:
             print "Like has failed, " + ex.message

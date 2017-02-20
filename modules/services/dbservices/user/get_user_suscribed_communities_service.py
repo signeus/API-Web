@@ -8,10 +8,9 @@ class GetUserSuscribedCommunities (IService):
     def run(self):
         user = self.core.InternalOperation("getByIdUser", {"_id": self.parameters["_id"]})
         communities_ids = user.get("communities_suscribed", [])
-        if len(communities_ids) <= 0:
-            return "FCK"
-        result = [self.retrieve_communities(elem_id) for elem_id in communities_ids]
-        user["communities_suscribed"] = result
+        if len(communities_ids) > 0:
+            communities = [self.retrieve_communities(elem_id) for elem_id in communities_ids]
+            user["communities_suscribed"] = communities
         return user
 
     def retrieve_communities(self, id):

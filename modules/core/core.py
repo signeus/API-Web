@@ -37,7 +37,7 @@ class Core:
             print '------'
             print ex
             print '------'
-            return {"result":1, "message":ex.message}
+            return {"result":1, "message":ex.message, "data":""}
 
     def GetMediaResources(self):
         try:
