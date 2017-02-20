@@ -23,7 +23,7 @@ class CreateCommunityService (IService):
                 image = image[image.find(",") + 1:]
                 decodeFile = base64.b64decode(image)
                 img = Image.open(BytesIO(decodeFile))
-                img.save("/home/kevin/Pictures/banners/" + str(record["_id"]) + str(img.format).lower(), str(img.format))
+                img.save("/home/www/media/banners/" + str(record["_id"]) + str(img.format).lower(), str(img.format))
                 ##End Saving the image
             return result
         except Exception, ex:

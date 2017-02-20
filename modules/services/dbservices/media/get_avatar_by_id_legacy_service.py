@@ -11,7 +11,7 @@ class GetAvatarByIdLegacyService(IService):
             name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
             #myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb", buffering=0).read())
             #myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb").read())
-            myfile = "/home/kevin/Pictures/avatares/" + name
+            myfile = "/home/www/media/avatars/" + name
             return myfile
         except Exception, ex:
             print ex.message

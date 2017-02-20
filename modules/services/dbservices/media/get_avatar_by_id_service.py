@@ -14,7 +14,7 @@ class GetAvatarByIdService(IService):
             response = self.parameters.get("response", None)
             name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
             #myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb", buffering=0).read())
-            myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb").read())
+            myfile = io.BytesIO(open("/home/www/media/avatars/" + name, "rb").read())
             image = Image.open(myfile)
             image.save(response.body, image.format)
             response.headers['Content-Type'] = "image/" + image.format.lower()

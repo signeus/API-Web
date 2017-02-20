@@ -10,16 +10,16 @@ def testCan():
     return test.testMethod()
 
 def getDocument():
-    file = open("/home/kevin/texto.txt","rt")
+    file = open("/home/www/texto.txt","rt")
     return file.read()
 
 def getFileInBytes():
-    file = open("/home/kevin/Notebook.3DS","rb")
+    file = open("/home/www/Notebook.3DS","rb")
     return file.read()
 
 def getFileEncoding():
     name = "Notebook.3DS"
-    file = open("/home/kevin/" + name, "rb" ).read()
+    file = open("/home/www/" + name, "rb" ).read()
     encodeFile = base64.b64encode(file)
     #response.headers["Content-Type"] = "application/octet-stream"
     return response.json({name:encodeFile})
@@ -35,7 +35,7 @@ def getFileDecoding():
     return encodeFile
 
 def getJson():
-    file = open("/home/kevin/jsonInput","rt")
+    file = open("/home/www/jsonInput","rt")
     readed = file.read()
     parse2Json = json.loads(readed)
     return parse2Json

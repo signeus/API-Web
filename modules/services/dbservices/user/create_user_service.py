@@ -13,7 +13,7 @@ class CreateUserService (IService):
 		record = DBService(self.core).insertIn2Collection("Users", self.parameters)
 		if image:
 			##Saving the image
-			path = "/home/kevin/Pictures/avatares/" + str(record["_id"]) + ".png"
+			path = "/home/www/media/avatars/" + str(record["_id"]) + ".png"
 			avatarFile = open(path,"wb")
 			decodeFile = base64.b64decode(image)
 			##encodeFile = base64.b64encode(self.parameters["avatar"])

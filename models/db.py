@@ -20,7 +20,7 @@ if request.global_settings.web2py_version < "2.14.1":
 # -------------------------------------------------------------------------
 # request.requires_https()
 
-# -------------------------------------------------------------------------
+# ------F-------------------------------------------------------------------
 # app configuration made easy. Look inside private/appconfig.ini
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
