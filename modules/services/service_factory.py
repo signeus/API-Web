@@ -31,7 +31,13 @@ from dbservices.post.user_unlike_post_service import UserUnlike2PostService
 from dbservices.post.like_post_service import Like2PostService
 from dbservices.post.update_post_content_service import UpdatePostContentService
 
+from dbservices.post.comment_2_post_service import Comment2PostService
+from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
+from dbservices.post.get_comments_post_service import GetCommentsPost
+
+
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
+from dbservices.media.get_banner_by_id_service import GetBannerByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route import GetMediaRoute
 
@@ -80,11 +86,16 @@ class ServiceFactory (object):
 			"getPostsByCommunityId"	: GetPostsByCommunityId,#TODO Service
 			"getCommunityPosts"		: GetCommunityPosts,#TODO Service
 			"like2Post"				: UserLike2PostService,
-			"unlike2Post"			: UserUnlike2PostService,
-			"likePost"				: Like2PostService,
+            "unlike2Post"			: UserUnlike2PostService,
+            "likePost"				: Like2PostService,
 			"updatePostContent"		: UpdatePostContentService,
+			#####Comment######
+			"comment2Post" 			: Comment2PostService,
+			"getCommentsByPostId"	: GetCommentsByPostId,
+			"getCommentsPost"		: GetCommentsPost,
 			######Media#######
 			"getAvatarById"			: GetAvatarByIdService,
+			"getBannerById"			: GetBannerByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
 			"getMediaRoute"			: GetMediaRoute,#TODO Service
 			#####Files#####

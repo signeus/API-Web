@@ -94,7 +94,7 @@ class DBService:
 
     def getAll(self, collection):
         col = self.openCollection(collection)
-        values = col.find({})
+        values = col.find({}).sort("date_modified", -1) #ASCENDING
         if type(values) == types.NoneType:
             return "Not founded results"
         result = [c for c in values]
@@ -102,5 +102,5 @@ class DBService:
 
     def getAllByFilter(self, collection, query, opt_filter={}):
         col = self.openCollection(collection)
-        values = col.find(query, opt_filter)
+        values = col.find(query, opt_filter).sort("date_modified", -1) #ASCENDING
         return [c for c in values]

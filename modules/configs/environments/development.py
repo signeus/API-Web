@@ -8,8 +8,8 @@ class Development(IEnvironment):
                                 'port_database':'27017',
                                 'name_database':'warehouse',
                                 'ip_app': '192.168.1.176',
-                                'port_app':'8001',
-                                'name_app':'kayoo2',
+                                'port_app':'8000',
+                                'name_app':'kayoo',
                                 'protocol_app':'http'
                             }
 

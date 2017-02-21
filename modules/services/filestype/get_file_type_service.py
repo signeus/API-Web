@@ -9,7 +9,6 @@ class GetFileTypeService(IService):
 
 
     def run(self):
-        #_data = self.parameters['_data_file_extension']
         _type = self.parameters['type']
         _ext = self.parameters['ext']
 

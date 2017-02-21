@@ -15,6 +15,15 @@ def getAvatarById():
                          )
     return response.body.getvalue()
 
+def getBannerById():
+    _id = request.vars["id"]
+    Core().MediaOperation("getBannerById", {
+                                            "_id": _id,
+                                            "response":response
+                                            }
+                         )
+    return response.body.getvalue()
+
 def getMediaRoute():
     _service = request.vars.get("service", "nonService")
     _attribs = request.vars.get("attribs", {})

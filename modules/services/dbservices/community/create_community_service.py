@@ -12,18 +12,16 @@ class CreateCommunityService (IService):
     def run(self):
         image = self.parameters.get("banner", None)
         self.parameters.pop("banner", None)
-        #del self.parameters["banner"]
         try:
             record =  DBService(self.core).insertIn2Collection("Communities", self.parameters)
             result = self.core.InternalOperation("suscribeUser2Community", {"id_user":record["id_creator"],"id_community":record["_id"]})
             if image:
                 ##Saving the image
                 image = str(image)
-                #format = image[:image.find(",")]
                 image = image[image.find(",") + 1:]
                 decodeFile = base64.b64decode(image)
                 img = Image.open(BytesIO(decodeFile))
-                img.save("/home/www/media/banners/" + str(record["_id"]) + str(img.format).lower(), str(img.format))
+                img.save("/home/www/media/banners/" + str(record["_id"]) + "." + str(img.format).lower(), str(img.format))
                 ##End Saving the image
             return result
         except Exception, ex:

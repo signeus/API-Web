@@ -15,5 +15,6 @@ class GetCommunityPosts(IService):
         users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         for key, value in posts.iteritems():
             posts[key].update(users[value['user_id']])
-            #TODO Include webservice of image
+            comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
+            posts[key]["comments"] = comments
         return posts

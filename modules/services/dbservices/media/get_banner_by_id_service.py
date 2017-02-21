@@ -4,9 +4,9 @@ import io
 from PIL import Image
 import time
 
-class GetAvatarByIdService(IService):
+class GetBannerByIdService(IService):
     def __init__(self, core, parameters):
-        super(GetAvatarByIdService, self).__init__(core, parameters)
+        super(GetBannerByIdService, self).__init__(core, parameters)
 
     def run(self):
         try:
@@ -15,10 +15,10 @@ class GetAvatarByIdService(IService):
             if not _id == '0':
                 name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
             try:
-                myfile = io.BytesIO(open("/home/www/media/avatars/" + name, "rb").read())
+                myfile = io.BytesIO(open("/home/www/media/banners/" + name, "rb").read())
             except Exception, ex:
                 name = "default.png"
-                myfile = io.BytesIO(open("/home/www/media/avatars/" + name, "rb").read())
+                myfile = io.BytesIO(open("/home/www/media/banners/" + name, "rb").read())
             image = Image.open(myfile)
             image.save(response.body, image.format)
             response.headers['Content-Type'] = "image/" + image.format.lower()

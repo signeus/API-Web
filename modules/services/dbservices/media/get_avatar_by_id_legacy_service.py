@@ -9,8 +9,6 @@ class GetAvatarByIdLegacyService(IService):
         try:
             _id = self.parameters.get("_id", '0')
             name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
-            #myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb", buffering=0).read())
-            #myfile = io.BytesIO(open("/home/kevin/Pictures/avatares/" + name, "rb").read())
             myfile = "/home/www/media/avatars/" + name
             return myfile
         except Exception, ex:

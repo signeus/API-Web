@@ -10,10 +10,8 @@ class GetPostsByCommunityId(IService):
 
     def run(self):
         result = DBService(self.core).getAllByFilter("Posts", self.parameters,  {'community_id':0})
-        #TODO Extract Caster to Service
-        result = self.core.InternalOperation("castDictObjectsId2DictHexIdRecursService", {"iter": result})
-        ##result = CasterObjectId().castListObjectsId2DictionaryHexId(result)
-        #result = CasterDatetime().castListDateObject2DateTimeStamp(result)
+        #TODO Checking if works the "JSON" encoder
+        #result = self.core.InternalOperation("castDictObjectsId2DictHexIdRecursService", {"iter": result})
         result = CasterCursor().castList2FormatDictionary(result)
 
         return result

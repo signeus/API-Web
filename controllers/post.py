@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pprint
+import json
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -110,4 +112,24 @@ def unlike2Post():
 def likePost():
     core = Core()
     result = core.PostOperation("likePost", dict(request.vars))
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "post_id":"mandatory", "comment":"mandatory"}, "comment2Post")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def commentPost():
+    core = Core()
+    result = core.PostOperation("comment2Post", dict(request.vars))
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getCommentsByPost")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getCommentsByPost():
+    _id = request.vars["id"]
+    core = Core()
+    result = core.PostOperation("getCommentsPost", {"post_id": _id})
     return response.json(result)
