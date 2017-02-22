@@ -76,10 +76,12 @@ def unsuscribeUser2Community():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getUser():
+    _id = request.vars["id"]
     core = Core()
-    result = core.UserOperation("getUserSuscribedCommunities", dict(request.vars))
+    result = core.UserOperation("getUserSuscribedCommunities", {"_id": _id})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
@@ -87,4 +89,13 @@ def getUser():
 def getAllUsersFiltered():
     core = Core()
     result = core.UserOperation("getAllUsersFiltered", dict(request.vars))
+    return response.json(result)
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"mail":"mandatory", "psswd":"mandatory"}, "loginUser")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def login():
+    core = Core()
+    result = core.UserOperation("loginUser", dict(request.vars))
     return response.json(result)
