@@ -20,4 +20,5 @@ class LoginUserService (IService):
             raise Exception("I don't have the user_id")
         user2Render = self.core.InternalOperation("getUserSuscribedCommunities", {"_id": keys[0]})
         user2Render.pop("psswd")
+
         return user2Render

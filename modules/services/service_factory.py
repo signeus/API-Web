@@ -10,6 +10,7 @@ from dbservices.user.suscribe_user_to_community_service import SuscribeUser2Comm
 from dbservices.user.get_user_suscribed_communities_service import GetUserSuscribedCommunities
 from dbservices.user.get_all_users_filtered_service import GetAllUsersFiltered
 from dbservices.user.login_user_service import LoginUserService
+from dbservices.user.sign_up_user_service import SignUpUserService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -70,6 +71,7 @@ class ServiceFactory (object):
 			"getUserSuscribedCommunities"	: GetUserSuscribedCommunities,
 			"getAllUsersFiltered"			: GetAllUsersFiltered,
             "loginUser"      				: LoginUserService,
+            "signup"      					: SignUpUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,

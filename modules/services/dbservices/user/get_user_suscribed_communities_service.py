@@ -17,7 +17,8 @@ class GetUserSuscribedCommunities (IService):
         community = self.core.InternalOperation("getByIdCommunity", {"_id":id})
         lite_community = {}
         lite_community["id"] = community["_id"]
-        lite_community["name"] = community["name"]
+        lite_community["name"] = community.get("name","")
+        lite_community["description"] = community.get("description","")
         lite_community["banner"] = self.core.InternalOperation("getMediaRoute", {"service": "getBannerById",
                                                                                 "attribs": {"id": str(id)}})
         order = community.get("order", [])

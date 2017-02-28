@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import pprint
-import json
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)

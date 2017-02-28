@@ -91,6 +91,7 @@ def getAllUsersFiltered():
     result = core.UserOperation("getAllUsersFiltered", dict(request.vars))
     return response.json(result)
 
+##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"mail":"mandatory", "psswd":"mandatory"}, "loginUser")
@@ -98,4 +99,14 @@ def getAllUsersFiltered():
 def login():
     core = Core()
     result = core.UserOperation("loginUser", dict(request.vars))
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"mail":"mandatory", "psswd":"mandatory", "name":"mandatory"}, "signup")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def signup():
+    core = Core()
+    result = core.UserOperation("signup", dict(request.vars))
     return response.json(result)
