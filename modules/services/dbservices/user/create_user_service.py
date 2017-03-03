@@ -10,6 +10,8 @@ class CreateUserService (IService):
 	def run(self):
 		image = self.parameters.get("avatar", None)
 		self.parameters.pop("avatar", None)
+		self.parameters["communities_subscribed"] = self.parameters.get("communities_subscribed",[])
+		self.parameters["profile"] = self.parameters.get("profile",{})
 		record = DBService(self.core).insertIn2Collection("Users", self.parameters)
 		if image:
 			##Saving the image

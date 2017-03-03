@@ -13,13 +13,13 @@ class UnsuscribeUser2Community (IService):
 		try:
 			user = self.core.UserOperation("getByIdUser", {"_id":self.parameters["id_user"]})
 			id_community = self.parameters["id_community"]
-			user["communities_suscribed"] = user.get("communities_suscribed", [])
-			if user["communities_suscribed"] != []:
-				user["communities_suscribed"].remove(CasterObjectId().castHex2ObjectId(id_community))
+			user["communities_subscribed"] = user.get("communities_subscribed", [])
+			if user["communities_subscribed"] != []:
+				user["communities_subscribed"].remove(CasterObjectId().castHex2ObjectId(id_community))
 			result = self.core.InternalOperation("updateUser", {
 															"_id": CasterObjectId().castHex2ObjectId(self.parameters["id_user"]),
 															"new_values": {
-																			"communities_suscribed"	:	user["communities_suscribed"],
+																			"communities_subscribed"	:	user["communities_subscribed"],
 																			"date_modified"			:	datetime.now()
 																		  }
 															}

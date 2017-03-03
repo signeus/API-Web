@@ -12,7 +12,7 @@ class SuscribeUser2Community (IService):
 	def run(self):
 		try:
 			user = self.core.InternalOperation("getByIdUser", {"_id":self.parameters["id_user"]})
-			user["communities_suscribed"] = user.get("communities_suscribed", []) + [CasterObjectId().castHex2ObjectId(self.parameters["id_community"])]
+			user["communities_subscribed"] = user.get("communities_suscribed", []) + [CasterObjectId().castHex2ObjectId(self.parameters["id_community"])]
 			result = self.core.InternalOperation("updateUser", {
 															"_id": CasterObjectId().castHex2ObjectId(self.parameters["id_user"]),
 															"new_values": {

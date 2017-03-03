@@ -20,7 +20,7 @@ class DBService:
 
     def insertDateModified(self, data):
         try:
-            data["date_modified"] = datetime.now()#.strftime('%Y-%m-%d %H:%M:%S')
+            data["date_modified"] = datetime.utcnow()#.strftime('%Y-%m-%d %H:%M:%S')
             return data
         except Exception, e:
             return "Has been appears a issue with the Json 'Date_Modified'\n Exception: " + e.message

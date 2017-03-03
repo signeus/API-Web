@@ -11,6 +11,7 @@ from dbservices.user.get_user_suscribed_communities_service import GetUserSuscri
 from dbservices.user.get_all_users_filtered_service import GetAllUsersFiltered
 from dbservices.user.login_user_service import LoginUserService
 from dbservices.user.sign_up_user_service import SignUpUserService
+from dbservices.user.update_user_profile_service import UpdateUserProfileService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -42,6 +43,8 @@ from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_banner_by_id_service import GetBannerByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route import GetMediaRoute
+from dbservices.media.save_image_service import SaveImageService
+from dbservices.media.save_avatar_service import SaveAvatarService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -72,6 +75,7 @@ class ServiceFactory (object):
 			"getAllUsersFiltered"			: GetAllUsersFiltered,
             "loginUser"      				: LoginUserService,
             "signup"      					: SignUpUserService,
+			"updateUserProfile"				: UpdateUserProfileService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -102,6 +106,8 @@ class ServiceFactory (object):
 			"getBannerById"			: GetBannerByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
 			"getMediaRoute"			: GetMediaRoute,#TODO Service
+			"saveImage"				: SaveImageService,
+			"saveAvatar"			: SaveAvatarService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####
