@@ -3,6 +3,7 @@ from services.interfaces.i_service import IService
 from datetime import datetime
 import base64
 from PIL import Image
+from io import BytesIO
 
 class SaveImageService(IService):
     def __init__(self, core, parameters):
@@ -16,12 +17,10 @@ class SaveImageService(IService):
         if file == "":
             file = timeNow
         realPath = "/home/www/media/"
-        path = realPath + path + file + ".png"
         decodeFile = base64.b64decode(data)
-        #Old
-        #imageFile = open(path, "wb")
         imageFile = Image.open(BytesIO(decodeFile))
-        imageFile.write(decodeFile)
+        path = realPath + path + file + "." +str(imageFile.format).lower()
+        imageFile.save(path, str(imageFile.format))
         imageFile.close()
         return 0
 
