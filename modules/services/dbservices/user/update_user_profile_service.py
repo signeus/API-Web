@@ -6,7 +6,6 @@ class UpdateUserProfileService (IService):
         super(UpdateUserProfileService, self).__init__(core, parameters)
 
     def run(self):
-        print self.parameters
         _id = self.parameters.get("id", "")
         name = self.parameters.get("firstName", "")
         lastName = self.parameters.get("lastName", "")

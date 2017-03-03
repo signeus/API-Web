@@ -9,6 +9,7 @@ class SaveAvatarService(IService):
         path = "avatars/"
         _id = self.parameters.get("id", "")
         data = self.parameters.get("data", "")
+        data = data[data.find(",") + 1:]
         result = self.core.InternalOperation("saveImage",{"path":path,"file":_id, "data":data})
         if result != 0:
             raise Exception("Saving image avatar failed")
