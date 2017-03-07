@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def createCommunity():
+    core = Core()
+    result = core.CommunityOperation("createCommunity", dict(request.vars))
+    return response.json(result)
+
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"optional"}, "getFirstByFieldsCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -35,15 +43,6 @@ def deleteCommunity():
         return "Success"
     return "Failed"
 
-##Used from Front##
-@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def newCommunity():
-    core = Core()
-    result = core.CommunityOperation("createCommunity", dict(request.vars))
-    return response.json(result)
-
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory", "new_values":"mandatory"}, "updateCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -52,4 +51,13 @@ def updateCommunity():
     _new_values = request.vars["new_values"]
     core = Core()
     result = core.CommunityOperation("updateCommunity", {"_id":_id, "new_values":_new_values})
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newCommunity():
+    core = Core()
+    result = core.CommunityOperation("newCommunity", dict(request.vars))
     return response.json(result)

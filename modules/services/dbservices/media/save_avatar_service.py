@@ -6,17 +6,10 @@ class SaveAvatarService(IService):
         super(SaveAvatarService, self).__init__(core, parameters)
 
     def run(self):
-        path = "avatars/"
-        _id = self.parameters.get("id", "")
-        data = self.parameters.get("data", "")
-        data = data[data.find(",") + 1:]
-        result = self.core.InternalOperation("saveImage",{"path":path,"file":_id, "data":data})
-        if result != 0:
+        self.parameters["path"] = "avatars/"
+        result = self.core.InternalOperation("saveDirImage", self.parameters)
+        if result == 1:
             raise Exception("Saving image avatar failed")
-        _hex_Id = self.core.InternalOperation("castObjectId2Hex", {"id": _id})
-        result = self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id": _hex_Id}})
-        return result
-
-
+        return self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id": result}})
 
 

@@ -7,11 +7,12 @@ class UpdateUserProfileService (IService):
 
     def run(self):
         _id = self.parameters.get("id", "")
-        name = self.parameters.get("firstName", "")
+        name = self.parameters.get("name", "")
+        firstName = self.parameters.get("firstName", "")
         lastName = self.parameters.get("lastName", "")
         mail = self.parameters.get("email", "")
         avatar = self.parameters.get("profileImage", "")
-        nick = "" ##Autogenerate FirstName.LastName
+        alias = "" ##Autogenerate FirstName.LastName
 
         if mail == "":
             raise Exception("Empty email is not allowed.")
@@ -21,13 +22,14 @@ class UpdateUserProfileService (IService):
 
         newLis = self.parameters
         newLis.pop("id", None)
-        newLis.pop("firstName", None)
+        newLis.pop("name", None)
         newLis.pop("email", None)
         newLis.pop("profileImage", None)
-        newLis.pop("nick", None)
-        nick = name + "." + lastName
+        newLis.pop("alias", None)
+        newLis.pop("psswd", None)
+        alias = firstName + "." + lastName
 
-        result = self.core.InternalOperation("updateUser", {"_id":_id, "new_values":{"name":name, "mail":mail, "nick":nick, "profile":newLis}})
+        result = self.core.InternalOperation("updateUser", {"_id":_id, "new_values":{"name":name, "mail":mail, "alias":alias, "profile":newLis}})
         if avatar:
             avatar = self.core.InternalOperation("saveAvatar", {"id": _id, "data": avatar})
             result["avatar"] = avatar

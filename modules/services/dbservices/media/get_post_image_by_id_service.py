@@ -4,10 +4,10 @@ import io
 from PIL import Image
 import time
 
-class GetBannerByIdService(IService):
+class GetPostImageByIdService(IService):
     def __init__(self, core, parameters):
-        super(GetBannerByIdService, self).__init__(core, parameters)
+        super(GetPostImageByIdService, self).__init__(core, parameters)
 
     def run(self):
-        self.parameters["path"] = "banners/"
+        self.parameters["path"] = "posts/"
         return self.core.InternalOperation("getDirImageById", self.parameters)

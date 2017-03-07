@@ -8,9 +8,6 @@ class CreatePostService (IService):
 		
 	def run(self):
 		try:
-			result = DBService(self.core).insertIn2Collection("Posts", self.parameters)
-			result["action"] = "ok"
-			result["_id"] = str(result["_id"])
+			return DBService(self.core).insertIn2Collection("Posts", self.parameters)
 		except Exception, ex:
 			print ex.message
-		return result

@@ -11,7 +11,6 @@ class GetMediaRoute(IService):
             serviceName = self.parameters.get("service", 'nonService')
             attribs = self.parameters.get("attribs", {})
             url = MediaEnrouting(self.core.rm.MediaManager()).getMedia2External("media/" + serviceName, attribs)
-
             return url
         except Exception, ex:
             print ex.message

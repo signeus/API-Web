@@ -37,11 +37,10 @@ def deletePost():
         return response.json({"result":0})
     return response.json({"result":1})
 
-##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def newPost():
+def createPost():
     core = Core()
     result = core.PostOperation("createPost", dict(request.vars))
     return response.json(result)
@@ -130,4 +129,13 @@ def getCommentsByPost():
     _id = request.vars["id"]
     core = Core()
     result = core.PostOperation("getCommentsPost", {"post_id": _id})
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newPost():
+    core = Core()
+    result = core.PostOperation("newPost", dict(request.vars))
     return response.json(result)

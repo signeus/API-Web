@@ -12,6 +12,7 @@ from dbservices.user.get_all_users_filtered_service import GetAllUsersFiltered
 from dbservices.user.login_user_service import LoginUserService
 from dbservices.user.sign_up_user_service import SignUpUserService
 from dbservices.user.update_user_profile_service import UpdateUserProfileService
+from dbservices.user.new_user_service import NewUserService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -20,6 +21,7 @@ from dbservices.community.get_all_community_service import GetAllCommunityServic
 from dbservices.community.get_by_id_community_service import GetByIdCommunityService
 from dbservices.community.get_first_by_fields_community_service import GetFirstByFieldsCommunityService
 from dbservices.community.update_community_service import UpdateCommunityService
+from dbservices.community.new_community_service import NewCommunityService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -33,6 +35,7 @@ from dbservices.post.user_like_post_service import UserLike2PostService
 from dbservices.post.user_unlike_post_service import UserUnlike2PostService
 from dbservices.post.like_post_service import Like2PostService
 from dbservices.post.update_post_content_service import UpdatePostContentService
+from dbservices.post.new_post_service import NewPostService
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
@@ -41,10 +44,14 @@ from dbservices.post.get_comments_post_service import GetCommentsPost
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_banner_by_id_service import GetBannerByIdService
+from dbservices.media.get_post_image_by_id_service import GetPostImageByIdService
+from dbservices.media.get_dir_image_by_id_service import GetDirImageByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route import GetMediaRoute
 from dbservices.media.save_image_service import SaveImageService
 from dbservices.media.save_avatar_service import SaveAvatarService
+from dbservices.media.save_post_image_service import SavePostImageService
+from dbservices.media.save_dir_image_service import SaveDirImageService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -76,6 +83,7 @@ class ServiceFactory (object):
             "loginUser"      				: LoginUserService,
             "signup"      					: SignUpUserService,
 			"updateUserProfile"				: UpdateUserProfileService,
+            "newUser"      					: NewUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -84,6 +92,7 @@ class ServiceFactory (object):
             "getAllCommunity" 			: GetAllCommunityService,
             "getByIdCommunity"			: GetByIdCommunityService,
             "getFirstByFieldsCommunity" : GetFirstByFieldsCommunityService,
+			"newCommunity" 				: NewCommunityService,
             ######Posts########
             "createPost" 			: CreatePostService,
 			"updatePost"			: UpdatePostService,
@@ -97,6 +106,7 @@ class ServiceFactory (object):
             "unlike2Post"			: UserUnlike2PostService,
             "likePost"				: Like2PostService,
 			"updatePostContent"		: UpdatePostContentService,
+            "newPost" 				: NewPostService,
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
@@ -104,10 +114,14 @@ class ServiceFactory (object):
 			######Media#######
 			"getAvatarById"			: GetAvatarByIdService,
 			"getBannerById"			: GetBannerByIdService,
+			"getPostImageById"		: GetPostImageByIdService,
+			"getDirImageById"		: GetDirImageByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
 			"getMediaRoute"			: GetMediaRoute,#TODO Service
 			"saveImage"				: SaveImageService,
 			"saveAvatar"			: SaveAvatarService,
+			"savePostImage"			: SavePostImageService,
+			"saveDirImage"			: SaveDirImageService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

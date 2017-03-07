@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def createUser():
+    core = Core()
+    result = core.UserOperation("createUser", request.vars)
+    return response.json(result)
+
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"optional"}, "getFirstByFieldsUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -34,14 +42,6 @@ def deleteUser():
     if result >= 1:
         return response.json({"result":"success"})
     return response.json({"result":"failed"})
-
-@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def newUser():
-    core = Core()
-    result = core.UserOperation("createUser", request.vars)
-    return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
@@ -114,4 +114,13 @@ def signup():
 #@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "profileImage":"optional"}, "updateUserProfile")
 def updateUserProfile():
     result = Core().UserOperation("updateUserProfile", dict(request.vars))
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newUser():
+    core = Core()
+    result = core.UserOperation("newUser", request.vars)
     return response.json(result)
