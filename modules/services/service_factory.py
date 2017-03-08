@@ -48,10 +48,14 @@ from dbservices.media.get_post_image_by_id_service import GetPostImageByIdServic
 from dbservices.media.get_dir_image_by_id_service import GetDirImageByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route import GetMediaRoute
+from dbservices.media.get_file_by_path_service import GetFileByPathService
 from dbservices.media.save_image_service import SaveImageService
 from dbservices.media.save_avatar_service import SaveAvatarService
 from dbservices.media.save_post_image_service import SavePostImageService
 from dbservices.media.save_dir_image_service import SaveDirImageService
+from dbservices.media.save_post_files_service import SavePostFilesService
+from dbservices.media.save_file_service import SaveFileService
+from dbservices.media.save_files_services import SaveFilesService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -122,6 +126,10 @@ class ServiceFactory (object):
 			"saveAvatar"			: SaveAvatarService,
 			"savePostImage"			: SavePostImageService,
 			"saveDirImage"			: SaveDirImageService,
+			"getFileByPath"			: GetFileByPathService,
+			"savePostFiles"			: SavePostFilesService,
+			"saveFile"				: SaveFileService,
+			"saveFiles"				: SaveFilesService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

@@ -10,4 +10,4 @@ class SavePostImageService(IService):
         result = self.core.InternalOperation("saveDirImage", self.parameters)
         if result == 1:
             raise Exception("Saving image post failed")
-        return self.core.InternalOperation("getMediaRoute", {"service":"getBannerById", "attribs": {"id": result}})
+        return self.core.InternalOperation("getMediaRoute", {"service":"getPostImageById", "attribs": {"id": result}})

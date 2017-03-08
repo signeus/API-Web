@@ -24,6 +24,11 @@ def getBannerById():
                          )
     return response.body.getvalue()
 
+def savePostFiles():
+    mediaRoutes = Core().MediaOperation("savePostFiles", dict(request.vars))
+    return mediaRoutes
+
+
 def getMediaRoute():
     _service = request.vars.get("service", "nonService")
     _attribs = request.vars.get("attribs", {})
@@ -33,3 +38,8 @@ def getMediaRoute():
                                                         }
                                       )
     return mediaRoute
+
+def getFileByPath():
+    request.vars["response"] = response
+    Core().MediaOperation("getFileByPath", dict(request.vars))
+    return response.body.getvalue()
