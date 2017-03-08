@@ -13,8 +13,8 @@ class GetCommentsPost(IService):
     def run(self):
         postId = self.parameters.get("post_id","")
         if postId == "":
-            return postId
-        comments = self.core.InternalOperation("getCommentsByPostId", {"post_id": self.parameters['post_id']})
+            raise Exception("Get comments post: Empty post ID is not allowed.")
+        comments = self.core.InternalOperation("getCommentsByPostId", {"post_id": postId})
         users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         co = [dict(c,**users[c["user_id"]]) for c in comments]
         return co

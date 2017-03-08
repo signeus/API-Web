@@ -15,6 +15,12 @@ def getAvatarById():
                          )
     return response.body.getvalue()
 
+##Used by Front##
+def getPostImageById():
+    request.vars["response"] = response
+    Core().MediaOperation("getPostImageById", request.vars)
+    return response.body.getvalue()
+
 def getBannerById():
     _id = request.vars["id"]
     Core().MediaOperation("getBannerById", {

@@ -29,13 +29,15 @@ from dbservices.post.delete_post_service import DeletePostService
 from dbservices.post.get_all_post_service import GetAllPostService
 from dbservices.post.get_by_id_post_service import GetByIdPostService
 from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPostService
-from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityId
-from dbservices.post.get_community_posts_service import GetCommunityPosts
+from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityIdService
+from dbservices.post.get_posts_by_community_formated_service import GetPostsByCommunityFormatedService
+from dbservices.post.get_community_posts_service import GetCommunityPostsService
 from dbservices.post.user_like_post_service import UserLike2PostService
 from dbservices.post.user_unlike_post_service import UserUnlike2PostService
 from dbservices.post.like_post_service import Like2PostService
 from dbservices.post.update_post_content_service import UpdatePostContentService
 from dbservices.post.new_post_service import NewPostService
+from dbservices.post.get_main_community_by_id_user_service import GetMainCommunityByIdService
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
@@ -47,7 +49,7 @@ from dbservices.media.get_banner_by_id_service import GetBannerByIdService
 from dbservices.media.get_post_image_by_id_service import GetPostImageByIdService
 from dbservices.media.get_dir_image_by_id_service import GetDirImageByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
-from dbservices.media.get_media_route import GetMediaRoute
+from dbservices.media.get_media_route_service import GetMediaRouteService
 from dbservices.media.get_file_by_path_service import GetFileByPathService
 from dbservices.media.save_image_service import SaveImageService
 from dbservices.media.save_avatar_service import SaveAvatarService
@@ -56,6 +58,8 @@ from dbservices.media.save_dir_image_service import SaveDirImageService
 from dbservices.media.save_post_files_service import SavePostFilesService
 from dbservices.media.save_file_service import SaveFileService
 from dbservices.media.save_files_services import SaveFilesService
+from dbservices.media.exists_file_service import ExistsFileService
+from dbservices.media.exists_post_image_service import ExistsPostImageService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -104,13 +108,15 @@ class ServiceFactory (object):
 			"getAllPost" 			: GetAllPostService,
 			"getByIdPost"			: GetByIdPostService,
 			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
-			"getPostsByCommunityId"	: GetPostsByCommunityId,#TODO Service
-			"getCommunityPosts"		: GetCommunityPosts,#TODO Service
+			"getPostsByCommunityId"		    : GetPostsByCommunityIdService,
+			"getPostsByCommunityFormated"	: GetPostsByCommunityFormatedService,
+			"getCommunityPosts"		: GetCommunityPostsService,
 			"like2Post"				: UserLike2PostService,
             "unlike2Post"			: UserUnlike2PostService,
             "likePost"				: Like2PostService,
 			"updatePostContent"		: UpdatePostContentService,
             "newPost" 				: NewPostService,
+			"getMainCommunityById"	: GetMainCommunityByIdService,
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
@@ -121,7 +127,7 @@ class ServiceFactory (object):
 			"getPostImageById"		: GetPostImageByIdService,
 			"getDirImageById"		: GetDirImageByIdService,
 			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
-			"getMediaRoute"			: GetMediaRoute,#TODO Service
+			"getMediaRoute"			: GetMediaRouteService,
 			"saveImage"				: SaveImageService,
 			"saveAvatar"			: SaveAvatarService,
 			"savePostImage"			: SavePostImageService,
@@ -130,15 +136,17 @@ class ServiceFactory (object):
 			"savePostFiles"			: SavePostFilesService,
 			"saveFile"				: SaveFileService,
 			"saveFiles"				: SaveFilesService,
+			"existsFile"			: ExistsFileService,
+			"existsPostImage"		: ExistsPostImageService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####
-			"castDictObjectsId2DictHexId"			: CastDictObjectsId2DictHexIdService,
-			"castHex2ObjectId"						: CastHex2ObjectIdService,
-			"castListObjectsId2ListHexId"			: CastListObjectsId2ListHexIdService,
-			"castListDictObjectsId2ListDictHexId"	: CastListDictObjectsId2ListDictHexIdService,
-			"castObjectId2Hex"						: CastObjectId2HexService,
-			"castDictObjectsId2DictHexIdRecursService" : CastDictObjectsId2DictHexIdRecursService,
+			"castDictObjectsId2DictHexId"			    : CastDictObjectsId2DictHexIdService,
+			"castHex2ObjectId"						    : CastHex2ObjectIdService,
+			"castListObjectsId2ListHexId"			    : CastListObjectsId2ListHexIdService,
+			"castListDictObjectsId2ListDictHexId"	    : CastListDictObjectsId2ListDictHexIdService,
+			"castObjectId2Hex"						    : CastObjectId2HexService,
+			"castDictObjectsId2DictHexIdRecursService"  : CastDictObjectsId2DictHexIdRecursService,
 			    ###Date###
 			"castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
 			"castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,

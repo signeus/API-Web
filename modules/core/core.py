@@ -36,6 +36,7 @@ class Core:
         except Exception, ex:
             print '------'
             print ex
+            print type(ex)
             print '------'
             return {"result":1, "data":{"message":ex.message, "error":1, "type": 1}}
 

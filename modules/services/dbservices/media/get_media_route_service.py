@@ -2,9 +2,9 @@
 from services.interfaces.i_service import IService
 from resources_manager.media.media_enrouting import MediaEnrouting
 
-class GetMediaRoute(IService):
+class GetMediaRouteService(IService):
     def __init__(self, core, parameters):
-        super(GetMediaRoute, self).__init__(core, parameters)
+        super(GetMediaRouteService, self).__init__(core, parameters)
 
     def run(self):
         try:

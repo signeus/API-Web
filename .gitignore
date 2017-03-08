@@ -1,3 +1,8 @@
 #   Pycharm files  #
 ####################
 *.pyc
+
+#   Error folder   #
+####################
+/errors/*.*
+/errors/

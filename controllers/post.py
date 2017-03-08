@@ -57,11 +57,22 @@ def updatePost():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getPostsByCommunityId")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getPostsByCommunityId():
-    _id = request.vars["_id"]
+    _id = request.vars["id"]
     core = Core()
     result = core.PostOperation("getPostsByCommunityId", {"community_id" : _id})
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getPostsByCommunityFormat")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getPostsByCommunityFormated():
+    _id = request.vars["id"]
+    core = Core()
+    result = core.PostOperation("getPostsByCommunityFormated", {"community_id" : _id})
     return response.json(result)
 
 ##Used from Front##
@@ -138,4 +149,14 @@ def getCommentsByPost():
 def newPost():
     core = Core()
     result = core.PostOperation("newPost", dict(request.vars))
+    return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getMainCommunityById")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getMainCommunityById():
+    _id = request.vars["id"]
+    core = Core()
+    result = core.PostOperation("getMainCommunityById", {"user_id": _id})
     return response.json(result)

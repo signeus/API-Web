@@ -12,7 +12,7 @@ class GetDirImageByIdService(IService):
         try:
             path = self.parameters.get("path", 'unknown/')
             path = "/home/www/media/" + path
-            _id = self.parameters.get("_id", '0')
+            _id = self.parameters.get("id", '0')
             response = self.parameters.get("response", None)
             if _id != '0':
                 name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
