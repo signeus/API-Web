@@ -9,7 +9,7 @@ def getAvatarByIdLegacy():
 def getAvatarById():
     _id = request.vars["id"]
     Core().MediaOperation("getAvatarById", {
-                                            "_id": _id,
+                                            "id": _id,
                                             "response":response
                                             }
                          )
@@ -24,7 +24,7 @@ def getPostImageById():
 def getBannerById():
     _id = request.vars["id"]
     Core().MediaOperation("getBannerById", {
-                                            "_id": _id,
+                                            "id": _id,
                                             "response":response
                                             }
                          )
