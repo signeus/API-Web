@@ -15,7 +15,7 @@ class SaveFileService(IService):
                 from datetime import datetime
                 timeNow = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
                 filename = timeNow
-            path = "/home/www/media/" + relativePath
+            path = self.core.GetMediaResources()["media_folder"] + relativePath
 
             if not os.path.exists(path):
                 os.makedirs(path)

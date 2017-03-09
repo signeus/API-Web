@@ -10,7 +10,8 @@ class Development(IEnvironment):
                                 'ip_app': '192.168.1.176',
                                 'port_app':'8000',
                                 'name_app':'kayoo',
-                                'protocol_app':'http'
+                                'protocol_app':'http',
+                                'media_folder':'/home/www/media/'
                             }
 
     def config(self):

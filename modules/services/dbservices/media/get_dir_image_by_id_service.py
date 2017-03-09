@@ -11,7 +11,7 @@ class GetDirImageByIdService(IService):
     def run(self):
         try:
             path = self.parameters.get("path", 'unknown/')
-            path = "/home/www/media/" + path
+            path = self.core.GetMediaResources()["media_folder"] + path
             _id = self.parameters.get("id", '0')
             response = self.parameters.get("response", None)
             if _id != '0':
@@ -24,7 +24,7 @@ class GetDirImageByIdService(IService):
             image = Image.open(myfile)
             image.save(response.body, image.format)
             response.headers['Content-Type'] = "image/" + image.format.lower()
-            response.headers["Cache-Control"] = "max-age=10, must-revalidate"
+            response.headers["Cache-Control"] = "public, max-age=3600, must-revalidate"
             response.headers["Expires"] = time.strftime("%a, %d-%b-%Y %T GMT",
                                                         time.gmtime(time.time() + 30 * 24 * 3600))
             response.headers["Pragma"] = "cache"

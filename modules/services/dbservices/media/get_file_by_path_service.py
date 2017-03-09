@@ -10,7 +10,7 @@ class GetFileByPathService(IService):
         try:
             path = self.parameters.get("path", 'unknown/')
             filename = self.parameters.get("filename", 'default.txt')
-            path = "/home/www/media/" + path
+            path = self.core.GetMediaResources()["media_folder"] + path
             response = self.parameters.get("response", None)
             file = open(path + filename, "rb").read()
             response.body.write(file)

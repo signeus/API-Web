@@ -17,7 +17,7 @@ class SaveImageService(IService):
             file = self.parameters.get("filename", timeNow)
             if file == "":
                 file = timeNow
-            path = "/home/www/media/" + path
+            path = self.core.GetMediaResources()["media_folder"] + path
             data = data[data.find(",") + 1:]
             decodeFile = base64.b64decode(data)
             imageFile = Image.open(BytesIO(decodeFile))

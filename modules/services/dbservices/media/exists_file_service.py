@@ -10,7 +10,7 @@ class ExistsFileService(IService):
         try:
             filename = self.parameters.get("filename", 'default.png')
             relativePath = self.parameters.get("path", 'unknown/')
-            path = "/home/www/media/" + relativePath
+            path = self.core.GetMediaResources()["media_folder"] + relativePath
 
             if not os.path.exists(path):
                 os.makedirs(path)
