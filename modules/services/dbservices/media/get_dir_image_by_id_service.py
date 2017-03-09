@@ -9,7 +9,6 @@ class GetDirImageByIdService(IService):
         super(GetDirImageByIdService, self).__init__(core, parameters)
 
     def run(self):
-        print "Empezamos"
         try:
             path = self.parameters.get("path", 'unknown/')
             path = self.core.GetMediaResources()["media_folder"] + path
