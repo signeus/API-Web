@@ -49,3 +49,6 @@ def getFileByPath():
     request.vars["response"] = response
     Core().MediaOperation("getFileByPath", dict(request.vars))
     return response.body.getvalue()
+
+def getFilesRoutesByPath():
+    return Core().MediaOperation("getFilesRoutesByPath", dict(request.vars))

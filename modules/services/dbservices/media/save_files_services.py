@@ -8,9 +8,4 @@ class SaveFilesService(IService):
     def run(self):
         files = self.parameters.get("files", {})
         path = self.parameters.get("path", '')
-        result = []
-
-        for filename, data in files.iteritems():
-            result.append(self.core.InternalOperation("saveFile", {'path': path, 'data': data, 'filename': filename}))
-
-        return result
+        return [self.core.InternalOperation("saveFile", {'path': path, 'data': data, 'filename': filename}) for filename, data in files.iteritems()]

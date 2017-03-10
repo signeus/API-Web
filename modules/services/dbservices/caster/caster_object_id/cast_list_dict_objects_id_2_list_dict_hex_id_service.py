@@ -6,9 +6,4 @@ class CastListDictObjectsId2ListDictHexIdService (IService):
         super(CastListDictObjectsId2ListDictHexIdService, self).__init__(core, parameters)
 
     def run(self):
-        lis = self.parameters.get("lis", None)
-        for elem in lis:
-            for key,value in elem.iteritems():
-                if type(value).__name__ == "ObjectId":
-                    elem[key] = str(value)
-        return lis
+        return [{key: str(value) for key, value in elem.iteritems() if type(value).__name__ == "ObjectId"} for elem in self.parameters.get("lis", [])]

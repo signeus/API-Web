@@ -6,8 +6,4 @@ class CastDictDate2DateTimeStampService (IService):
         super(CastDictDate2DateTimeStampService, self).__init__(core, parameters)
 
     def run(self):
-        dictionary = self.parameters.get("dictionary", None)
-        for key,value in dictionary.iteritems():
-            if type(value).__name__ == "datetime":
-                dictionary[key] = value.strftime("%s")
-        return dictionary
+        return {key: value.strftime("%s") for key, value in self.parameters.get("dictionary", {}).iteritems() if type(value).__name__ == "datetime"}

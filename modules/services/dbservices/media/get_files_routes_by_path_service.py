@@ -9,16 +9,10 @@ class GetFilesRoutesByPathService(IService):
     def run(self):
         try:
             path = self.parameters.get("path", 'unknown/')
-            path = self.core.GetMediaResources()["media_folder"] + path
-            files = os.listdir(path)
-
-            routesFiles = []
-            if len(files) > 0:
-                for file in files:
-                    routesFiles.append(self.core.InternalOperation("getMediaRoute", {"service": "getFileByPath",
+            realPath = self.core.GetMediaResources()["media_folder"] + path
+            files = os.listdir(realPath)
+            return [self.core.InternalOperation("getMediaRoute", {"service": "getFileByPath",
                                                                     "attribs": {"path": path,
-                                                                            "filename": file}}))
-
-            return routesFiles
+                                                                            "filename": file}}) for file in files if len(files) > 0]
         except Exception, ex:
             print ex.message

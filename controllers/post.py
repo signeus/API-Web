@@ -160,3 +160,10 @@ def getMainCommunityById():
     core = Core()
     result = core.PostOperation("getMainCommunityById", {"user_id": _id})
     return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST"], request)
+#@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "checkSurveyByPostId")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def checkSurveyByPostId():
+    return response.json(Core().PostOperation("checkSurveyByPostId", dict(request.vars)))

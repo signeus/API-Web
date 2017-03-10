@@ -38,6 +38,8 @@ from dbservices.post.like_post_service import Like2PostService
 from dbservices.post.update_post_content_service import UpdatePostContentService
 from dbservices.post.new_post_service import NewPostService
 from dbservices.post.get_main_community_by_id_user_service import GetMainCommunityByIdService
+from dbservices.post.check_survey_by_post_id_service import CheckSurveyByPostIdService
+
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
@@ -51,6 +53,7 @@ from dbservices.media.get_dir_image_by_id_service import GetDirImageByIdService
 from dbservices.media.get_avatar_by_id_legacy_service import GetAvatarByIdLegacyService
 from dbservices.media.get_media_route_service import GetMediaRouteService
 from dbservices.media.get_file_by_path_service import GetFileByPathService
+from dbservices.media.get_files_routes_by_path_service import GetFilesRoutesByPathService
 from dbservices.media.save_image_service import SaveImageService
 from dbservices.media.save_avatar_service import SaveAvatarService
 from dbservices.media.save_post_image_service import SavePostImageService
@@ -117,6 +120,7 @@ class ServiceFactory (object):
 			"updatePostContent"		: UpdatePostContentService,
             "newPost" 				: NewPostService,
 			"getMainCommunityById"	: GetMainCommunityByIdService,
+			"checkSurveyByPostId"	: CheckSurveyByPostIdService,
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
@@ -133,6 +137,7 @@ class ServiceFactory (object):
 			"savePostImage"			: SavePostImageService,
 			"saveDirImage"			: SaveDirImageService,
 			"getFileByPath"			: GetFileByPathService,
+			"getFilesRoutesByPath"			: GetFilesRoutesByPathService,
 			"savePostFiles"			: SavePostFilesService,
 			"saveFile"				: SaveFileService,
 			"saveFiles"				: SaveFilesService,

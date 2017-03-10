@@ -7,3 +7,6 @@ class IService (object):
 		
 	def run(self):
 		pass
+
+	def internalOp(self, args):
+		return self.core.InternalOperation(args)

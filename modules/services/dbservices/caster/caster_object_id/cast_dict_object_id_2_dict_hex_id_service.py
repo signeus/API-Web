@@ -6,9 +6,5 @@ class CastDictObjectsId2DictHexIdService (IService):
         super(CastDictObjectsId2DictHexIdService, self).__init__(core, parameters)
 
     def run(self):
-        dictionary = self.parameters.get("dictionary", None)
-        for key,value in dictionary.iteritems():
-            if type(value).__name__ == "ObjectId":
-                dictionary[key] = str(value)
-        return dictionary
+        return {key:str(value) for key,value in self.parameters.get("dictionary", {}).iteritems() if type(value).__name__ == "ObjectId"}
 
