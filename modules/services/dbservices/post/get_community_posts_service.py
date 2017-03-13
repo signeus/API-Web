@@ -6,7 +6,13 @@ class GetCommunityPostsService(IService):
         super(GetCommunityPostsService, self).__init__(core, parameters)
 
     def run(self):
-        posts = self.core.InternalOperation("getPostsByCommunityFormated", {"community_id": self.parameters['community_id']})
+        _community_id = self.parameters.get("community_id", None)
+
+        if not _community_id:
+            raise Exception("Empty community ID is not allowed.")
+
+        posts = self.core.InternalOperation("getPostsByCommunityFormated", {"community_id": _community_id})
+
         users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         for key, value in posts.iteritems():
             ##Comments
@@ -17,5 +23,10 @@ class GetCommunityPostsService(IService):
             if self.core.InternalOperation("existsPostImage", {"id": key}): ##If exists...
                 image = self.core.InternalOperation("getMediaRoute", {"service": "getPostImageById", "attribs": {"id": key}})
                 posts[key]["image"] = image
+            ##Files
+            files = self.core.InternalOperation("getPostFiles", {"id":key})
+            if files:
+               posts[key]["files"] = files
+
 
         return posts

@@ -10,5 +10,5 @@ class GetPostFilesService(IService):
         if not _id:
             raise Exception("Empty ID not allowed.")
 
-        path = "posts/" + _id
+        path = "posts/files/" + _id + "/"
         return self.core.InternalOperation("getFilesRoutesByPath", {'path': path})

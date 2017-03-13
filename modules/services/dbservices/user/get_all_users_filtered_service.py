@@ -11,4 +11,11 @@ class GetAllUsersFiltered(IService):
     def run(self):
         result = DBService(self.core).getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))
         result = CasterCursor().castList2FormatDictionary(result)
-        return [dict(elem,**{'avatar': self.internalOp("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elem)}})}) for elem in result]
+
+        for elems in result:
+            result[elems]["avatar"] = self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elems)}})
+
+        return result
+        #result = [dict(elem,**{'avatar': self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elem)}})}) for elem in result]
+        #print "he Pasado"
+        #print result

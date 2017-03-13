@@ -1,8 +1,13 @@
 #   Pycharm files  #
 ####################
-*.pyc
+/**/*.pyc
 
 #   Error folder   #
 ####################
 /errors/*.*
 /errors/
+
+
+#    Workspace     #
+####################
+.idea/workspace.xml
