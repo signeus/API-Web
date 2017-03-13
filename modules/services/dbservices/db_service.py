@@ -105,53 +105,16 @@ class DBService:
         values = col.find(query, opt_filter).sort("date_modified", -1) #ASCENDING
         return [c for c in values]
 
-    def updateFieldInside(self, collection, _id, new_values):
+    def updateFieldInside(self, collection, _id, fieldPath, value):
         _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         col = self.openCollection(collection)
-        #data_completed = self.insertDateModified(new_values)
-        print _ObjectId
-        # value = col.update({ '_id': 5 },
-        #                        {
-        #                          '$push': {
-        #                            'quizzes': {'scores': 90}
-        #                          }
-        #                        }
-        #                     )
+        result = col.update({"_id": _ObjectId},
+                   {"$push": {fieldPath: value}, "$set":{"date_modified":datetime.utcnow()}})
+        return result
 
-        # db.collection.update(
-        #     {"_id": ID, "playlists._id": "58"},
-        #     {"$push":
-        #         {"playlists.$.musics":
-        #             {
-        #                 "name": "test name",
-        #                 "duration": "4.00"
-        #             }
-        #         }
-        #     }
-        # )
-        print type(_ObjectId)
-        value = col.update({'_id': '5'},
-                           {
-                               '$push': {
-                                   'survey.$.answers': ['5891cced481f3416aa786783']
-                               }
-                           }
-                           )
-
-        # value = col.update({'_id': _ObjectId },{'$push': {'survey':
-        #                                                             { 'answers':
-        #                                                                 {
-        #                                                                     '$each':['5891cced481f3416aa786783']
-        #                                                                 }
-        #                                                             }
-        #                                                 }
-        #                                         })
-        print value
-        print "he terminado"
-        return value
-
-        #
-        #value = col.update({'': {'$ne':''} },{'$push': {'':{'$each':['']}}},
-        #										return_document=ReturnDocument.AFTER)
-        #
-        #db.threads.update({'messages.read_by': {$ne: 'jim'}},{$push: {'messages.read_by': {$each: ['jim']}}})
+    def extractFieldInside(self, collection, _id, fieldPath, value):
+        _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
+        col = self.openCollection(collection)
+        result = col.update({"_id": _ObjectId},
+                   {"$pull": {fieldPath: value}, "$set":{"date_modified":datetime.utcnow()}})
+        return result

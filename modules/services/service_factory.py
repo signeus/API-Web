@@ -39,6 +39,10 @@ from dbservices.post.update_post_content_service import UpdatePostContentService
 from dbservices.post.new_post_service import NewPostService
 from dbservices.post.get_main_community_by_id_user_service import GetMainCommunityByIdService
 from dbservices.post.check_survey_by_post_id_service import CheckSurveyByPostIdService
+from dbservices.post.check_option_survey_service import CheckOptionSurveyService
+from dbservices.post.uncheck_option_survey_service import UncheckOptionSurveyService
+from dbservices.post.update_inside_fields_post_service import UpdateInsideFieldsPostService
+from dbservices.post.extract_inside_fields_post_service import ExtractInsideFieldsPostService
 
 
 from dbservices.post.comment_2_post_service import Comment2PostService
@@ -121,6 +125,11 @@ class ServiceFactory (object):
             "newPost" 				: NewPostService,
 			"getMainCommunityById"	: GetMainCommunityByIdService,
 			"checkSurveyByPostId"	: CheckSurveyByPostIdService,
+			"checkOptionSurveyId"	: CheckOptionSurveyService,
+			"uncheckOptionSurveyId"	: UncheckOptionSurveyService,
+            "updateInsideFieldsPost"        : UpdateInsideFieldsPostService,
+            "extractInsideFieldsPost"       : ExtractInsideFieldsPostService,
+
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
