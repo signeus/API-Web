@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 import time
+import magic
 
 class GetFileByPathService(IService):
     def __init__(self, core, parameters):
@@ -13,9 +14,9 @@ class GetFileByPathService(IService):
             path = self.core.GetMediaResources()["media_folder"] + path
             response = self.parameters.get("response", None)
             file = open(path + filename, "rb").read()
+            mime = magic.Magic(mime=True, uncompress=True).from_buffer(file)
             response.body.write(file)
-            #response.headers['Content-Type'] = "application/octet-stream"
-            response.headers['Content-Type'] = "application/x-msdownload"
+            response.headers['Content-Type'] = mime
             response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '"'
             response.headers["Cache-Control"] = "private"
             response.headers["Expires"] = time.strftime("%a, %d-%b-%Y %T GMT",

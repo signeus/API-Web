@@ -6,6 +6,9 @@ class SaveFilesService(IService):
         super(SaveFilesService, self).__init__(core, parameters)
 
     def run(self):
-        files = self.parameters.get("files", {})
+        files = self.parameters.get("files", [])
         path = self.parameters.get("path", '')
-        return [self.core.InternalOperation("saveFile", {'path': path, 'data': data, 'filename': filename}) for filename, data in files.iteritems()]
+
+        print type(files)
+
+        return [self.core.InternalOperation("saveFile", {'path': path, 'data': file["data"], 'filename': file["name"] + "." + file["extension"]}) for file in files]

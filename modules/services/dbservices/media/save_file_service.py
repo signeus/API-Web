@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
+import base64
 import os
 
 class SaveFileService(IService):
@@ -22,8 +23,10 @@ class SaveFileService(IService):
                 print "Created directory in "+ path
 
             path = path + filename
+            data = data[data.find(",") + 1:]
+            decodeFile = base64.b64decode(data)
             file = open(path, 'wb')
-            file.write(str(data))
+            file.write(str(decodeFile))
             file.close()
             return self.core.InternalOperation("getMediaRoute", {"service": "getFileByPath",
                                                                  "attribs": {"path": relativePath,

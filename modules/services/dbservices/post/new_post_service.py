@@ -6,15 +6,25 @@ class NewPostService (IService):
         super(NewPostService, self).__init__(core, parameters)
 
     def run(self):
-
         _comment_id = self.parameters.get("community_id", None)
         if _comment_id:
             self.parameters["community_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _comment_id})
 
-        image = self.parameters.get("image", None)
-        self.parameters.pop("image", None)
-        video = self.parameters.get("video", None)
-        self.parameters.pop("video", None)
+        video = self.parameters.pop("video", None)
+        image = self.parameters.pop("image", None)
+        files = self.parameters.pop("files", None)
+
+        urlVideo = self.core.InternalOperation("validateUrl", {'url': video})
+        urlImagen = self.core.InternalOperation("validateUrl", {'url': image})
+
+        if type(urlVideo) == str:
+            if urlVideo != "":
+                self.parameters["video"] = video
+            video = None
+        if type(urlImagen) == str:
+            if urlImagen != "":
+                self.parameters["image"] = image
+            image = None
 
 
         result = self.core.InternalOperation("createPost",self.parameters)
@@ -22,6 +32,10 @@ class NewPostService (IService):
         id = result.get("_id", None)
         if not id:
             raise Exception("New post, Failed the create post.")
+
+        if files:
+            filesRoutes = self.core.InternalOperation("savePostFiles", {'id': id, 'files': files})
+            result["files"] = filesRoutes
 
         if image:
             urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image})

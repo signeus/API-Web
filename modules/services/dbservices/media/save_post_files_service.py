@@ -11,9 +11,9 @@ class SavePostFilesService(IService):
         files = self.parameters.get("files", None)
 
         ##TODO HACK That is only to test
-        print type(files)
-        files = json.loads(files)
-        print type(files)
+        # print type(files)
+        # files = json.loads(files)
+        # print type(files)
         ##TODO HACK That is only to test END
 
         if not (_id or files):

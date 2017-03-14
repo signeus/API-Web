@@ -74,6 +74,7 @@ from dbservices.media.save_video_service import SaveVideoService
 from dbservices.media.get_post_video_by_id_service import GetPostVideoByIdService
 from dbservices.media.get_dir_video_by_id_service import GetDirVideoByIdService
 
+
 from services.filestype.get_file_type_service import GetFileTypeService
 
 from dbservices.caster.caster_object_id.cast_dict_object_id_2_dict_hex_id_service import CastDictObjectsId2DictHexIdService
@@ -85,6 +86,9 @@ from dbservices.caster.caster_object_id.cast_object_id_2_hex_service import Cast
 from dbservices.caster.caster_datetime.cast_dict_date_2_date_timestamp_service import CastDictDate2DateTimeStampService
 from dbservices.caster.caster_datetime.cast_list_date_2_date_timestamp_service import CastListDate2DateTimestampService
 from dbservices.caster.caster_datetime.cast_date_2_date_timestamp_service import CastDate2DateTimestampService
+
+from dbservices.validator.validate_url_service import ValidateUrlService
+from dbservices.validator.exists_url_service import ExistsUrlService
 
 
 class ServiceFactory (object):
@@ -177,6 +181,10 @@ class ServiceFactory (object):
 			"castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
 			"castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
 			"castDate2DateTimestamp"				: CastDate2DateTimestampService,
+            ###Validator###
+			"validateUrl"				: ValidateUrlService,
+            "existsUrl"                 : ExistsUrlService,
+
 		}
 		return services[serviceName](core, parameters)
 
