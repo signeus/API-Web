@@ -8,6 +8,7 @@ class SavePostImageService(IService):
     def run(self):
         self.parameters["path"] = "posts/"
         result = self.core.InternalOperation("saveDirImage", self.parameters)
-        if result == 1:
-            raise Exception("Saving image post failed")
+        if type(result) != str:
+            return result
+
         return self.core.InternalOperation("getMediaRoute", {"service":"getPostImageById", "attribs": {"id": result}})

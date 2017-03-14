@@ -13,12 +13,23 @@ class NewPostService (IService):
 
         image = self.parameters.get("image", None)
         self.parameters.pop("image", None)
+        video = self.parameters.get("video", None)
+        self.parameters.pop("video", None)
+
+
         result = self.core.InternalOperation("createPost",self.parameters)
+
+        id = result.get("_id", None)
+        if not id:
+            raise Exception("New post, Failed the create post.")
+
         if image:
-            id = result.get("_id", None)
-            if not id:
-                raise Exception("New post, Not exists the ID to generate the image.")
             urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image})
-            result['image'] = urlImage
+            if type(urlImage) == str:
+                result['image'] = urlImage
+        if video:
+            urlVideo = self.core.InternalOperation("savePostVideo", {'id':id, 'data':video})
+            if type(urlVideo) == str:
+                result['video'] = urlVideo
 
         return result

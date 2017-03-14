@@ -68,6 +68,11 @@ from dbservices.media.save_files_services import SaveFilesService
 from dbservices.media.exists_file_service import ExistsFileService
 from dbservices.media.exists_post_image_service import ExistsPostImageService
 from dbservices.media.get_post_files_service import GetPostFilesService
+from dbservices.media.save_post_video_service import SavePostVideoService
+from dbservices.media.save_dir_video_service import SaveDirVideoService
+from dbservices.media.save_video_service import SaveVideoService
+from dbservices.media.get_post_video_by_id_service import GetPostVideoByIdService
+from dbservices.media.get_dir_video_by_id_service import GetDirVideoByIdService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -154,6 +159,11 @@ class ServiceFactory (object):
 			"existsFile"			: ExistsFileService,
 			"existsPostImage"		: ExistsPostImageService,
 			"getPostFiles"		    : GetPostFilesService,
+			"savePostVideo"			: SavePostVideoService,
+			"saveDirVideo"			: SaveDirVideoService,
+			"saveVideo"				: SaveVideoService,
+            "getPostVideoById"      : GetPostVideoByIdService,
+			"getDirVideoById"		: GetDirVideoByIdService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

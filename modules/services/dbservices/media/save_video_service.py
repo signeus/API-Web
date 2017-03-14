@@ -2,13 +2,11 @@
 from services.interfaces.i_service import IService
 from datetime import datetime
 import base64
-from PIL import Image
 import magic
-from io import BytesIO
 
-class SaveImageService(IService):
+class SaveVideoService(IService):
     def __init__(self, core, parameters):
-        super(SaveImageService, self).__init__(core, parameters)
+        super(SaveVideoService, self).__init__(core, parameters)
 
     def run(self):
         data = self.parameters.get("data", '')
@@ -22,12 +20,14 @@ class SaveImageService(IService):
         ext = format[format.rfind("/") + 1:]
         data = data[data.find(",") + 1:]
         decodeFile = base64.b64decode(data)
+        filename = file + "." +str(ext).lower()
+        path = path + filename
         realMime = magic.Magic(mime=True).from_buffer(decodeFile)
         if realMime != format:
-            raise Exception("This image does not match uploaded format")
+            raise Exception("This video does not match uploaded format")
 
-        imageFile = Image.open(BytesIO(decodeFile))
-        path = path + file + "." +str(ext).lower()
-        imageFile.save(path, str(imageFile.format))
-        imageFile.close()
+        videoFile = open(path, 'wb')
+        videoFile.write(decodeFile)
+        videoFile.close()
         return file
+

@@ -14,14 +14,20 @@ class GetFileTypeService(IService):
 
         imagesTypeDictionary = {
             'png': '.png',
-            'jpeg': '.jpeg'
+            'jpeg': '.jpeg',
         }
+
+        videoTypeDictionary = {
+            'mp4': '.mp4'
+        }
+
         applicationTypeDictionary = {
             'ex-xml': '.xls'
         }
         typesDictionary = {
             'images': imagesTypeDictionary,
             'application': applicationTypeDictionary,
+            'video': videoTypeDictionary,
         }
 
         return typesDictionary[_type][_ext]

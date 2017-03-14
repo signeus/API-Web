@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
-import io
-from PIL import Image
-import time
 
 class GetPostImageByIdService(IService):
     def __init__(self, core, parameters):

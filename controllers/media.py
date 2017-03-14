@@ -21,6 +21,7 @@ def getPostImageById():
     Core().MediaOperation("getPostImageById", request.vars)
     return response.body.getvalue()
 
+
 def getBannerById():
     _id = request.vars["id"]
     Core().MediaOperation("getBannerById", {
@@ -52,3 +53,8 @@ def getFileByPath():
 
 def getFilesRoutesByPath():
     return Core().MediaOperation("getFilesRoutesByPath", dict(request.vars))
+
+def getPostVideoById():
+    request.vars["response"] = response
+    Core().MediaOperation("getPostVideoById", dict(request.vars))
+    return response.body.getvalue()
