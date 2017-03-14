@@ -17,15 +17,12 @@ class SaveVideoService(IService):
             file = timeNow
         path = self.core.GetMediaResources()["media_folder"] + path
         format = data[:data.rfind(",")]
-        ext = format[format.rfind("/") + 1:]
         data = data[data.find(",") + 1:]
         decodeFile = base64.b64decode(data)
+        realMime = magic.Magic(mime=True).from_buffer(decodeFile)
+        ext = realMime[realMime.rfind("/") + 1:]
         filename = file + "." +str(ext).lower()
         path = path + filename
-        realMime = magic.Magic(mime=True).from_buffer(decodeFile)
-        if realMime != format:
-            raise Exception("This video does not match uploaded format")
-
         videoFile = open(path, 'wb')
         videoFile.write(decodeFile)
         videoFile.close()

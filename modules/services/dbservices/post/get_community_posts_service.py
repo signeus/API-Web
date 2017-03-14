@@ -23,6 +23,9 @@ class GetCommunityPostsService(IService):
             if self.core.InternalOperation("existsPostImage", {"id": key}): ##If exists...
                 image = self.core.InternalOperation("getMediaRoute", {"service": "getPostImageById", "attribs": {"id": key}})
                 posts[key]["image"] = image
+            if self.core.InternalOperation("existsPostVideo", {"id": key}): ##If exists...
+                video = self.core.InternalOperation("getMediaRoute", {"service": "getPostVideoById", "attribs": {"id": key}})
+                posts[key]["video"] = video
             ##Files
             files = self.core.InternalOperation("getPostFiles", {"id":key})
             if files:
