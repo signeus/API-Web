@@ -74,6 +74,8 @@ from dbservices.media.save_dir_video_service import SaveDirVideoService
 from dbservices.media.save_video_service import SaveVideoService
 from dbservices.media.get_post_video_by_id_service import GetPostVideoByIdService
 from dbservices.media.get_dir_video_by_id_service import GetDirVideoByIdService
+from dbservices.media.save_default_banner_service import SaveDefaultBannerService
+from dbservices.media.save_default__banner_image_service import SaveDefaultBannerImageService
 
 
 from services.filestype.get_file_type_service import GetFileTypeService
@@ -170,6 +172,8 @@ class ServiceFactory (object):
 			"saveVideo"				: SaveVideoService,
             "getPostVideoById"      : GetPostVideoByIdService,
 			"getDirVideoById"		: GetDirVideoByIdService,
+			"saveDefaultBanner"		: SaveDefaultBannerService,
+			"saveDefaultBannerImage": SaveDefaultBannerImageService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

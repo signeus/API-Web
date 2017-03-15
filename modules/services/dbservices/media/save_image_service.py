@@ -19,15 +19,13 @@ class SaveImageService(IService):
             file = timeNow
         path = self.core.GetMediaResources()["media_folder"] + path
         format = data[:data.rfind(",")]
-        ext = format[format.rfind("/") + 1:]
         data = data[data.find(",") + 1:]
         decodeFile = base64.b64decode(data)
         realMime = magic.Magic(mime=True).from_buffer(decodeFile)
-        if realMime != format:
-            raise Exception("This image does not match uploaded format")
-
+        ext = realMime[realMime.rfind("/") + 1:]
+        filename = file + "." +str(ext).lower()
+        path = path + filename
         imageFile = Image.open(BytesIO(decodeFile))
-        path = path + file + "." +str(ext).lower()
         imageFile.save(path, str(imageFile.format))
         imageFile.close()
         return file

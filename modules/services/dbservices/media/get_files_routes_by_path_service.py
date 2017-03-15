@@ -13,9 +13,11 @@ class GetFilesRoutesByPathService(IService):
             if not os.path.exists(realPath):
                 return
             files = os.listdir(realPath)
-            return [self.core.InternalOperation("getMediaRoute", {"service": "getFileByPath",
+            return [{'url':self.core.InternalOperation("getMediaRoute", {"service": "getFileByPath",
                                                                     "attribs": {"path": path,
-                                                                            "filename": file}}) for file in files if len(files) > 0]
+                                                                            "filename": file}}),'name':file[:file.rfind(".")],
+                                                                            'extension':file[file.rfind(".") +1:]}
+                                                                                for file in files if len(files) > 0]
         except Exception, ex:
             ##No se ha encontrado la ruta hacia ese directorio
             print "Exception now!"
