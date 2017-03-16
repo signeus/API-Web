@@ -18,12 +18,10 @@ class NewCommunityService (IService):
         if not id:
             raise Exception("New community, Not exists the ID to generate the image.")
 
-        print "Voy a entrar"
         if image:
             urlImage = self.core.InternalOperation("saveBanner", {'id':id, 'data':image})
             result['image'] = urlImage
         else:
-            print "Entrando por save default banner"
             description = record.get("description", "")
             keywords = record.get("keywords", [])
             urlImage = self.core.InternalOperation("saveDefaultBanner", {'id':str(id), 'description': description, 'keywords':keywords})

@@ -43,6 +43,7 @@ from dbservices.post.check_option_survey_service import CheckOptionSurveyService
 from dbservices.post.uncheck_option_survey_service import UncheckOptionSurveyService
 from dbservices.post.update_inside_fields_post_service import UpdateInsideFieldsPostService
 from dbservices.post.extract_inside_fields_post_service import ExtractInsideFieldsPostService
+from dbservices.post.check_post_urls_service import CheckPostUrlsService
 
 
 from dbservices.post.comment_2_post_service import Comment2PostService
@@ -74,6 +75,7 @@ from dbservices.media.save_dir_video_service import SaveDirVideoService
 from dbservices.media.save_video_service import SaveVideoService
 from dbservices.media.get_post_video_by_id_service import GetPostVideoByIdService
 from dbservices.media.get_dir_video_by_id_service import GetDirVideoByIdService
+from dbservices.media.save_banner_service import SaveBannerService
 from dbservices.media.save_default_banner_service import SaveDefaultBannerService
 from dbservices.media.save_default__banner_image_service import SaveDefaultBannerImageService
 from dbservices.media.get_post_audio_by_id_service import GetPostAudioByIdService
@@ -177,6 +179,7 @@ class ServiceFactory (object):
 			"saveVideo"				: SaveVideoService,
             "getPostVideoById"      : GetPostVideoByIdService,
 			"getDirVideoById"		: GetDirVideoByIdService,
+			"saveBanner"			: SaveBannerService,
 			"saveDefaultBanner"		: SaveDefaultBannerService,
 			"saveDefaultBannerImage": SaveDefaultBannerImageService,
 			"saveAudio"             : SaveAudioService,
@@ -184,6 +187,7 @@ class ServiceFactory (object):
 			"savePostAudio"         : SavePostAudioService,
             "getPostAudioById"      : GetPostAudioByIdService,
 			"getDirAudioById"		: GetDirAudioByIdService,
+			"checkPostUrls"			: CheckPostUrlsService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

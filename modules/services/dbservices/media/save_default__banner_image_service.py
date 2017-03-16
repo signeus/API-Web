@@ -30,10 +30,9 @@ class SaveDefaultBannerImageService(IService):
             content_lis = ["hey","pepe","tomas","kluiver","rodriguez","pez","bandera","big","data","analitycs","machine","learning","K","L","R","A","J"]
             #TODO Create method with random posts and generate
 
-        numPalabras = random.randint(10, len(set(content_lis)))
+
+        numPalabras = random.randint(10, len(set(content_lis)) if len(set(content_lis)) > 10 else 15)
         state = random.randint(2, 45)
-        print numPalabras
-        print state
         widthMax = 860
         heightMax = 250
         wc = WordCloud(width=widthMax, height=heightMax, max_words=numPalabras, random_state=state, mode="RGBA",

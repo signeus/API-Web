@@ -10,23 +10,15 @@ class NewPostService (IService):
         if _comment_id:
             self.parameters["community_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _comment_id})
 
-        video = self.parameters.pop("video", None)
-        image = self.parameters.pop("image", None)
-        files = self.parameters.pop("files", None)
-        audio = self.parameters.pop("audio", None)
+        video = self.parameters.pop("video", {})
+        image = self.parameters.pop("image", {})
+        files = self.parameters.pop("files", {})
+        audio = self.parameters.pop("audio", {})
 
-        urlVideo = self.core.InternalOperation("validateUrl", {'url': video})
-        urlImagen = self.core.InternalOperation("validateUrl", {'url': image})
+        checkedUrls = self.core.InternalOperation("checkPostUrls", {"video":video,"image":image,"files":files,"audio":audio})
 
-        if type(urlVideo) == str:
-            if urlVideo != "":
-                self.parameters["video"] = video
-            video = None
-        if type(urlImagen) == str:
-            if urlImagen != "":
-                self.parameters["image"] = image
-            image = None
-
+        files = checkedUrls.pop("filesAttachment",None)
+        self.parameters = dict(self.parameters, **checkedUrls)
 
         result = self.core.InternalOperation("createPost",self.parameters)
 
@@ -34,20 +26,30 @@ class NewPostService (IService):
         if not id:
             raise Exception("New post, Failed the create post.")
 
+        for key, value in checkedUrls.iteritems():
+            if key == "video":
+               video = None
+            if key == "audio":
+                audio = None
+            if key == "image":
+                image = None
+
+        #TODO New service "POST Attachment"
         if files:
             filesRoutes = self.core.InternalOperation("savePostFiles", {'id': id, 'files': files})
-            result["files"] = filesRoutes
+            result["files"] = dict(result.get("files",{}), **filesRoutes)
+            #result["files"] = filesRoutes
 
         if audio:
-            audio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio})
+            audio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio.get("data",None)})
             result['audio'] = audio
 
         if image:
-            urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image})
+            urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image.get("data",None)})
             if type(urlImage) == str:
                 result['image'] = urlImage
         if video:
-            urlVideo = self.core.InternalOperation("savePostVideo", {'id':id, 'data':video})
+            urlVideo = self.core.InternalOperation("savePostVideo", {'id':id, 'data':video.get("data",None)})
             if type(urlVideo) == str:
                 result['video'] = urlVideo
 

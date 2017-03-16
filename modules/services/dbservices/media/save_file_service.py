@@ -12,6 +12,7 @@ class SaveFileService(IService):
             data = self.parameters.get("data", '')
             relativePath = self.parameters.get("path", 'unknown/')
             filename = self.parameters.get("filename", "")
+            extension = self.parameters.get("extension", "")
             if filename == "":
                 from datetime import datetime
                 timeNow = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
@@ -22,6 +23,7 @@ class SaveFileService(IService):
                 os.makedirs(path)
                 print "Created directory in "+ path
 
+            filename = filename + "." + extension
             path = path + filename
             data = data[data.find(",") + 1:]
             decodeFile = base64.b64decode(data)

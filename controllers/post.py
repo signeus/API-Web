@@ -125,7 +125,7 @@ def likePost():
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "post_id":"mandatory", "comment":"mandatory"}, "comment2Post")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "post_id":"mandatory", "comment":"mandatory","files":"optional"}, "comment2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def commentPost():
     core = Core()
