@@ -13,6 +13,7 @@ class NewPostService (IService):
         video = self.parameters.pop("video", None)
         image = self.parameters.pop("image", None)
         files = self.parameters.pop("files", None)
+        audio = self.parameters.pop("audio", None)
 
         urlVideo = self.core.InternalOperation("validateUrl", {'url': video})
         urlImagen = self.core.InternalOperation("validateUrl", {'url': image})
@@ -36,6 +37,10 @@ class NewPostService (IService):
         if files:
             filesRoutes = self.core.InternalOperation("savePostFiles", {'id': id, 'files': files})
             result["files"] = filesRoutes
+
+        if audio:
+            audio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio})
+            result['audio'] = audio
 
         if image:
             urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image})
