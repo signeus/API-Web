@@ -58,3 +58,8 @@ def getPostVideoById():
     request.vars["response"] = response
     Core().MediaOperation("getPostVideoById", dict(request.vars))
     return response.body.getvalue()
+
+def getPostAudioById():
+    request.vars["response"] = response
+    Core().MediaOperation("getPostAudioById", dict(request.vars))
+    return response.body.getvalue()
