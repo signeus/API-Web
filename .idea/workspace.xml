@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ac83215-99f6-47d0-8baa-38187dd76906" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_by_post_id_service.py" afterPath="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_by_post_id_service.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_post_service.py" afterPath="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_post_service.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py" afterPath="$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/services/service_factory.py" afterPath="$PROJECT_DIR$/modules/services/service_factory.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +23,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_comments_post_service.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_comments_post_service.py">
+      <file leaf-file-name="get_community_posts_service.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="268">
+              <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="service_factory.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/services/service_factory.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="89">
+              <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exists_post_audio_service.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_audio_service.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -45,7 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GetMediaResources</find>
       <find>getAvatarById</find>
       <find>print</find>
       <find>GetFilesRoutesByPathService</find>
@@ -75,6 +93,7 @@
       <find>audio</find>
       <find>hex</find>
       <find>getPostFiles</find>
+      <find>ExistsPostVideoService</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/modules/casters</dir>
@@ -86,7 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/services/dbservices/post/check_option_survey_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/uncheck_option_survey_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/extract_inside_fields_post_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/check_survey_by_post_id_service.py" />
@@ -125,7 +143,6 @@
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/decide_post_image_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/validator/validate_url_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/check_post_urls_service.py" />
-        <option value="$PROJECT_DIR$/modules/services/service_factory.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/media/save_files_services.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/media/save_file_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/new_post_service.py" />
@@ -134,9 +151,11 @@
         <option value="$PROJECT_DIR$/controllers/media.py" />
         <option value="$PROJECT_DIR$/modules/configs/environment.py" />
         <option value="$PROJECT_DIR$/modules/services/filestype/get_file_type_service.py" />
-        <option value="$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_by_post_id_service.py" />
         <option value="$PROJECT_DIR$/modules/services/dbservices/post/get_comments_post_service.py" />
+        <option value="$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py" />
+        <option value="$PROJECT_DIR$/modules/services/service_factory.py" />
+        <option value="$PROJECT_DIR$/modules/services/dbservices/media/exists_post_audio_service.py" />
       </list>
     </option>
   </component>
@@ -321,14 +340,14 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/kevin/Kayoo2Backend/controllers/user.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/modules/services/dbservices/caster/caster_object_id" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/modules/services/dbservices/post" />
       <recent name="$PROJECT_DIR$/modules/services/dbservices/media" />
+      <recent name="$PROJECT_DIR$/modules/services/dbservices/post" />
       <recent name="$PROJECT_DIR$/modules/services/dbservices/validator" />
       <recent name="$PROJECT_DIR$/modules/services/dbservices/user" />
+      <recent name="$PROJECT_DIR$/modules/services/dbservices/caster/caster_object_id" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modules/services/dbservices/caster/caster_object_id" />
     </key>
   </component>
@@ -585,13 +604,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/user/login_user_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/services/dbservices/validator/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -620,24 +632,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_video_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_file_service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="14" column="12" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_image_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -809,6 +807,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -816,6 +815,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="16" column="78" lean-forward="false" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="78" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -912,16 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/services/service_factory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="175" column="25" lean-forward="false" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="25" />
-          <folding>
-            <element signature="e#24#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_comments_by_post_id_service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -938,18 +928,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_comments_post_service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_image_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_video_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/post/get_community_posts_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/services/service_factory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/services/dbservices/media/exists_post_audio_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding />
         </state>
       </provider>
