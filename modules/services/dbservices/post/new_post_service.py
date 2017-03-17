@@ -37,8 +37,8 @@ class NewPostService (IService):
         #TODO New service "POST Attachment"
         if files:
             filesRoutes = self.core.InternalOperation("savePostFiles", {'id': id, 'files': files})
-            result["files"] = dict(result.get("files",{}), **filesRoutes)
-            #result["files"] = filesRoutes
+            #dict(result.get("files",{}), **{'files':filesRoutes})
+            result["files"] = filesRoutes
 
         if audio:
             audio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio.get("data",None)})
