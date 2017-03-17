@@ -9,6 +9,7 @@ class GetCommentsByPostId(IService):
         super(GetCommentsByPostId, self).__init__(core, parameters)
 
     def run(self):
+        _post_id = self.parameters.get("post_id", None)
+        self.parameters["post_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _post_id})
         result = DBService(self.core).getAllByFilter("Posts", self.parameters,  {'post_id':0})
-        #result = CasterCursor().castList2FormatDictionary(result)
         return result
