@@ -22,6 +22,7 @@ from dbservices.community.get_by_id_community_service import GetByIdCommunitySer
 from dbservices.community.get_first_by_fields_community_service import GetFirstByFieldsCommunityService
 from dbservices.community.update_community_service import UpdateCommunityService
 from dbservices.community.new_community_service import NewCommunityService
+from dbservices.community.get_all_communities_service import GetAllCommunitiesService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -129,6 +130,7 @@ class ServiceFactory (object):
             "getByIdCommunity"			: GetByIdCommunityService,
             "getFirstByFieldsCommunity" : GetFirstByFieldsCommunityService,
 			"newCommunity" 				: NewCommunityService,
+			"getAllCommunities"			: GetAllCommunitiesService,
             ######Posts########
             "createPost" 			: CreatePostService,
 			"updatePost"			: UpdatePostService,
