@@ -99,18 +99,13 @@ def updatePostContent():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory"}, "like2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def like2Post():
-    core = Core()
-    result = core.PostOperation("like2Post", dict(request.vars))
-    print result
-    return response.json(result)
+    return response.json(Core().PostOperation("like2Post", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id_user":"mandatory", "id":"mandatory"}, "unlike2Post")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory"}, "unlike2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def unlike2Post():
-    core = Core()
-    result = core.PostOperation("unlike2Post", dict(request.vars))
-    return response.json(result)
+    return response.json(Core().PostOperation("unlike2Post", dict(request.vars)))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
@@ -118,9 +113,7 @@ def unlike2Post():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory", "status":"mandatory"}, "likePost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def likePost():
-    core = Core()
-    result = core.PostOperation("likePost", dict(request.vars))
-    return response.json(result)
+    return response.json(Core().PostOperation("likePost", dict(request.vars)))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)

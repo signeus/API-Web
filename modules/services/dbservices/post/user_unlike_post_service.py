@@ -14,24 +14,23 @@ class UserUnlike2PostService (IService):
             if not _UserObjectId in post.get("likes", []):
                 raise Exception("This user hasn't liked the post")
 
-            post["likes"] = post.get("likes", []).remove(_UserObjectId)
-            result = self.core.InternalOperation("updatePost", {
-                                                                "_id": _PostObjectid,
-                                                                "new_values": {
-                                                                    "likes": post["likes"],
-                                                                    "date_modified"	 :	datetime.now()
-                                                                }
-                                                            }
-                                             )
+
+            resultUpdate = self.core.InternalOperation("extractInsideFieldsPost",
+                                                       {"id": _PostObjectid, "field_path": "likes",
+                                                        "value": _UserObjectId})
+
+            post["likes"].remove(_UserObjectId)
+
             # DICTIONARY (user, name, nick)
             dictionaryUser = {}
-            for elem in result["likes"]:
-                so = self.core.InternalOperation("getByIdUser", {"_id": elem})
-                dictionaryUser[str(elem)] = {'name':so.pop("name"), 'nick':so.pop("nick")}
-            #result["likes"] = self.core.InternalOperation("castListObjectsId2ListHexId", {"lis": result["likes"]})
-            result["likes"] = dictionaryUser
-            #result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
-            #result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
-            return result
+            if post["likes"]:
+                for elem in post["likes"]:
+                    user = self.core.InternalOperation("getByIdUser", {"_id": elem})
+                    dictionaryUser[str(elem)] = {'name':user.get("name", ""), 'nick':user.get("nick", "")}
+                    post["likes"] = dictionaryUser
+            else:
+                post.pop("likes", "")
+
+            return post
         except Exception, ex:
-            print "Like has failed, " + ex.message
+            print "Unlike has failed, " + ex.message

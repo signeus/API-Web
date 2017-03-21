@@ -15,23 +15,17 @@ class UserLike2PostService (IService):
                 raise Exception('This user already liked the post')
 
             post["likes"] = post.get("likes", []) + [_UserObjectId]
-            result = self.core.InternalOperation("updatePost", {
-                                                                "_id": _PostObjectid,
-                                                                "new_values": {
-                                                                    "likes": post["likes"],
-                                                                    "date_modified"	 :	datetime.now()
-                                                                }
-                                                            }
-                                             )
+
+            resultUpdate = self.core.InternalOperation("updateInsideFieldsPost",
+                                               {"id": _PostObjectid, "field_path": "likes",
+                                                "value": _UserObjectId})
+
             # DICTIONARY (user, name, nick)
             dictionaryUser = {}
-            for elem in result["likes"]:
-                so = self.core.InternalOperation("getByIdUser", {"_id": elem})
-                dictionaryUser[str(elem)] = {'name':so.pop("name"), 'nick':so.pop("nick")}
-            #result["likes"] = self.core.InternalOperation("castListObjectsId2ListHexId", {"lis": result["likes"]})
-            result["likes"] = dictionaryUser
-            #result = self.core.InternalOperation("castDictDate2DateTimestamp", {"dictionary": result})
-            #result = self.core.InternalOperation("castDictObjectsId2DictHexId", {"dictionary": result})
-            return result
+            for elem in post["likes"]:
+                user = self.core.InternalOperation("getByIdUser", {"_id": elem})
+                dictionaryUser[str(elem)] = {'name':user.get("name", ""), 'nick':user.get("nick", "")}
+            post["likes"] = dictionaryUser
+            return post
         except Exception, ex:
             print "Like has failed, " + ex.message
