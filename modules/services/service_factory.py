@@ -45,6 +45,9 @@ from dbservices.post.uncheck_option_survey_service import UncheckOptionSurveySer
 from dbservices.post.update_inside_fields_post_service import UpdateInsideFieldsPostService
 from dbservices.post.extract_inside_fields_post_service import ExtractInsideFieldsPostService
 from dbservices.post.check_post_urls_service import CheckPostUrlsService
+from dbservices.post.check_content_type_url_service import CheckContentTypeUrlService
+from dbservices.post.generate_embed_external_url_service import GenerateEmbedExternalUrlService
+from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
 
 
 from dbservices.post.comment_2_post_service import Comment2PostService
@@ -152,7 +155,9 @@ class ServiceFactory (object):
 			"uncheckOptionSurveyId"	: UncheckOptionSurveyService,
             "updateInsideFieldsPost"        : UpdateInsideFieldsPostService,
             "extractInsideFieldsPost"       : ExtractInsideFieldsPostService,
-
+            "checkContentTypeUrl"           : CheckContentTypeUrlService,
+            "generateEmbedExternalUrl"           : GenerateEmbedExternalUrlService,
+            "identifyExternalUrl"           : IdentifyExternalUrlService,
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,

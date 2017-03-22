@@ -8,12 +8,11 @@ def getFirstByFieldsPost():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdPost")
+#@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdPost():
     _id = request.vars["id"]
-    core = Core()
-    result = core.PostOperation("getByIdPost", {"id":_id})
+    result = Core().PostOperation("getByIdPost", {"_id":_id})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
@@ -140,8 +139,7 @@ def getCommentsByPost():
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newPost():
-    core = Core()
-    result = core.PostOperation("newPost", dict(request.vars))
+    result = Core().PostOperation("newPost", dict(request.vars))
     return response.json(result)
 
 ##Used from Front##
@@ -160,3 +158,11 @@ def getMainCommunityById():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def checkSurveyByPostId():
     return response.json(Core().PostOperation("checkSurveyByPostId", dict(request.vars)))
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"link":"mandatory"}, "checkContentTypeUrl")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def checkContentTypeUrl():
+    return response.json(Core().PostOperation("checkContentTypeUrl", dict(request.vars)))
