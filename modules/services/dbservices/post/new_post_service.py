@@ -28,10 +28,13 @@ class NewPostService (IService):
 
         for key, value in checkedUrls.iteritems():
             if key == "video":
+               result['video'] = {'url':result['video'], 'external': True}
                video = None
             if key == "audio":
+                result['audio'] = {'url': result['audio'], 'external': True}
                 audio = None
             if key == "image":
+                result['image'] = {'url': result['image'], 'external': True}
                 image = None
 
         #TODO New service "POST Attachment"
@@ -41,16 +44,17 @@ class NewPostService (IService):
             result["files"] = filesRoutes
 
         if audio:
-            audio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio.get("data",None)})
-            result['audio'] = audio
+            urlAudio = self.core.InternalOperation("savePostAudio", {'id': id, 'data': audio.get("data",None)})
+            if type(urlAudio) == str:
+                result['audio'] = {'url': urlAudio}
 
         if image:
             urlImage = self.core.InternalOperation("savePostImage", {'id':id, 'data':image.get("data",None)})
             if type(urlImage) == str:
-                result['image'] = urlImage
+                result['image'] = {'url':urlImage}
         if video:
             urlVideo = self.core.InternalOperation("savePostVideo", {'id':id, 'data':video.get("data",None)})
             if type(urlVideo) == str:
-                result['video'] = urlVideo
+                result['video'] = {'url':urlVideo}
 
         return result

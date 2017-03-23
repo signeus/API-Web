@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 import sys, os
+import collections
 
 class IdentifyExternalUrlService (IService):
     def __init__(self, core, parameters):
@@ -10,17 +11,16 @@ class IdentifyExternalUrlService (IService):
         _url = self.parameters.get("link", "")
         try:
             types_allowed = {
-
-                                'youtube' : {'name':'youtube','id': _url[_url.find('watch?v='):].split('=')[1] if _url.find('watch?v=') >= 0 else ""},
-                                'vimeo'   : {'name':'vimeo','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
+                                'www.youtube.com' : {'name':'youtube','id': _url[_url.find('watch?v='):].split('=')[1] if _url.find('watch?v=') >= 0 else ""},
+                                'vimeo.com'   : {'name':'vimeo','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
                                 'twitch.tv/videos' : {'name':'twitch.video','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
-                                'twitch' : {'name':'twitch','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
-                                'dailymotion' : {'name':'dailymotion','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
-                                'gaming.youtube': {'name': 'gaming.youtube', 'id': _url[_url.find('watch?v='):].split('=')[1] if _url.find( 'watch?v=') >= 0 else ""},
+                                'www.twitch.tv' : {'name':'twitch','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
+                                'dailymotion.com' : {'name':'dailymotion','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
+                                'gaming.youtube.com': {'name': 'gaming.youtube', 'id': _url[_url.find('watch?v='):].split('=')[1] if _url.find( 'watch?v=') >= 0 else ""},
                             }
 
             for key, value in types_allowed.iteritems():
-                if _url.find(key) >= 0:
+                if _url.lower().find(key) >= 0:
                     return value
 
             return ""

@@ -15,6 +15,17 @@ class GetCommunityPostsService(IService):
 
         users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         for key, value in posts.iteritems():
+            ##URLS
+            urlImage = posts[key].get("image","")
+            if urlImage:
+                posts[key]["image"] = {'url': posts[key]["image"], 'external':True}
+            urlVideo = posts[key].get("video","")
+            if urlVideo:
+                posts[key]["video"] = {'url': posts[key]["video"], 'external':True}
+            urlAudio = posts[key].get("audio","")
+            if urlAudio:
+                posts[key]["audio"] = {'url': posts[key]["audio"], 'external':True}
+
             ##Comments
             posts[key].update(users[value['user_id']])
             comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
@@ -22,19 +33,20 @@ class GetCommunityPostsService(IService):
             ##Image
             if self.core.InternalOperation("existsPostImage", {"id": key}): ##If exists...
                 image = self.core.InternalOperation("getMediaRoute", {"service": "getPostImageById", "attribs": {"id": key}})
-                posts[key]["image"] = image
+                posts[key]["image"] = {'url':image}
             ##Video
             if self.core.InternalOperation("existsPostVideo", {"id": key}):
                 video = self.core.InternalOperation("getMediaRoute", {"service": "getPostVideoById", "attribs": {"id": key}})
-                posts[key]["video"] = video
+                posts[key]["video"] = {'url':video}
             ##Audio
             if self.core.InternalOperation("existsPostAudio", {"id": key}):
-                image = self.core.InternalOperation("getMediaRoute", {"service": "getPostAudioById", "attribs": {"id": key}})
-                posts[key]["audio"] = image
+                audio = self.core.InternalOperation("getMediaRoute", {"service": "getPostAudioById", "attribs": {"id": key}})
+                posts[key]["audio"] = {'url':audio}
             ##Files
             files = self.core.InternalOperation("getPostFiles", {"id":key})
             if files:
                posts[key]["files"] = files
+
 
 
         return posts

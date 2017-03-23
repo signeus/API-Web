@@ -8,12 +8,13 @@ class CheckContentTypeUrlService (IService):
 
     def run(self):
         _url = self.parameters.get("link", None)
+        utils = self.parameters.get("utils", "")
         validateUrl = self.core.InternalOperation("validateUrl", {'url': _url})
 
         if not validateUrl or "":
             raise Exception("The url is not valid.")
 
-        embedUrl = self.core.InternalOperation("generateEmbedExternalUrl", {'link': _url})
+        embedUrl = self.core.InternalOperation("generateEmbedExternalUrl", {'link': _url, 'utils': utils})
         if embedUrl:
             return embedUrl
 
