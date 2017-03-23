@@ -26,6 +26,13 @@ class GetCommunityPostsService(IService):
             if urlAudio:
                 posts[key]["audio"] = {'url': posts[key]["audio"], 'external':True}
 
+            #Likes
+            likes = posts[key].pop("likes", [])
+            for like in likes:
+                posts[key]["likes"] = {}
+                posts[key]["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
+
+
             ##Comments
             posts[key].update(users[value['user_id']])
             comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
