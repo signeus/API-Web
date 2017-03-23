@@ -19,7 +19,8 @@ class GenerateEmbedExternalUrlService (IService):
                         'twitch.tv/videos' : 'http://player.twitch.tv/?video=v'+ type.get("id","") +'&',
                         'twitch' : 'http://player.twitch.tv/?channel='+ type.get("id",""),
                         'vimeo' : 'https://player.vimeo.com/video/'+ type.get("id","") +'?portrait=0&',
-                        'gaming.youtube': 'https://gaming.youtube.com/embed/' + type.get("id", "")
+                        'gaming.youtube': 'https://gaming.youtube.com/embed/' + type.get("id", ""),
+                        'dailymotion' : 'http://www.dailymotion.com/embed/video/' + type.get("id", "") +'?'
                     }
             utils = {
                         'autoplay' : 'autoplay=1'

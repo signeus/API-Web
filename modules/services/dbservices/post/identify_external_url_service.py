@@ -15,7 +15,7 @@ class IdentifyExternalUrlService (IService):
                                 'vimeo.com'   : {'name':'vimeo','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
                                 'twitch.tv/videos' : {'name':'twitch.video','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
                                 'www.twitch.tv' : {'name':'twitch','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
-                                'dailymotion.com' : {'name':'dailymotion','id': _url[_url.rfind('/') + 1:] if _url.rfind('/') >= 0 else ""},
+                                'dailymotion.com' : {'name':'dailymotion','id': _url[_url.rfind('/') + 1:].split("_")[0] if _url.rfind('/') >= 0 else ""},
                                 'gaming.youtube.com': {'name': 'gaming.youtube', 'id': _url[_url.find('watch?v='):].split('=')[1] if _url.find( 'watch?v=') >= 0 else ""},
                             }
 
