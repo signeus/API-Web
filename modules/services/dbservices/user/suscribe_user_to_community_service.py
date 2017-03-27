@@ -13,7 +13,7 @@ class SuscribeUser2Community (IService):
 				raise Exception("Suscribe User to Community: Empty user_id not allowed.")
 
 			user = self.core.InternalOperation("getByIdUser", {"_id":_user_id})
-			_community_id = self.parameters("community_id", "")
+			_community_id = self.parameters.get("community_id", "")
 			user_ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _user_id})
 			community_ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _community_id})
 

@@ -76,6 +76,7 @@ def getPostsByCommunityFormated():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunityPosts():
     _id = request.vars["id"]

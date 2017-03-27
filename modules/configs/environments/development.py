@@ -7,7 +7,7 @@ class Development(IEnvironment):
                                 'ip_database':'127.0.0.1',
                                 'port_database':'27017',
                                 'name_database':'warehouse',
-                                'ip_app': '192.168.1.176',
+                                'ip_app': 'kbdev',
                                 'port_app':'8000',
                                 'name_app':'kayoo',
                                 'protocol_app':'http',

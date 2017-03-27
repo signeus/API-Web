@@ -15,12 +15,17 @@ class GetCommentsPost(IService):
         if postId == "":
             raise Exception("Get comments post: Empty post ID is not allowed.")
         comments = self.core.InternalOperation("getCommentsByPostId", {"post_id": postId})
+        users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         for comment in comments:
             _comment_object_id = self.core.InternalOperation("castObjectId2Hex", {"id": comment.get("_id", "")})
             files = self.core.InternalOperation("getPostFiles", {"id": _comment_object_id})
             if files:
                comment["files"] = files
 
-        users = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
-        co = [dict(c,**users[c["user_id"]]) for c in comments]
+            likes = comment.pop("likes", [])
+            for like in likes:
+                comment["likes"] = {}
+                comment["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
+
+        co = [dict(c,**users[str(c["user_id"])]) for c in comments]
         return co

@@ -58,9 +58,7 @@ def updateCommunity():
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newCommunity():
-    core = Core()
-    result = core.CommunityOperation("newCommunity", dict(request.vars))
-    return response.json(result)
+    return response.json(Core().CommunityOperation("newCommunity", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)

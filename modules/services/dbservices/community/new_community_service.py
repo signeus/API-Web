@@ -11,7 +11,7 @@ class NewCommunityService (IService):
 
         record = self.core.InternalOperation("createCommunity",self.parameters)
         result = self.core.InternalOperation("suscribeUser2Community",
-                                             {"id_user": record["id_creator"], "id_community": record["_id"]})
+                                             {"user_id": record["id_creator"], "community_id": record["_id"]})
 
         id = record.get("_id", None)
 

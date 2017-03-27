@@ -8,6 +8,7 @@ class Comment2PostService (IService):
     def run(self):
         try:
             _post_id = self.parameters.get("post_id", None)
+            _user_id = self.parameters.get("user_id", None)
             files = self.parameters.pop("files",{})
 
             checkedUrls = self.core.InternalOperation("checkPostUrls",
@@ -15,12 +16,12 @@ class Comment2PostService (IService):
 
             files = checkedUrls.pop("filesAttachment", {})
 
-            print checkedUrls
-
             self.parameters = dict(self.parameters, **checkedUrls)
 
             if _post_id:
                 self.parameters["post_id"] = self.core.InternalOperation("castHex2ObjectId", {"id":_post_id})
+            if _user_id:
+                self.parameters["user_id"] = self.core.InternalOperation("castHex2ObjectId", {"id":_user_id})
 
             result = self.core.InternalOperation("createPost", self.parameters)
 

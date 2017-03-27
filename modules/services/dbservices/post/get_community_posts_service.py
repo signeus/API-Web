@@ -37,6 +37,7 @@ class GetCommunityPostsService(IService):
             posts[key].update(users[value['user_id']])
             comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
             posts[key]["comments"] = comments
+
             ##Image
             if self.core.InternalOperation("existsPostImage", {"id": key}): ##If exists...
                 image = self.core.InternalOperation("getMediaRoute", {"service": "getPostImageById", "attribs": {"id": key}})
