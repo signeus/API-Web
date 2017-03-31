@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 from services.dbservices.db_service import DBService
-import base64
-from PIL import Image
-from io import BytesIO
 
 class CreateCommunityService (IService):
     def __init__(self, core, parameters):

@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 
-class castDict2FormatDictService (IService):
+class CastDict2FormatDictService (IService):
     def __init__(self, core, parameters):
-        super(castDict2FormatDictService, self).__init__(core, parameters)
+        super(CastDict2FormatDictService, self).__init__(core, parameters)
 
     def run(self):
         dictionary = self.parameters.get("dictionary", None)
+        newKey = str(dictionary.pop('_id'))
         newDictionary = {}
-        for elem in dictionary:
-            newObject = {}
-            newKey = str(elem.pop('_id'))
-            newObject[newKey] = elem
-            newDictionary = dict(newDictionary, **newObject)
+        newDictionary[newKey] = dictionary
         return newDictionary

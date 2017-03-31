@@ -80,9 +80,7 @@ def getPostsByCommunityFormated():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunityPosts():
     _id = request.vars["id"]
-    core = Core()
-    result = core.PostOperation("getCommunityPosts", {"community_id": _id})
-    return response.json(result)
+    return response.json(Core().PostOperation("getCommunityPosts", {"community_id": _id}))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
@@ -167,3 +165,17 @@ def checkSurveyByPostId():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def checkContentTypeUrl():
     return response.json(Core().PostOperation("checkContentTypeUrl", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory","community_id":"mandatory","post_id":"mandatory"}, "checkContentTypeUrl")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newRepost():
+    return response.json(Core().PostOperation("newRepost", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getRepost")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def getRepost():
+    _id = request.vars["id"]
+    return response.json(Core().PostOperation("getRepost", {"post_id": _id}))

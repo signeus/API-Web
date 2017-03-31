@@ -10,6 +10,10 @@ class NewPostService (IService):
         if _comment_id:
             self.parameters["community_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _comment_id})
 
+        _user_id = self.parameters.get("user_id", None)
+        if _user_id:
+            self.parameters["user_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _user_id})
+
         video = self.parameters.pop("video", {})
         image = self.parameters.pop("image", {})
         files = self.parameters.pop("files", {})

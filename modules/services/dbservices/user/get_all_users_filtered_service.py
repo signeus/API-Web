@@ -17,5 +17,3 @@ class GetAllUsersFiltered(IService):
 
         return result
         #result = [dict(elem,**{'avatar': self.core.InternalOperation("getMediaRoute", {"service":"getAvatarById", "attribs":{"id":str(elem)}})}) for elem in result]
-        #print "he Pasado"
-        #print result

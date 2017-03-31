@@ -8,12 +8,7 @@ class DeleteCommunityUnsuscribeService(IService):
         super(DeleteCommunityUnsuscribeService, self).__init__(core, parameters)
 
     def run(self):
-        result = DBService(self.core).updateMultiByFieldWithDelete('Users', self.parameters['field'], self.parameters['_id'])
-        print '---------'
-        print result
-        print '---------'
-        print 'Delete 2 Collection'
-        result2 = DBService().deleteIn2Collection('Communities', self.parameters['_id'])
-        print result2
-        print '---------------'
+        _id = self.parameters['_id']
+        result = DBService(self.core).updateMultiByFieldWithDelete('Users', self.parameters['field'], _id)
+        result2 = self.core.InternalOperation("deleteCommunity", {'_id': _id})
         return result2

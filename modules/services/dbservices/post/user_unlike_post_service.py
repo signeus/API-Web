@@ -10,7 +10,7 @@ class UserUnlike2PostService (IService):
         try:
             _UserObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters["user_id"]})
             _PostObjectid = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters["id"]})
-            post = self.core.InternalOperation("getByIdPost", {"_id": self.parameters["id"]})
+            post = self.core.InternalOperation("getPostById", {"id": self.parameters["id"]})
             if not _UserObjectId in post.get("likes", []):
                 raise Exception("This user hasn't liked the post")
 

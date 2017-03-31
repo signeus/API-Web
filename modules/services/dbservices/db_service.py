@@ -118,3 +118,19 @@ class DBService:
         result = col.update({"_id": _ObjectId},
                    {"$pull": {fieldPath: value}, "$set":{"date_modified":datetime.utcnow()}})
         return result
+
+    def getNextPageFields(self, collection, nRecordByPage = 10, nPage = 0):
+        col = self.openCollection(collection)
+        values = col.find({}).sort([('$natural', -1),("date_modified",-1)]).limit(nRecordByPage).skip((((nPage-1)*nRecordByPage) if (nPage-1) > 0 else 0)) #ASCENDING
+        if type(values) == types.NoneType:
+            return "Not founded results"
+        result = [c for c in values]
+        return result
+
+    def getNextFields(self, collection, start = 0, offset = 0):
+        col = self.openCollection(collection)
+        values = col.find({}).sort([('$natural', -1),("date_modified",-1)]).limit(offset).skip(start) #ASCENDING
+        if type(values) == types.NoneType:
+            return "Not founded results"
+        result = [c for c in values]
+        return result

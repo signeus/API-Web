@@ -23,12 +23,16 @@ from dbservices.community.get_first_by_fields_community_service import GetFirstB
 from dbservices.community.update_community_service import UpdateCommunityService
 from dbservices.community.new_community_service import NewCommunityService
 from dbservices.community.get_all_communities_service import GetAllCommunitiesService
+from dbservices.community.get_communities_by_page_service import GetCommunitiesByPageService
+from dbservices.community.get_communities_by_offset_service import GetCommunitiesByOffsetService
+from dbservices.community.get_communities_service import GetCommunitiesService
+
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
 from dbservices.post.delete_post_service import DeletePostService
 from dbservices.post.get_all_post_service import GetAllPostService
-from dbservices.post.get_by_id_post_service import GetByIdPostService
+from dbservices.post.get_post_by_id_service import GetPostByIdService
 from dbservices.post.get_first_by_fields_post_service import GetFirstByFieldsPostService
 from dbservices.post.get_posts_by_community_id_service import GetPostsByCommunityIdService
 from dbservices.post.get_posts_by_community_formated_service import GetPostsByCommunityFormatedService
@@ -48,11 +52,17 @@ from dbservices.post.check_post_urls_service import CheckPostUrlsService
 from dbservices.post.check_content_type_url_service import CheckContentTypeUrlService
 from dbservices.post.generate_embed_external_url_service import GenerateEmbedExternalUrlService
 from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
+from dbservices.post.get_post_service import GetPostService
+
 
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
 from dbservices.post.get_comments_post_service import GetCommentsPost
+
+from dbservices.post.new_repost_service import NewRepostService
+from dbservices.post.get_repost_service import GetRepostService
+
 
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
@@ -101,6 +111,8 @@ from dbservices.caster.caster_object_id.cast_object_id_2_hex_service import Cast
 from dbservices.caster.caster_datetime.cast_dict_date_2_date_timestamp_service import CastDictDate2DateTimeStampService
 from dbservices.caster.caster_datetime.cast_list_date_2_date_timestamp_service import CastListDate2DateTimestampService
 from dbservices.caster.caster_datetime.cast_date_2_date_timestamp_service import CastDate2DateTimestampService
+from dbservices.caster.caster_cursor.cast_list_2_format_dict_service import CastList2FormatDictService
+from dbservices.caster.caster_cursor.cast_dict_2_format_dict_service import CastDict2FormatDictService
 
 from dbservices.validator.validate_url_service import ValidateUrlService
 from dbservices.validator.exists_url_service import ExistsUrlService
@@ -134,12 +146,15 @@ class ServiceFactory (object):
             "getFirstByFieldsCommunity" : GetFirstByFieldsCommunityService,
 			"newCommunity" 				: NewCommunityService,
 			"getAllCommunities"			: GetAllCommunitiesService,
+			"getCommunitiesByPage"		: GetCommunitiesByPageService,
+			"getCommunitiesByOffset"	: GetCommunitiesByOffsetService,
+			"getCommunities"	        : GetCommunitiesService,
             ######Posts########
             "createPost" 			: CreatePostService,
 			"updatePost"			: UpdatePostService,
 			"deletePost" 			: DeletePostService,
 			"getAllPost" 			: GetAllPostService,
-			"getByIdPost"			: GetByIdPostService,
+			"getPostById"			: GetPostByIdService,
 			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
 			"getPostsByCommunityId"		    : GetPostsByCommunityIdService,
 			"getPostsByCommunityFormated"	: GetPostsByCommunityFormatedService,
@@ -158,6 +173,9 @@ class ServiceFactory (object):
             "checkContentTypeUrl"           : CheckContentTypeUrlService,
             "generateEmbedExternalUrl"           : GenerateEmbedExternalUrlService,
             "identifyExternalUrl"           : IdentifyExternalUrlService,
+            "newRepost"             : NewRepostService,
+            "getPost"               : GetPostService,
+            "getRepost"             : GetRepostService,
 			#####Comment######
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
@@ -210,6 +228,9 @@ class ServiceFactory (object):
 			"castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
 			"castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
 			"castDate2DateTimestamp"				: CastDate2DateTimestampService,
+                ###Cursor###
+			"castList2FormatDict"				: CastList2FormatDictService,
+			"castDict2FormatDict"				: CastDict2FormatDictService,
             ###Validator###
 			"validateUrl"				: ValidateUrlService,
             "existsUrl"                 : ExistsUrlService,
