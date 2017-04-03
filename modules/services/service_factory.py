@@ -54,16 +54,13 @@ from dbservices.post.generate_embed_external_url_service import GenerateEmbedExt
 from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
 from dbservices.post.get_post_service import GetPostService
 
-
-
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
 from dbservices.post.get_comments_post_service import GetCommentsPost
 
 from dbservices.post.new_repost_service import NewRepostService
 from dbservices.post.get_repost_service import GetRepostService
-
-
+from dbservices.post.count_repost_service import CountRepostService
 
 from dbservices.media.get_avatar_by_id_service import GetAvatarByIdService
 from dbservices.media.get_banner_by_id_service import GetBannerByIdService
@@ -173,10 +170,12 @@ class ServiceFactory (object):
             "checkContentTypeUrl"           : CheckContentTypeUrlService,
             "generateEmbedExternalUrl"           : GenerateEmbedExternalUrlService,
             "identifyExternalUrl"           : IdentifyExternalUrlService,
+                ##Repost##
             "newRepost"             : NewRepostService,
             "getPost"               : GetPostService,
             "getRepost"             : GetRepostService,
-			#####Comment######
+            "countRepost"           : CountRepostService,
+			    ##Comment##
 			"comment2Post" 			: Comment2PostService,
 			"getCommentsByPostId"	: GetCommentsByPostId,
 			"getCommentsPost"		: GetCommentsPost,
@@ -237,8 +236,3 @@ class ServiceFactory (object):
 
 		}
 		return services[serviceName](core, parameters)
-
-
-	## def create_service(core, method, parameters):
-	##	if(methodName == "newUser"):
-	##		return UserService(core, parameters)

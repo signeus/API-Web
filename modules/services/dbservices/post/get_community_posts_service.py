@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
-import operator
 
 class GetCommunityPostsService(IService):
     def __init__(self, core, parameters):
@@ -66,14 +65,7 @@ class GetCommunityPostsService(IService):
                 print repost
                 resultPosts.update(repost)
                 continue
-                #deleteRepost = deleteRepost + [key]
-                #self.updateKey(posts, repost.keys()[0], repost[repost.keys()[0]], key)
 
             resultPosts[key] = value
-        # for key in deleteRepost:
-        #     posts.pop(key,None)
 
         return resultPosts
-
-    # def updateKey(self, dic, key, value, oldKey):
-    #     operator.setitem(dic, key, value)

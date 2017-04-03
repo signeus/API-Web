@@ -179,3 +179,10 @@ def newRepost():
 def getRepost():
     _id = request.vars["id"]
     return response.json(Core().PostOperation("getRepost", {"post_id": _id}))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "countRepost")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def countRepost():
+    _id = request.vars["id"]
+    return response.json(Core().PostOperation("countRepost", {"post_id": _id}))
