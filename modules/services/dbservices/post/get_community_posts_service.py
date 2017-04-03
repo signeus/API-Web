@@ -37,32 +37,18 @@ class GetCommunityPostsService(IService):
 
 
             ##Comments
-            posts[key].update(users[str(value['user_id'])])
+            posts[key].update(self.core.InternalOperation("getUserFormatById", {"user_id": value['user_id']}))
+            #posts[key].update(users[str(value['user_id'])])
             comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
             posts[key]["comments"] = comments
 
-            ##Image
-            if self.core.InternalOperation("existsPostImage", {"id": key}): ##If exists...
-                image = self.core.InternalOperation("getMediaRoute", {"service": "getPostImageById", "attribs": {"id": key}})
-                posts[key]["image"] = {'url':image}
-            ##Video
-            if self.core.InternalOperation("existsPostVideo", {"id": key}):
-                video = self.core.InternalOperation("getMediaRoute", {"service": "getPostVideoById", "attribs": {"id": key}})
-                posts[key]["video"] = {'url':video}
-            ##Audio
-            if self.core.InternalOperation("existsPostAudio", {"id": key}):
-                audio = self.core.InternalOperation("getMediaRoute", {"service": "getPostAudioById", "attribs": {"id": key}})
-                posts[key]["audio"] = {'url':audio}
-            ##Files
-            files = self.core.InternalOperation("getPostFiles", {"id":key})
-            if files:
-               posts[key]["files"] = files
+            posts[key] = self.core.InternalOperation("postAttachment", {"post_id": key, "post": posts[key]})
 
             ##Repost
             repost = posts[key].get("repost", None)
             if repost != None:
                 repost = self.core.InternalOperation("getRepost", {"id": key})
-                print repost
+                repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0], "post": repost[repost.keys()[0]]})
                 resultPosts.update(repost)
                 continue
 

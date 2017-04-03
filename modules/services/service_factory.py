@@ -13,6 +13,7 @@ from dbservices.user.login_user_service import LoginUserService
 from dbservices.user.sign_up_user_service import SignUpUserService
 from dbservices.user.update_user_profile_service import UpdateUserProfileService
 from dbservices.user.new_user_service import NewUserService
+from dbservices.user.get_user_format_by_id_service import GetUserFormatByIdService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -53,6 +54,8 @@ from dbservices.post.check_content_type_url_service import CheckContentTypeUrlSe
 from dbservices.post.generate_embed_external_url_service import GenerateEmbedExternalUrlService
 from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
 from dbservices.post.get_post_service import GetPostService
+
+from dbservices.validator.posts.post_attachment_service import PostAttachmentService
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
@@ -133,6 +136,7 @@ class ServiceFactory (object):
             "signup"      					: SignUpUserService,
 			"updateUserProfile"				: UpdateUserProfileService,
             "newUser"      					: NewUserService,
+            "getUserFormatById"             : GetUserFormatByIdService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -170,6 +174,7 @@ class ServiceFactory (object):
             "checkContentTypeUrl"           : CheckContentTypeUrlService,
             "generateEmbedExternalUrl"           : GenerateEmbedExternalUrlService,
             "identifyExternalUrl"           : IdentifyExternalUrlService,
+            "postAttachment"                : PostAttachmentService,
                 ##Repost##
             "newRepost"             : NewRepostService,
             "getPost"               : GetPostService,

@@ -12,6 +12,9 @@ class GetPostService (IService):
             raise Exception("Get post: Empty post id not allowed.")
 
         post = self.core.InternalOperation("getPostById", {"id": _post_id})
+
+        post.update(self.core.InternalOperation("getUserFormatById", {"user_id": post['user_id']}))
+
         comments = self.core.InternalOperation("getCommentsPost", {"post_id": _post_id})
         post["comments"] = comments
         result = self.core.InternalOperation("castDict2FormatDict", {"dictionary":post})
