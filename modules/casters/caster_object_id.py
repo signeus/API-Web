@@ -26,3 +26,10 @@ class CasterObjectId:
             if type(value).__name__ == "ObjectId":
                 dictionary[key] = str(value)
         return dictionary
+
+    def castDictHex2DictObjectid(self,dictionary):
+        for key, value in dictionary.iteritems():
+            if "_id" in key:
+                dictionary[key] = ObjectId(value)
+        return dictionary
+
