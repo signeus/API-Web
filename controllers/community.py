@@ -73,3 +73,6 @@ def getAllCommunities():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory","start":"optional","offset":"optional"}, "getAllCommunities")
 def getCommunitiesByUser():
     return response.json(Core().CommunityOperation("getCommunities", dict(request.vars)))
+
+def countCommunityMembers():
+    return response.json(Core().CommunityOperation("countCommunityMembers", dict(request.vars)))

@@ -134,3 +134,10 @@ class DBService:
             return "Not founded results"
         result = [c for c in values]
         return result
+
+    def countFields(self, collection, query):
+        cobjid=CasterObjectId()
+        query=cobjid.castDictHex2DictObjectid(query)
+        col = self.openCollection(collection)
+        counts = col.find(query).count()
+        return counts

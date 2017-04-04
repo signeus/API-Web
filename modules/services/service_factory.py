@@ -27,7 +27,7 @@ from dbservices.community.get_all_communities_service import GetAllCommunitiesSe
 from dbservices.community.get_communities_by_page_service import GetCommunitiesByPageService
 from dbservices.community.get_communities_by_offset_service import GetCommunitiesByOffsetService
 from dbservices.community.get_communities_service import GetCommunitiesService
-
+from dbservices.community.count_community_members_service import CountCommunityMembersService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -150,6 +150,7 @@ class ServiceFactory (object):
 			"getCommunitiesByPage"		: GetCommunitiesByPageService,
 			"getCommunitiesByOffset"	: GetCommunitiesByOffsetService,
 			"getCommunities"	        : GetCommunitiesService,
+			"countCommunityMembers"		: CountCommunityMembersService,
             ######Posts########
             "createPost" 			: CreatePostService,
 			"updatePost"			: UpdatePostService,
