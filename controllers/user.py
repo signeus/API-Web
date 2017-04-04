@@ -56,16 +56,16 @@ def updateUser():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id_user":"mandatory", "id_community":"mandatory"}, "suscribeUser2Community")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "community_id":"mandatory"}, "subscribeUser2Community")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def suscribeUser2Community():
+def subscribeUser2Community():
     core = Core()
     result = core.UserOperation("suscribeUser2Community", dict(request.vars))
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def unsuscribeUser2Community():
+def unsubscribeUser2Community():
     core = Core()
     result = core.UserOperation("unsuscribeUser2Community", dict(request.vars))
     return response.json(result)
