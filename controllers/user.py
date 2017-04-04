@@ -56,6 +56,7 @@ def updateUser():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "community_id":"mandatory"}, "subscribeUser2Community")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def subscribeUser2Community():
