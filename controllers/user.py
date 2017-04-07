@@ -124,3 +124,10 @@ def newUser():
     core = Core()
     result = core.UserOperation("newUser", request.vars)
     return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"name":"mandatory"}, "findUser")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def findUserService():
+    return response.json(Core().UserOperation("findUser", dict(request.vars)))

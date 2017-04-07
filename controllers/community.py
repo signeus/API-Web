@@ -76,3 +76,6 @@ def getCommunitiesByUser():
 
 def countCommunityMembers():
     return response.json(Core().CommunityOperation("countCommunityMembers", dict(request.vars)))
+
+def getCommunityService():
+    return response.json(Core().CommunityOperation("getCommunityInfo", dict(request.vars)))

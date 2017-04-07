@@ -14,6 +14,7 @@ from dbservices.user.sign_up_user_service import SignUpUserService
 from dbservices.user.update_user_profile_service import UpdateUserProfileService
 from dbservices.user.new_user_service import NewUserService
 from dbservices.user.get_user_format_by_id_service import GetUserFormatByIdService
+from dbservices.user.find_user_service import FindUserService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -28,6 +29,8 @@ from dbservices.community.get_communities_by_page_service import GetCommunitiesB
 from dbservices.community.get_communities_by_offset_service import GetCommunitiesByOffsetService
 from dbservices.community.get_communities_service import GetCommunitiesService
 from dbservices.community.count_community_members_service import CountCommunityMembersService
+from dbservices.community.get_community_info_service import GetCommunityInfoService
+from dbservices.community.get_community_users_service import GetCommunityUsersService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -99,6 +102,11 @@ from dbservices.media.save_post_audio_service import SavePostAudioService
 from dbservices.media.save_dir_audio_service import SaveDirAudioService
 from dbservices.media.save_audio_service import SaveAudioService
 
+from dbservices.search.search_user_service import SearchUserService
+from dbservices.search.search_post_service import SearchPostService
+from dbservices.search.search_community_service import SearchCommunityService
+from dbservices.search.search_all import SearchAllService
+from dbservices.search.search_comment_service import SearchCommentService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -137,6 +145,7 @@ class ServiceFactory (object):
 			"updateUserProfile"				: UpdateUserProfileService,
             "newUser"      					: NewUserService,
             "getUserFormatById"             : GetUserFormatByIdService,
+			"findUser"						: FindUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -151,6 +160,8 @@ class ServiceFactory (object):
 			"getCommunitiesByOffset"	: GetCommunitiesByOffsetService,
 			"getCommunities"	        : GetCommunitiesService,
 			"countCommunityMembers"		: CountCommunityMembersService,
+			"getCommunityInfo"			: GetCommunityInfoService,
+			"getCommunityUsers"			: GetCommunityUsersService,
             ######Posts########
             "createPost" 			: CreatePostService,
 			"updatePost"			: UpdatePostService,
@@ -220,6 +231,12 @@ class ServiceFactory (object):
             "getPostAudioById"      : GetPostAudioByIdService,
 			"getDirAudioById"		: GetDirAudioByIdService,
 			"checkPostUrls"			: CheckPostUrlsService,
+            ######Search########
+            "searchUserService" 		: SearchUserService,
+            "searchPostService"         : SearchPostService,
+            "searchCommunityService"    : SearchCommunityService,
+            "searchAllService"          : SearchAllService,
+			"searchCommentService"		: SearchCommentService,
 			#####Files#####
 			"getFileTypeService"		: GetFileTypeService,
 			#####Caster####

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from services.interfaces.i_service import IService
 from services.dbservices.db_service import DBService
 

@@ -7,4 +7,5 @@ class GetByIdCommunityService (IService):
 		super(GetByIdCommunityService, self).__init__(core, parameters)
 		
 	def run(self):
+
 		return DBService(self.core).getById("Communities", self.parameters['_id'])

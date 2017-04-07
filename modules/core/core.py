@@ -21,6 +21,9 @@ class Core:
     def FilesOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters)
 
+    def SearchOperation(self, serviceName, parameters):
+        return self.FactoryOperation(serviceName, parameters)
+
     def InternalOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters, True)
 

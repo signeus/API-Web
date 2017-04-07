@@ -141,3 +141,4 @@ class DBService:
         col = self.openCollection(collection)
         counts = col.find(query).count()
         return counts
+
