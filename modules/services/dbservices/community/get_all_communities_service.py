@@ -20,4 +20,13 @@ class GetAllCommunitiesService(IService):
                     community["subscribed"] = True
                 else:
                     community["subscribed"] = False
+
+                _ObjectId = community.get("_id", "")
+                _id = self.core.InternalOperation("castObjectId2Hex", {"id": _ObjectId})
+
+                if _id:
+                    community["members"] = self.core.InternalOperation("countCommunityMembers", {"community_id": _id})
+                    community["banner"] = self.core.InternalOperation("getMediaRoute", {"service": "getBannerById",
+                                                                                             "attribs": {"id": _id}})
+
         return communities

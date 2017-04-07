@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from services.interfaces.i_service import IService
 from services.dbservices.db_service import DBService
 
@@ -11,8 +13,5 @@ class CountCommunityMembersService(IService):
         id_comm=self.parameters["community_id"]
         _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": id_comm})
 
-        counts = DBService(self.core).countFields("Users",
+        return DBService(self.core).countFields("Users",
                                                   {"communities_subscribed": { "$in":[_ObjectId] }})
-        communityCount={}
-        communityCount["Count"]=counts
-        return communityCount

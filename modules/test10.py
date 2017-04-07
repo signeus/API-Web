@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 from core.core import Core
+import pprint
 from bson import ObjectId
 from datetime import datetime
 from timeit import timeit
+
 
 Core()
 #result = core.PostOperation("like2Post", {'id':'58a3298c481f3406cf184ca2', 'id_user':'5891cced481f3416aa786783'})
@@ -17,5 +20,11 @@ Core()
 #http://192.168.1.176:8001/kayoo2/post/getCommunityPosts?id=5898abfd481f3443d8917fce
 
 
-result = Core().UserOperation("getUserSuscribedCommunities", {"_id":"5891cced481f3416aa786783"})
-print result
+#result = Core().UserOperation("getUserSuscribedCommunities", {"_id":"5891cced481f3416aa786783"})
+#print result
+
+result = Core().SearchOperation("getCommunityInfo", {"community_id":"58e4fede481f34078ba6655c"})
+#print dict(result)
+p=pprint.PrettyPrinter(indent=4)
+p.pprint(dict(result))
+

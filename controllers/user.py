@@ -61,14 +61,14 @@ def updateUser():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def subscribeUser2Community():
     core = Core()
-    result = core.UserOperation("suscribeUser2Community", dict(request.vars))
+    result = core.UserOperation("subscribeUser2Community", dict(request.vars))
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def unsubscribeUser2Community():
     core = Core()
-    result = core.UserOperation("unsuscribeUser2Community", dict(request.vars))
+    result = core.UserOperation("unsubscribeUser2Community", dict(request.vars))
     return response.json(result)
 
 ##Used from Front##
@@ -78,7 +78,7 @@ def unsubscribeUser2Community():
 def getUser():
     _id = request.vars["id"]
     core = Core()
-    result = core.UserOperation("getUserSuscribedCommunities", {"_id": _id})
+    result = core.UserOperation("getUserSubscribedCommunities", {"_id": _id})
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
@@ -94,9 +94,7 @@ def getAllUsersFiltered():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"mail":"mandatory", "psswd":"mandatory"}, "loginUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def login():
-    core = Core()
-    result = core.UserOperation("loginUser", dict(request.vars))
-    return response.json(result)
+    return response.json(Core().UserOperation("loginUser", dict(request.vars)))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
@@ -125,3 +123,18 @@ def newUser():
     core = Core()
     result = core.UserOperation("newUser", request.vars)
     return response.json(result)
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"name":"mandatory"}, "findUser")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def findUserService():
+    return response.json(Core().UserOperation("findUser", dict(request.vars)))
+
+##Used from Front##
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "community_id":"mandatory", "status":"mandatory"}, "subscribeUser")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def subscribeUser():
+    return response.json(Core().UserOperation("subscribeUser", dict(request.vars)))

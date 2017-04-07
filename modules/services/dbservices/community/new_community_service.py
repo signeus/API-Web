@@ -10,8 +10,8 @@ class NewCommunityService (IService):
         self.parameters.pop("banner", None)
 
         record = self.core.InternalOperation("createCommunity",self.parameters)
-        userInfo = self.core.InternalOperation("suscribeUser2Community",
-                                             {"user_id": record["id_creator"], "community_id": record["_id"]})
+        userInfo = self.core.InternalOperation("subscribeUser2Community",
+                                             {"user_id": record["creator_id"], "community_id": record["_id"], "creator_id":record["creator_id"]})
 
         id = record.get("_id", None)
 
@@ -27,6 +27,6 @@ class NewCommunityService (IService):
             urlImage = self.core.InternalOperation("saveDefaultBanner", {'id':str(id), 'description': description, 'keywords':keywords})
             record['image'] = urlImage
 
-        record["communities_subscribed"] = userInfo["communities_subscribed"]
+        record["communities_subscribed"] = userInfo.get("communities_subscribed",[])
 
         return record

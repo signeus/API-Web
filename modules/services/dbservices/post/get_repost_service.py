@@ -21,5 +21,7 @@ class GetRepostService (IService):
         #Find the post_id to refer
         post_id = repost.get("post_id", "")
         result = self.core.InternalOperation("getPost", {"post_id": post_id})
+
+        result[result.keys()[0]]["count_repost"] =  self.core.InternalOperation("countCommentsByPost", {"post_id": post_id})
         result[result.keys()[0]]["repost"] = dictRepost
         return result

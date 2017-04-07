@@ -5,19 +5,23 @@ from dbservices.user.delete_user_service import DeleteUserService
 from dbservices.user.get_all_user_service import GetAllUserService
 from dbservices.user.get_by_id_user_service import GetByIdUserService
 from dbservices.user.get_first_by_fields_user_service import GetFirstByFieldsUserService
-from dbservices.user.unsuscribe_user_to_community_service import UnsuscribeUser2Community
-from dbservices.user.suscribe_user_to_community_service import SuscribeUser2Community
-from dbservices.user.get_user_suscribed_communities_service import GetUserSuscribedCommunities
+from dbservices.user.unsubscribe_user_to_community_service import UnsubscribeUser2Community
+from dbservices.user.subscribe_user_to_community_service import SubscribeUser2Community
+from dbservices.user.get_user_subscribed_communities_service import GetUserSubscribedCommunitiesService
 from dbservices.user.get_all_users_filtered_service import GetAllUsersFiltered
 from dbservices.user.login_user_service import LoginUserService
 from dbservices.user.sign_up_user_service import SignUpUserService
 from dbservices.user.update_user_profile_service import UpdateUserProfileService
 from dbservices.user.new_user_service import NewUserService
 from dbservices.user.get_user_format_by_id_service import GetUserFormatByIdService
+from dbservices.user.subscribe_user_service import SubscribeUserService
+from dbservices.user.update_inside_fields_user_service import UpdateInsideFieldsUserService
+from dbservices.user.extract_inside_fields_user_service import ExtractInsideFieldsUserService
+from dbservices.user.find_user_service import FindUserService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
-from dbservices.community.delete_community_unsuscribe_service import DeleteCommunityUnsuscribeService
+from dbservices.community.delete_community_unsubscribe_service import DeleteCommunityUnsubscribeService
 from dbservices.community.get_all_community_service import GetAllCommunityService
 from dbservices.community.get_by_id_community_service import GetByIdCommunityService
 from dbservices.community.get_first_by_fields_community_service import GetFirstByFieldsCommunityService
@@ -28,6 +32,9 @@ from dbservices.community.get_communities_by_page_service import GetCommunitiesB
 from dbservices.community.get_communities_by_offset_service import GetCommunitiesByOffsetService
 from dbservices.community.get_communities_service import GetCommunitiesService
 from dbservices.community.count_community_members_service import CountCommunityMembersService
+from dbservices.community.get_community_info_service import GetCommunityInfoService
+from dbservices.community.get_community_users_service import GetCommunityUsersService
+from dbservices.community.get_info_community_service import GetInfoCommunityService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -54,12 +61,14 @@ from dbservices.post.check_content_type_url_service import CheckContentTypeUrlSe
 from dbservices.post.generate_embed_external_url_service import GenerateEmbedExternalUrlService
 from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
 from dbservices.post.get_post_service import GetPostService
+from dbservices.post.count_posts_service import CountPostsService
 
 from dbservices.validator.posts.post_attachment_service import PostAttachmentService
 
 from dbservices.post.comment_2_post_service import Comment2PostService
 from dbservices.post.get_comments_by_post_id_service import GetCommentsByPostId
 from dbservices.post.get_comments_post_service import GetCommentsPost
+from dbservices.post.count_comments_by_post_service import CountCommentsByPostService
 
 from dbservices.post.new_repost_service import NewRepostService
 from dbservices.post.get_repost_service import GetRepostService
@@ -99,6 +108,11 @@ from dbservices.media.save_post_audio_service import SavePostAudioService
 from dbservices.media.save_dir_audio_service import SaveDirAudioService
 from dbservices.media.save_audio_service import SaveAudioService
 
+from dbservices.search.search_user_service import SearchUserService
+from dbservices.search.search_post_service import SearchPostService
+from dbservices.search.search_community_service import SearchCommunityService
+from dbservices.search.search_all import SearchAllService
+from dbservices.search.search_comment_service import SearchCommentService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -117,128 +131,151 @@ from dbservices.caster.caster_cursor.cast_dict_2_format_dict_service import Cast
 from dbservices.validator.validate_url_service import ValidateUrlService
 from dbservices.validator.exists_url_service import ExistsUrlService
 
+from dbservices.validator.find_everything_service import FindEverythingService
+
 
 class ServiceFactory (object):
-	def __new__(cls, serviceName, core, parameters):
-		services = {
-			######Users#########
-            "createUser"      				: CreateUserService,
-			"updateUser"					: UpdateUserService,
-			"deleteUser" 					: DeleteUserService,
-			"getAllUser" 					: GetAllUserService,
-			"getByIdUser"					: GetByIdUserService,
-			"getFirstByFieldsUser" 			: GetFirstByFieldsUserService,
-			"suscribeUser2Community"		: SuscribeUser2Community,
-			"unsuscribeUser2Community"		: UnsuscribeUser2Community,
-			"getUserSuscribedCommunities"	: GetUserSuscribedCommunities,
-			"getAllUsersFiltered"			: GetAllUsersFiltered,
+    def __init__(self, core):
+        self.core = core
+        self.services = {
+            ######Users#########
+            "createUser"      			: CreateUserService,
+            "updateUser"					: UpdateUserService,
+            "deleteUser" 					: DeleteUserService,
+            "getAllUser" 					: GetAllUserService,
+            "getByIdUser"					: GetByIdUserService,
+            "getFirstByFieldsUser" 			: GetFirstByFieldsUserService,
+            "subscribeUser2Community"	: SubscribeUser2Community,
+            "unsubscribeUser2Community"	: UnsubscribeUser2Community,
+            "getUserSubscribedCommunities"	: GetUserSubscribedCommunitiesService,
+            "getAllUsersFiltered"			: GetAllUsersFiltered,
             "loginUser"      				: LoginUserService,
             "signup"      					: SignUpUserService,
-			"updateUserProfile"				: UpdateUserProfileService,
+            "updateUserProfile"				: UpdateUserProfileService,
             "newUser"      					: NewUserService,
             "getUserFormatById"             : GetUserFormatByIdService,
+            "subscribeUser"					: SubscribeUserService,
+            "updateInsideFieldsUser"        : UpdateInsideFieldsUserService,
+            "extractInsideFieldsUser"       : ExtractInsideFieldsUserService,
+		"findUser"						: FindUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
             "deleteCommunity" 			: DeleteCommunityService,
-            "deleteCommunityUnsuscribe" : DeleteCommunityUnsuscribeService,
+            "deleteCommunityUnsubscribe" : DeleteCommunityUnsubscribeService,
             "getAllCommunity" 			: GetAllCommunityService,
             "getByIdCommunity"			: GetByIdCommunityService,
             "getFirstByFieldsCommunity" : GetFirstByFieldsCommunityService,
-			"newCommunity" 				: NewCommunityService,
-			"getAllCommunities"			: GetAllCommunitiesService,
-			"getCommunitiesByPage"		: GetCommunitiesByPageService,
-			"getCommunitiesByOffset"	: GetCommunitiesByOffsetService,
-			"getCommunities"	        : GetCommunitiesService,
-			"countCommunityMembers"		: CountCommunityMembersService,
+            "newCommunity" 				: NewCommunityService,
+            "getAllCommunities"			: GetAllCommunitiesService,
+            "getCommunitiesByPage"		: GetCommunitiesByPageService,
+            "getCommunitiesByOffset"	: GetCommunitiesByOffsetService,
+            "getCommunities"	        : GetCommunitiesService,
+            "countCommunityMembers"		: CountCommunityMembersService,
+            "getInfoCommunity"          : GetInfoCommunityService,
+		"getCommunityInfo"			: GetCommunityInfoService,
+			"getCommunityUsers"			: GetCommunityUsersService,
             ######Posts########
             "createPost" 			: CreatePostService,
-			"updatePost"			: UpdatePostService,
-			"deletePost" 			: DeletePostService,
-			"getAllPost" 			: GetAllPostService,
-			"getPostById"			: GetPostByIdService,
-			"getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
-			"getPostsByCommunityId"		    : GetPostsByCommunityIdService,
-			"getPostsByCommunityFormated"	: GetPostsByCommunityFormatedService,
-			"getCommunityPosts"		: GetCommunityPostsService,
-			"like2Post"				: UserLike2PostService,
+            "updatePost"			: UpdatePostService,
+            "deletePost" 			: DeletePostService,
+            "getAllPost" 			: GetAllPostService,
+            "getPostById"			: GetPostByIdService,
+            "getFirstByFieldsPost" 	: GetFirstByFieldsPostService,
+            "getPostsByCommunityId"		    : GetPostsByCommunityIdService,
+            "getPostsByCommunityFormated"	: GetPostsByCommunityFormatedService,
+            "getCommunityPosts"		: GetCommunityPostsService,
+            "like2Post"				: UserLike2PostService,
             "unlike2Post"			: UserUnlike2PostService,
             "likePost"				: Like2PostService,
-			"updatePostContent"		: UpdatePostContentService,
+            "updatePostContent"		: UpdatePostContentService,
             "newPost" 				: NewPostService,
-			"getMainCommunityById"	: GetMainCommunityByIdService,
-			"checkSurveyByPostId"	: CheckSurveyByPostIdService,
-			"checkOptionSurveyId"	: CheckOptionSurveyService,
-			"uncheckOptionSurveyId"	: UncheckOptionSurveyService,
+            "getMainCommunityById"	: GetMainCommunityByIdService,
+            "checkSurveyByPostId"	: CheckSurveyByPostIdService,
+            "checkOptionSurveyId"	: CheckOptionSurveyService,
+            "uncheckOptionSurveyId"	: UncheckOptionSurveyService,
             "updateInsideFieldsPost"        : UpdateInsideFieldsPostService,
             "extractInsideFieldsPost"       : ExtractInsideFieldsPostService,
             "checkContentTypeUrl"           : CheckContentTypeUrlService,
             "generateEmbedExternalUrl"           : GenerateEmbedExternalUrlService,
             "identifyExternalUrl"           : IdentifyExternalUrlService,
             "postAttachment"                : PostAttachmentService,
-                ##Repost##
+            "countPosts"                    : CountPostsService,
+            ##Repost##
             "newRepost"             : NewRepostService,
             "getPost"               : GetPostService,
             "getRepost"             : GetRepostService,
             "countRepost"           : CountRepostService,
-			    ##Comment##
-			"comment2Post" 			: Comment2PostService,
-			"getCommentsByPostId"	: GetCommentsByPostId,
-			"getCommentsPost"		: GetCommentsPost,
-			######Media#######
-			"getAvatarById"			: GetAvatarByIdService,
-			"getBannerById"			: GetBannerByIdService,
-			"getPostImageById"		: GetPostImageByIdService,
-			"getDirImageById"		: GetDirImageByIdService,
-			"getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
-			"getMediaRoute"			: GetMediaRouteService,
-			"saveImage"				: SaveImageService,
-			"saveAvatar"			: SaveAvatarService,
-			"savePostImage"			: SavePostImageService,
-			"saveDirImage"			: SaveDirImageService,
-			"getFileByPath"			: GetFileByPathService,
-			"getFilesRoutesByPath"			: GetFilesRoutesByPathService,
-			"savePostFiles"			: SavePostFilesService,
-			"saveFile"				: SaveFileService,
-			"saveFiles"				: SaveFilesService,
-			"existsFile"			: ExistsFileService,
-			"existsPostImage"		: ExistsPostImageService,
+            ##Comment##
+            "comment2Post" 			: Comment2PostService,
+            "getCommentsByPostId"	: GetCommentsByPostId,
+            "getCommentsPost"		: GetCommentsPost,
+            "countCommentsByPost"   : CountCommentsByPostService,
+            ######Media#######
+            "getAvatarById"			: GetAvatarByIdService,
+            "getBannerById"			: GetBannerByIdService,
+            "getPostImageById"		: GetPostImageByIdService,
+            "getDirImageById"		: GetDirImageByIdService,
+            "getAvatarByIdLegacy"	: GetAvatarByIdLegacyService,
+            "getMediaRoute"			: GetMediaRouteService,
+            "saveImage"				: SaveImageService,
+            "saveAvatar"			: SaveAvatarService,
+            "savePostImage"			: SavePostImageService,
+            "saveDirImage"			: SaveDirImageService,
+            "getFileByPath"			: GetFileByPathService,
+            "getFilesRoutesByPath"			: GetFilesRoutesByPathService,
+            "savePostFiles"			: SavePostFilesService,
+            "saveFile"				: SaveFileService,
+            "saveFiles"				: SaveFilesService,
+            "existsFile"			: ExistsFileService,
+            "existsPostImage"		: ExistsPostImageService,
             "existsPostVideo"       : ExistsPostVideoService,
             "existsPostAudio"       : ExistsPostAudioService,
-			"getPostFiles"		    : GetPostFilesService,
-			"savePostVideo"			: SavePostVideoService,
-			"saveDirVideo"			: SaveDirVideoService,
-			"saveVideo"				: SaveVideoService,
+            "getPostFiles"		    : GetPostFilesService,
+            "savePostVideo"			: SavePostVideoService,
+            "saveDirVideo"			: SaveDirVideoService,
+            "saveVideo"				: SaveVideoService,
             "getPostVideoById"      : GetPostVideoByIdService,
-			"getDirVideoById"		: GetDirVideoByIdService,
-			"saveBanner"			: SaveBannerService,
-			"saveDefaultBanner"		: SaveDefaultBannerService,
-			"saveDefaultBannerImage": SaveDefaultBannerImageService,
-			"saveAudio"             : SaveAudioService,
-			"saveDirAudio"          : SaveDirAudioService,
-			"savePostAudio"         : SavePostAudioService,
+            "getDirVideoById"		: GetDirVideoByIdService,
+            "saveBanner"			: SaveBannerService,
+            "saveDefaultBanner"		: SaveDefaultBannerService,
+            "saveDefaultBannerImage": SaveDefaultBannerImageService,
+            "saveAudio"             : SaveAudioService,
+            "saveDirAudio"          : SaveDirAudioService,
+            "savePostAudio"         : SavePostAudioService,
             "getPostAudioById"      : GetPostAudioByIdService,
-			"getDirAudioById"		: GetDirAudioByIdService,
-			"checkPostUrls"			: CheckPostUrlsService,
-			#####Files#####
-			"getFileTypeService"		: GetFileTypeService,
-			#####Caster####
-			"castDictObjectsId2DictHexId"			    : CastDictObjectsId2DictHexIdService,
-			"castHex2ObjectId"						    : CastHex2ObjectIdService,
-			"castListObjectsId2ListHexId"			    : CastListObjectsId2ListHexIdService,
-			"castListDictObjectsId2ListDictHexId"	    : CastListDictObjectsId2ListDictHexIdService,
-			"castObjectId2Hex"						    : CastObjectId2HexService,
-			"castDictObjectsId2DictHexIdRecursService"  : CastDictObjectsId2DictHexIdRecursService,
-			    ###Date###
-			"castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
-			"castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
-			"castDate2DateTimestamp"				: CastDate2DateTimestampService,
-                ###Cursor###
-			"castList2FormatDict"				: CastList2FormatDictService,
-			"castDict2FormatDict"				: CastDict2FormatDictService,
+            "getDirAudioById"		: GetDirAudioByIdService,
+            "checkPostUrls"			: CheckPostUrlsService,
+		######Search########
+            "searchUserService" 		: SearchUserService,
+            "searchPostService"         : SearchPostService,
+            "searchCommunityService"    : SearchCommunityService,
+            "searchAllService"          : SearchAllService,
+	"searchCommentService"		: SearchCommentService,
+            #####Files#####
+            "getFileTypeService"		: GetFileTypeService,
+            #####Caster####
+            "castDictObjectsId2DictHexId"			    : CastDictObjectsId2DictHexIdService,
+            "castHex2ObjectId"						    : CastHex2ObjectIdService,
+            "castListObjectsId2ListHexId"			    : CastListObjectsId2ListHexIdService,
+            "castListDictObjectsId2ListDictHexId"	    : CastListDictObjectsId2ListDictHexIdService,
+            "castObjectId2Hex"						    : CastObjectId2HexService,
+            "castDictObjectsId2DictHexIdRecursService"  : CastDictObjectsId2DictHexIdRecursService,
+            ###Date###
+            "castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
+            "castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
+            "castDate2DateTimestamp"				: CastDate2DateTimestampService,
+            ###Cursor###
+            "castList2FormatDict"				: CastList2FormatDictService,
+            "castDict2FormatDict"				: CastDict2FormatDictService,
             ###Validator###
-			"validateUrl"				: ValidateUrlService,
+            "validateUrl"				: ValidateUrlService,
             "existsUrl"                 : ExistsUrlService,
 
-		}
-		return services[serviceName](core, parameters)
+            ##Others##
+            "findEverything"            : FindEverythingService,
+
+        }
+
+    def getTask(self, serviceName, parameters):
+        return self.services[serviceName](self.core, parameters)

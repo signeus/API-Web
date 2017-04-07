@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
-from databases.test import Testencio
 import base64
-
-
-def testCan():
-    test = Testencio()
-    return test.testMethod()
 
 def getDocument():
     file = open("/home/kevin/texto.txt","rt")
@@ -75,3 +69,7 @@ def insertDatabase():
             except Exception , e:
                 print "parse Error" TODO '''
     return "Todo ha sido guardado"
+
+def findEverything():
+    return response.json(Core().FilesOperation("findEverything", {}))
+

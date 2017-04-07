@@ -30,6 +30,10 @@ class DBService:
         collection = db[collection]
         return collection
 
+    def getAllCollection(self):
+        db = MongoDatabaseManager(self.core.GetDatabaseResources()).connect2Database()
+        return db.collection_names()
+
     def insertIn2Collection(self, collection, data):
         col = self.openCollection(collection)
         data_completed = self.insertDateCreated(data)
@@ -141,3 +145,17 @@ class DBService:
         col = self.openCollection(collection)
         counts = col.find(query).count()
         return counts
+
+    def findInEveryWhere(self):
+        collections = self.getAllCollection()
+        results = {}
+        for collection in collections:
+            if "sys" in collection:
+                continue
+            colOpen = self.openCollection(collection)
+            values = colOpen.find({})
+            if type(values) == types.NoneType:
+                return "Not founded results"
+            result = [c for c in values]
+            results[collection] = result
+        return results

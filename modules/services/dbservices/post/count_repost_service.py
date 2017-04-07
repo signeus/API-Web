@@ -11,9 +11,7 @@ class CountRepostService(IService):
 
     def run(self):
 
-        #counts=DBService(self.core).countFields("Posts", {"repost": {"$exists": True}, "post_id": self.parameters['post_id']})
-        counts = DBService(self.core).countFields("Users",
-                                                  {"name": "Saray"})
+        counts=DBService(self.core).countFields("Posts", {"repost": {"$exists": True}, "post_id": self.parameters['post_id']})
         repostCount={}
         repostCount["Count"]=counts
         return repostCount

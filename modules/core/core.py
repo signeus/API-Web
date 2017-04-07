@@ -5,6 +5,7 @@ from resources_manager.resource_manager import ResourceManager
 class Core:
     def __init__(self):
         self.rm = ResourceManager(self)
+        self.serviceFactory =  ServiceFactory(self)
 
     def UserOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters)
@@ -21,12 +22,16 @@ class Core:
     def FilesOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters)
 
+    def SearchOperation(self, serviceName, parameters):
+        return self.FactoryOperation(serviceName, parameters)
+
     def InternalOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters, True)
 
     def FactoryOperation(self, serviceName, parameters, internalContext=False):
         try:
-            serviceResult = ServiceFactory(serviceName, self, parameters).run()
+            serviceResult = self.serviceFactory.getTask(serviceName, parameters).run()
+
             if not internalContext:
                 resultDict = {}
                 resultDict["data"] = serviceResult

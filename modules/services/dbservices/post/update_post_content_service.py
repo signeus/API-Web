@@ -7,5 +7,4 @@ class UpdatePostContentService (IService):
 
     def run(self):
         result = self.core.InternalOperation("updatePost", {"_id":self.parameters["id"], "new_values":{"post":str(self.parameters["post"])}})
-        #result = self.core.InternalOperation("castDictObjectsId2DictHexIdRecursService", {"iter": result})
         return result
