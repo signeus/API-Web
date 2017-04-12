@@ -194,3 +194,10 @@ def countComments():
     _id = request.vars["id"]
     return response.json(Core().PostOperation("countCommentsByPost", {"community_id": _id}))
 
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory", "status":"mandatory"}, "favPost")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def favPost():
+    return response.json(Core().PostOperation("favPost", dict(request.vars)))

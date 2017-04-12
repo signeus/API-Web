@@ -11,7 +11,6 @@ class GetCommunityInfoService(IService):
         communityInfo=self.core.InternalOperation("getByIdCommunity",{"_id": id_comm})
         usersInCommunity = self.core.InternalOperation("getCommunityUsers",
                                                   {"community_id":id_comm})
-        listUsers=[]
         for i in usersInCommunity:
             x=self.core.InternalOperation("getByIdUser", {"_id": i["_id"]})
             dicUser = {}
@@ -25,10 +24,5 @@ class GetCommunityInfoService(IService):
                 if k=="avatar":
                     dicUser["avatar"] = v
 
-            listUsers=listUsers+[dicUser]
-            Users={}
-            Users["Users"]=listUsers
-            comm={}
-            comm["Community"]=[communityInfo]
-        allInfo = dict(Users, **comm)
-        return allInfo
+        return dict({"users":[dicUser]}, **{"community": [communityInfo]})
+

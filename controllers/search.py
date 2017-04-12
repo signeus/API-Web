@@ -37,3 +37,18 @@ def findCommentService():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findAllService():
     return response.json(Core().SearchOperation("searchAllService", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "find")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def findUser():
+    return response.json(Core().SearchOperation("findUser", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "find")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def find():
+    return response.json(Core().SearchOperation("find", dict(request.vars)))
+
+def findDic():
+    return response.json({"a":1, "b":2, "c":3})

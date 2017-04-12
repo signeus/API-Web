@@ -159,3 +159,18 @@ class DBService:
             result = [c for c in values]
             results[collection] = result
         return results
+
+
+    def findIn(self, collection, fields, value):
+        value = self.core.InternalOperation("castNormalize2Diacritics", {"text":value})
+        col = self.openCollection(collection)
+        lisDic=[]
+        print fields
+
+        for i in fields:
+            dic={}
+            dic[i]= {"$regex": value, "$options": "i"}
+            lisDic=lisDic + [dic]
+        resul = col.aggregate([{"$match":{"$or":lisDic}}])
+
+        return [c for c in resul]

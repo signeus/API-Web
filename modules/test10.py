@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import pprint
 from core.core import Core
-
+from bson import ObjectId
+from datetime import datetime
+from timeit import timeit
 
 
 Core()
@@ -21,7 +23,8 @@ Core()
 #result = Core().UserOperation("getUserSuscribedCommunities", {"_id":"5891cced481f3416aa786783"})
 #print result
 
-result = Core().SearchOperation("getCommunityInfo", {"community_id":"58e4fede481f34078ba6655c"})
+result = Core().SearchOperation("find", {"search":"co"})
+#result = Core().SearchOperation("getCommunityInfo", {"community_id":"58e4fede481f34078ba6655c"})
 #print dict(result)
 p=pprint.PrettyPrinter(indent=4)
 p.pprint(dict(result))

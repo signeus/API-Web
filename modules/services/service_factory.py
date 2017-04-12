@@ -62,6 +62,9 @@ from dbservices.post.generate_embed_external_url_service import GenerateEmbedExt
 from dbservices.post.identify_external_url_service import IdentifyExternalUrlService
 from dbservices.post.get_post_service import GetPostService
 from dbservices.post.count_posts_service import CountPostsService
+from dbservices.post.fav_post_service import FavPostService
+from dbservices.post.user_fav_post_service import UserFavPostService
+from dbservices.post.user_unfav_post_service import UserUnfavPostService
 
 from dbservices.validator.posts.post_attachment_service import PostAttachmentService
 
@@ -113,6 +116,10 @@ from dbservices.search.search_post_service import SearchPostService
 from dbservices.search.search_community_service import SearchCommunityService
 from dbservices.search.search_all import SearchAllService
 from dbservices.search.search_comment_service import SearchCommentService
+from dbservices.search.find_service import FindService
+from dbservices.search.find_user_service import FindUserService
+from dbservices.search.find_community_service import FindCommunityService
+from dbservices.search.find_post_service import FindPostService
 
 from services.filestype.get_file_type_service import GetFileTypeService
 
@@ -127,6 +134,8 @@ from dbservices.caster.caster_datetime.cast_list_date_2_date_timestamp_service i
 from dbservices.caster.caster_datetime.cast_date_2_date_timestamp_service import CastDate2DateTimestampService
 from dbservices.caster.caster_cursor.cast_list_2_format_dict_service import CastList2FormatDictService
 from dbservices.caster.caster_cursor.cast_dict_2_format_dict_service import CastDict2FormatDictService
+from dbservices.caster.caster_diacritics.cast_diacritics_2_normalize import CastDiacritics2NormalizeService
+from dbservices.caster.caster_diacritics.cast_normalize_2_diacritics import CastNormalize2DiacriticsService
 
 from dbservices.validator.validate_url_service import ValidateUrlService
 from dbservices.validator.exists_url_service import ExistsUrlService
@@ -157,7 +166,7 @@ class ServiceFactory (object):
             "subscribeUser"					: SubscribeUserService,
             "updateInsideFieldsUser"        : UpdateInsideFieldsUserService,
             "extractInsideFieldsUser"       : ExtractInsideFieldsUserService,
-		    "findUser"						: FindUserService,
+            "findUser"						: FindUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -173,8 +182,8 @@ class ServiceFactory (object):
             "getCommunities"	        : GetCommunitiesService,
             "countCommunityMembers"		: CountCommunityMembersService,
             "getInfoCommunity"          : GetInfoCommunityService,
-		    "getCommunityInfo"			: GetCommunityInfoService,
-			"getCommunityUsers"			: GetCommunityUsersService,
+            "getCommunityInfo"			: GetCommunityInfoService,
+            "getCommunityUsers"			: GetCommunityUsersService,
             ######Posts########
             "createPost" 			: CreatePostService,
             "updatePost"			: UpdatePostService,
@@ -201,6 +210,10 @@ class ServiceFactory (object):
             "identifyExternalUrl"           : IdentifyExternalUrlService,
             "postAttachment"                : PostAttachmentService,
             "countPosts"                    : CountPostsService,
+            "favPost"                       : FavPostService,
+            "userFavPost"                   : UserFavPostService,
+            "userUnfavPost"                 : UserUnfavPostService,
+
             ##Repost##
             "newRepost"             : NewRepostService,
             "getPost"               : GetPostService,
@@ -246,12 +259,17 @@ class ServiceFactory (object):
             "getPostAudioById"      : GetPostAudioByIdService,
             "getDirAudioById"		: GetDirAudioByIdService,
             "checkPostUrls"			: CheckPostUrlsService,
-		    ######Search########
+            ######Search########
             "searchUserService" 		: SearchUserService,
             "searchPostService"         : SearchPostService,
             "searchCommunityService"    : SearchCommunityService,
             "searchAllService"          : SearchAllService,
-	        "searchCommentService"		: SearchCommentService,
+            "searchCommentService"		: SearchCommentService,
+            "find"                      : FindService,
+            "findUser"                  : FindUserService,
+            "findCommunity"             : FindCommunityService,
+            "findPost"                  : FindPostService,
+
             #####Files#####
             "getFileTypeService"		: GetFileTypeService,
             #####Caster####
@@ -261,6 +279,9 @@ class ServiceFactory (object):
             "castListDictObjectsId2ListDictHexId"	    : CastListDictObjectsId2ListDictHexIdService,
             "castObjectId2Hex"						    : CastObjectId2HexService,
             "castDictObjectsId2DictHexIdRecursService"  : CastDictObjectsId2DictHexIdRecursService,
+            "castDiacritics2Normalize"                  : CastDiacritics2NormalizeService,
+            "castNormalize2Diacritics"                  : CastNormalize2DiacriticsService,
+
             ###Date###
             "castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,
             "castListDate2DateTimestamp" 			: CastListDate2DateTimestampService,
@@ -271,7 +292,6 @@ class ServiceFactory (object):
             ###Validator###
             "validateUrl"				: ValidateUrlService,
             "existsUrl"                 : ExistsUrlService,
-
             ##Others##
             "findEverything"            : FindEverythingService,
 
