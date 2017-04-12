@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from core.core import Core
 import pprint
-from bson import ObjectId
-from datetime import datetime
-from timeit import timeit
+from core.core import Core
+
 
 
 Core()

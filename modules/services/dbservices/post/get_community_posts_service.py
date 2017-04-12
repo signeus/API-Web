@@ -35,10 +35,11 @@ class GetCommunityPostsService(IService):
                 posts[key]["likes"] = {}
                 posts[key]["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
 
-
+            posts[key]["count_repost"] = self.core.InternalOperation("countRepost", {"post_id": key})
             ##Comments
             posts[key].update(self.core.InternalOperation("getUserFormatById", {"user_id": value['user_id']}))
-            #posts[key].update(users[str(value['user_id'])])
+                # Count of comments by post, that function depend on the Front now.
+            #posts[key]["count_comments"] = self.core.InternalOperation("countCommentsByPost", {"post_id": key})
             comments = self.core.InternalOperation("getCommentsPost", {"post_id": key})
             posts[key]["comments"] = comments
 
@@ -49,6 +50,25 @@ class GetCommunityPostsService(IService):
             if repost != None:
                 repost = self.core.InternalOperation("getRepost", {"id": key})
                 repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0], "post": repost[repost.keys()[0]]})
+                urlIm = repost[repost.keys()[0]].get("image", "")
+                if urlIm:
+                    repost[repost.keys()[0]]["image"] = {'url': repost[repost.keys()[0]]["image"], 'external': True}
+                urlVi = repost[repost.keys()[0]].get("video", "")
+                if urlVi:
+                    repost[repost.keys()[0]]["video"] = {'url': repost[repost.keys()[0]]["video"], 'external': True}
+                urlAu = repost[repost.keys()[0]].get("audio", "")
+                if urlAu:
+                    repost[repost.keys()[0]]["audio"] = {'url': repost[repost.keys()[0]]["audio"], 'external': True}
+
+                # Likes
+                lik = repost[repost.keys()[0]].pop("likes", [])
+                for like in lik:
+                    repost[repost.keys()[0]]["likes"] = {}
+                    repost[repost.keys()[0]]["likes"][str(like)] = {'name': users[str(like)].get("name", ""),
+                                                      'nick': users[str(like)].get("nick", "")}
+
+                repost[repost.keys()[0]]["count_repost"] = self.core.InternalOperation("countRepost", {"post_id": repost.keys()[0]})
+
                 resultPosts.update(repost)
                 continue
 

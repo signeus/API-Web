@@ -157,7 +157,7 @@ class ServiceFactory (object):
             "subscribeUser"					: SubscribeUserService,
             "updateInsideFieldsUser"        : UpdateInsideFieldsUserService,
             "extractInsideFieldsUser"       : ExtractInsideFieldsUserService,
-		"findUser"						: FindUserService,
+		    "findUser"						: FindUserService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,
@@ -173,7 +173,7 @@ class ServiceFactory (object):
             "getCommunities"	        : GetCommunitiesService,
             "countCommunityMembers"		: CountCommunityMembersService,
             "getInfoCommunity"          : GetInfoCommunityService,
-		"getCommunityInfo"			: GetCommunityInfoService,
+		    "getCommunityInfo"			: GetCommunityInfoService,
 			"getCommunityUsers"			: GetCommunityUsersService,
             ######Posts########
             "createPost" 			: CreatePostService,
@@ -246,12 +246,12 @@ class ServiceFactory (object):
             "getPostAudioById"      : GetPostAudioByIdService,
             "getDirAudioById"		: GetDirAudioByIdService,
             "checkPostUrls"			: CheckPostUrlsService,
-		######Search########
+		    ######Search########
             "searchUserService" 		: SearchUserService,
             "searchPostService"         : SearchPostService,
             "searchCommunityService"    : SearchCommunityService,
             "searchAllService"          : SearchAllService,
-	"searchCommentService"		: SearchCommentService,
+	        "searchCommentService"		: SearchCommentService,
             #####Files#####
             "getFileTypeService"		: GetFileTypeService,
             #####Caster####

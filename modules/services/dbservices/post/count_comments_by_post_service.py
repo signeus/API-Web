@@ -7,7 +7,6 @@ class CountCommentsByPostService (IService):
 
     def run(self):
         _id = self.parameters.get("post_id","")
-        print self.parameters
         _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
 
         count = self.core.InternalOperation("countPosts", {"query": {"comment":{"$exists": True}, "post_id": _ObjectId}})

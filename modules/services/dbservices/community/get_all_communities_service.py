@@ -13,13 +13,19 @@ class GetAllCommunitiesService(IService):
         user = self.core.InternalOperation("getByIdUser", {"_id": _user_id})
 
         communities = self.core.InternalOperation("getAllCommunity", {})
-        user_communities = user.get("communities_subscribed",[])
-        if len(user_communities) > 0:
+        user_communities_subscribed = user.get("communities_subscribed",[])
+        user_communities_requested = user.get("communities_requested",[])
+        if len(user_communities_subscribed) > 0:
             for community in communities:
-                if community["_id"] in user_communities:
+                if community["_id"] in user_communities_subscribed:
                     community["subscribed"] = True
                 else:
                     community["subscribed"] = False
+                if community.get("community_type",0) >0:
+                    if community["_id"] in user_communities_requested:
+                        community["requested"] = True
+                    else:
+                        community["requested"] = False
 
                 _ObjectId = community.get("_id", "")
                 _id = self.core.InternalOperation("castObjectId2Hex", {"id": _ObjectId})
