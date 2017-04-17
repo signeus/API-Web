@@ -26,6 +26,6 @@ Core()
 result = Core().SearchOperation("find", {"search":"co"})
 #result = Core().SearchOperation("getCommunityInfo", {"community_id":"58e4fede481f34078ba6655c"})
 #print dict(result)
-p=pprint.PrettyPrinter(indent=4)
-p.pprint(dict(result))
+#p=pprint.PrettyPrinter(indent=4)
+#p.pprint(dict(result))
 

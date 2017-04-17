@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.service_factory import ServiceFactory
 from resources_manager.resource_manager import ResourceManager
+from caller.caller import Caller
 
 class Core:
     def __init__(self):
@@ -29,21 +30,7 @@ class Core:
         return self.FactoryOperation(serviceName, parameters, True)
 
     def FactoryOperation(self, serviceName, parameters, internalContext=False):
-        try:
-            serviceResult = self.serviceFactory.getTask(serviceName, parameters).run()
-
-            if not internalContext:
-                resultDict = {}
-                resultDict["data"] = serviceResult
-                resultDict['result'] = 0
-                return resultDict
-            return serviceResult
-        except Exception, ex:
-            print '------'
-            print ex
-            print type(ex)
-            print '------'
-            return {"result":1, "data":{"message":ex.message, "error":1, "type": 1}}
+        return Caller(serviceName, parameters, self.serviceFactory).call() if internalContext else Caller(serviceName, parameters, self.serviceFactory).lastCall()
 
     def GetMediaResources(self):
         try:
