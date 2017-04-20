@@ -53,4 +53,4 @@ def find():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findDic():
-    return response.json({"a":1, "b":2, "c":3})
+    return response.json({"data":{"items":[{"name":"hola"},{"name":"caca"},{"name":"podaspo"}]}})

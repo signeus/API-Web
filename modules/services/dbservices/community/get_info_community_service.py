@@ -18,7 +18,4 @@ class GetInfoCommunityService (IService):
                                                                                  "attribs": {"id": _id}})
 
         lite_community["members"] = self.core.InternalOperation("countCommunityMembers", {"community_id": _id})
-        order = community.get("order", [])
-        if order:
-            lite_community["order"] = order
         return lite_community
