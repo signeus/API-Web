@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
 import random
-#from wordcloud import WordCloud
+from wordcloud import WordCloud
 
 class SaveDefaultBannerImageService(IService):
     def __init__(self, core, parameters):
@@ -35,11 +35,11 @@ class SaveDefaultBannerImageService(IService):
         state = random.randint(2, 45)
         widthMax = 860
         heightMax = 250
-        # wc = WordCloud(width=widthMax, height=heightMax, max_words=numPalabras, random_state=state, mode="RGBA",
-        #                background_color=None)
-        # wc.generate(" ".join(content_lis))
-        # wc.recolor(color_func=self.color)
-        # _path = self.core.GetMediaResources()["media_folder"] + _path
-        #
-        # wc.to_file(_path + filename)
+        wc = WordCloud(width=widthMax, height=heightMax, max_words=numPalabras, random_state=state, mode="RGBA",
+                       background_color=None)
+        wc.generate(" ".join(content_lis))
+        wc.recolor(color_func=self.color)
+        _path = self.core.GetMediaResources()["media_folder"] + _path
+
+        wc.to_file(_path + filename)
         return _id
