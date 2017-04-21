@@ -57,6 +57,9 @@ def updateCommunity():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"creator_id":"mandatory", "community_type":"mandatory", "leaders":"mandatory",
+                                                   "description":"mandatory" , "administrators":"mandatory","enviroment_type":"mandatory",
+                                                   "name":"mandatory", "invitations":"optional", "keywords":"optional"}, "newCommunity")
 def newCommunity():
     return response.json(Core().CommunityOperation("newCommunity", dict(request.vars)))
 

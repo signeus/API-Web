@@ -6,9 +6,23 @@ class NewCommunityService (IService):
         super(NewCommunityService, self).__init__(core, parameters)
 
     def run(self):
+        # print "RUN"
         image = self.parameters.get("banner", None)
         self.parameters.pop("banner", None)
+        # listMandatory=[]
+        # for k,v  in self.parameters.iteritems():
+        #     print "esto es k"
+        #     print k
+        #     field={}
+        #     if k=="description" or k=="name":
+        #         field[k]="mandatory"
+        #
+        #     print field
+        #
 
+        ## x=trim(self.parmeters.get("description", None))
+        ## if x
+        # 
         record = self.core.InternalOperation("createCommunity",self.parameters)
         userInfo = self.core.InternalOperation("subscribeUser2Community",
                                              {"user_id": record["creator_id"], "community_id": record["_id"], "creator_id":record["creator_id"]})
