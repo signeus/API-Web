@@ -110,6 +110,7 @@ from dbservices.media.get_dir_audio_by_id_service import GetDirAudioByIdService
 from dbservices.media.save_post_audio_service import SavePostAudioService
 from dbservices.media.save_dir_audio_service import SaveDirAudioService
 from dbservices.media.save_audio_service import SaveAudioService
+from dbservices.media.get_random_post_comment_service import GetRandomPostCommentService
 
 from dbservices.search.search_user_service import SearchUserService
 from dbservices.search.search_post_service import SearchPostService
@@ -136,6 +137,9 @@ from dbservices.caster.caster_cursor.cast_list_2_format_dict_service import Cast
 from dbservices.caster.caster_cursor.cast_dict_2_format_dict_service import CastDict2FormatDictService
 from dbservices.caster.caster_diacritics.cast_diacritics_2_normalize import CastDiacritics2NormalizeService
 from dbservices.caster.caster_diacritics.cast_normalize_2_diacritics import CastNormalize2DiacriticsService
+from dbservices.caster.caster_format_text.cast_separate_text import CastSeparateTextService
+from dbservices.caster.caster_format_text.cast_replace_text import CastReplaceTextService
+from dbservices.caster.caster_format_text.cast_url_email_text import CastUrlEmailTextService
 
 from dbservices.validator.validate_url_service import ValidateUrlService
 from dbservices.validator.exists_url_service import ExistsUrlService
@@ -259,6 +263,7 @@ class ServiceFactory (object):
             "getPostAudioById"      : GetPostAudioByIdService,
             "getDirAudioById"		: GetDirAudioByIdService,
             "checkPostUrls"			: CheckPostUrlsService,
+            "getRandomPostComment"  : GetRandomPostCommentService,
             ######Search########
             "searchUserService" 		: SearchUserService,
             "searchPostService"         : SearchPostService,
@@ -281,6 +286,9 @@ class ServiceFactory (object):
             "castDictObjectsId2DictHexIdRecursService"  : CastDictObjectsId2DictHexIdRecursService,
             "castDiacritics2Normalize"                  : CastDiacritics2NormalizeService,
             "castNormalize2Diacritics"                  : CastNormalize2DiacriticsService,
+            "castUrlEmailText"                          : CastUrlEmailTextService,
+            "castSeparateText"                          : CastSeparateTextService,
+            "castReplaceText"                           : CastReplaceTextService,
 
             ###Date###
             "castDictDate2DateTimestamp"			: CastDictDate2DateTimeStampService,

@@ -34,6 +34,12 @@ class GetCommunityPostsService(IService):
             for like in likes:
                 posts[key]["likes"] = {}
                 posts[key]["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
+            # Favs
+            favs = posts[key].pop("favs", [])
+            for fav in favs:
+                posts[key]["favs"] = {}
+                posts[key]["favs"][str(fav)] = {'name': users[str(fav)].get("name", ""),
+                                                      'nick': users[str(fav)].get("nick", "")}
 
             posts[key]["count_repost"] = self.core.InternalOperation("countRepost", {"post_id": key})
             ##Comments
@@ -66,6 +72,12 @@ class GetCommunityPostsService(IService):
                     repost[repost.keys()[0]]["likes"] = {}
                     repost[repost.keys()[0]]["likes"][str(like)] = {'name': users[str(like)].get("name", ""),
                                                       'nick': users[str(like)].get("nick", "")}
+                # Favs
+                fv = repost[repost.keys()[0]].pop("favs", [])
+                for fav in fv:
+                    repost[repost.keys()[0]]["favs"] = {}
+                    repost[repost.keys()[0]]["favs"][str(fav)] = {'name': users[str(fav)].get("name", ""),
+                                                                        'nick': users[str(fav)].get("nick", "")}
 
                 repost[repost.keys()[0]]["count_repost"] = self.core.InternalOperation("countRepost", {"post_id": repost.keys()[0]})
 

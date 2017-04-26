@@ -173,3 +173,4 @@ class DBService:
         resul = col.aggregate([{"$match":{"$or":lisDic}}])
 
         return [c for c in resul]
+
