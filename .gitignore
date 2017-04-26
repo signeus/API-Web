@@ -11,3 +11,7 @@
 #    Workspace     #
 ####################
 .idea/workspace.xml
+
+
+
+modules/core/*.pyc
