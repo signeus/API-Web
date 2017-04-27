@@ -12,6 +12,7 @@ class GetPostsByCommunityFormatedService(IService):
         _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         result = self.core.InternalOperation("getPostsByCommunityId", {"community_id":_ObjectId})
         #TODO Adapt this with Core.InternalOperation
+
         result = CasterCursor().castList2FormatDictionary(result)
 
         return result

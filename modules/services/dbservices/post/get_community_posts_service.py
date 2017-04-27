@@ -7,9 +7,13 @@ class GetCommunityPostsService(IService):
 
     def run(self):
         _community_id = self.parameters.get("community_id", None)
+        _user_id = self.parameters.get("user_id", None)
 
         if not _community_id:
             raise Exception("Empty community ID is not allowed.")
+        if not _user_id:
+            raise Exception("Empty user ID is not allowed.")
+
 
         posts = self.core.InternalOperation("getPostsByCommunityFormated", {"community_id": _community_id})
 
@@ -51,6 +55,10 @@ class GetCommunityPostsService(IService):
 
             posts[key] = self.core.InternalOperation("postAttachment", {"post_id": key, "post": posts[key]})
 
+            # ReadPost
+            if self.core.InternalOperation("verifyReadPost", {"post_id": key, "user_id": _user_id}):
+                posts[key]["read"] = True
+
             ##Repost
             repost = posts[key].get("repost", None)
             if repost != None:
@@ -80,9 +88,9 @@ class GetCommunityPostsService(IService):
                                                                         'nick': users[str(fav)].get("nick", "")}
 
                 repost[repost.keys()[0]]["count_repost"] = self.core.InternalOperation("countRepost", {"post_id": repost.keys()[0]})
-
                 resultPosts.update(repost)
                 continue
+
 
             resultPosts[key] = value
 

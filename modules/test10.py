@@ -29,11 +29,11 @@ Core()
 #									 "creator_id":"5891cc74481f3416aa78677c", "environement_type":"0", "community_type": "0"} )
 #result = Core().SearchOperation("getCommunityInfo", {"community_id":"58e4fede481f34078ba6655c"})
 
-result = Core().InternalOperation("getRandomPostComment", "")
+#result = Core().InternalOperation("getRandomPostComment", "")
 #result = Core().InternalOperation("castReplaceText", "Este. texto, de prueba: tenia! muchas? cosas... incluso www.loquesea.com y tambien un@email.es y las cosas con tildes no sé no sé")
 #result = Core().InternalOperation("castSeparateText", "Este. texto, de prueba: tenia! muchas? cosas... incluso www.loquesea.com y tambien un@email.es")
 #resul=Core().InternalOperation("castDiacritics2Normalize", "quiero quitar las tildes de no sé no sé")
-
+result = Core().InternalOperation("getCommunityPosts", {"community_id":"58f61094481f343de6d5dc17", "user_id":"5891cced481f3416aa786783"})
 #print dict(result)
 #p=pprint.PrettyPrinter(indent=4)
 #p.pprint(dict(result)) 
