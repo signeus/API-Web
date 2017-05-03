@@ -1,6 +1,15 @@
 #   Pycharm files  #
 ####################
 /**/*.pyc
+*.pyc
+/*.pyc
+.idea/*.iml
+.idea/*.xml
+
+#   Pycharm Folder #
+####################
+.idea
+
 
 #   Error folder   #
 ####################
@@ -11,7 +20,4 @@
 #    Workspace     #
 ####################
 .idea/workspace.xml
-
-
-
 modules/core/*.pyc

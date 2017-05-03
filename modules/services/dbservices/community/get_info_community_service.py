@@ -8,7 +8,6 @@ class GetInfoCommunityService (IService):
     def run(self):
         _ObjectId = self.parameters.get("community_id", "")
         _id = self.core.InternalOperation("castObjectId2Hex", {"id": _ObjectId})
-
         community = self.core.InternalOperation("getByIdCommunity", {"_id": _ObjectId})
         lite_community = {}
         lite_community["id"] = community["_id"]

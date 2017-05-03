@@ -78,9 +78,11 @@ def getPostsByCommunityFormated():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "user_id":"mandatory"}, "getCommunityPosts")
 def getCommunityPosts():
     _id = request.vars["id"]
-    return response.json(Core().PostOperation("getCommunityPosts", {"community_id": _id}))
+    user_id = request.vars["user_id"]
+    return response.json(Core().PostOperation("getCommunityPosts", {"community_id": _id, "user_id":user_id}))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
@@ -201,3 +203,11 @@ def countComments():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def favPost():
     return response.json(Core().PostOperation("favPost", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newSurveyAnswer():
+    return response.json({})
+    #return response.json(Core().PostOperation("newSurveyAnswer", dict(request.vars)))
+
