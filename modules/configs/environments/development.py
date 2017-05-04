@@ -11,7 +11,10 @@ class Development(IEnvironment):
                                 'port_app':'8000',
                                 'name_app':'kayoo',
                                 'protocol_app':'http',
-                                'media_folder':'/home/www/media/'
+                                'media_folder':'/home/www/media/',
+                                'ip_log_database':'127.0.0.1',
+                                'name_log_database':'logKayoo',
+                                'port_log_database':'27017'
                             }
 
     def config(self):
