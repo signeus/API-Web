@@ -66,6 +66,7 @@ from dbservices.post.fav_post_service import FavPostService
 from dbservices.post.user_fav_post_service import UserFavPostService
 from dbservices.post.user_unfav_post_service import UserUnfavPostService
 from dbservices.post.verify_read_post_service import VerifyReadPostService
+from dbservices.post.new_survey_answer_service import NewSurveyAnswerService
 
 from dbservices.validator.posts.post_attachment_service import PostAttachmentService
 
@@ -219,6 +220,7 @@ class ServiceFactory (object):
             "userFavPost"                   : UserFavPostService,
             "userUnfavPost"                 : UserUnfavPostService,
             "verifyReadPost"                : VerifyReadPostService,
+            "newSurveyAnswer"               : NewSurveyAnswerService,
 
             ##Repost##
             "newRepost"             : NewRepostService,

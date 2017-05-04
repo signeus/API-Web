@@ -1,24 +1,32 @@
 # -*- coding: utf-8 -*-
 from k_exception.check_exception import CheckException
 from decorators.generic_decorator import GENERIC_DECORATOR
+from controllers.controller_params_factory import ControllerParamsFactory
 
 class CHECK_PARAMETERS_DECORATOR:
     @staticmethod
     @GENERIC_DECORATOR.parametrized
-    def checkIt(f, reqVars, params, method):
+
+    def checkIt(f, reqVars, method):
         def decorator(*args, **kwargs):
+
             ### Empty parameters ###
+
             if len(reqVars) <= 0:
+
                 try:
                     raise CheckException(method, {}, "EMPTY")
                 except Exception as ex:
                     return ex
+            params=ControllerParamsFactory().getParams(method)
+            print params
             ### Mandatory Condition ###
             parameterMandatory = False
             for k, v in params.iteritems():
-                if v == "mandatory":
+                if (v == "mandatory" ) or (v =="mandatory_list"):
                     if not k in reqVars:
                         parameterMandatory = True
+                        break
             if parameterMandatory:
                 try:
                     raise CheckException(method, {k: v}, "MANDATORY")
@@ -28,7 +36,6 @@ class CHECK_PARAMETERS_DECORATOR:
             cKsParams = set(params.keys())
             cKsReqVars = set(reqVars.keys())
             leftElems = cKsReqVars - cKsParams
-
             optionalParams = []
             for k, v in params.iteritems():
                 if v == "optional":

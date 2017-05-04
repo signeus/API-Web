@@ -6,9 +6,7 @@ class SearchPostService(IService):
         super(SearchPostService, self).__init__(core, parameters)
 
     def run(self):
-        print "Encontrar post"
         post=self.parameters["search"]
-        print post
         found = DBService(self.core).getAllByFilter("Posts",
                                                   {"post": post})
         postFound = {}

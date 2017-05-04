@@ -29,7 +29,6 @@ class CastReplaceTextService(IService):
                 if i in elem:
                     newValue= newValue + [elem.replace(i,"")]
                     found=True
-                    print newValue
             if not found:
                 newValue=newValue +[elem]
 

@@ -8,7 +8,7 @@ def getFirstByFieldsPost():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-#@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getByIdPost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getByIdPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdPost():
     _id = request.vars["id"]
@@ -26,7 +26,7 @@ def getPosts():
 #@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "deletePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "deletePost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deletePost():
     _id = request.vars["id"]
@@ -47,7 +47,7 @@ def createPost():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updatePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "updatePost")
 def updatePost():
     _id = request.vars["id"]
     _new_values = request.vars["new_values"]
@@ -56,7 +56,7 @@ def updatePost():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getPostsByCommunityId")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getPostsByCommunityId")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getPostsByCommunityId():
     _id = request.vars["id"]
@@ -66,7 +66,7 @@ def getPostsByCommunityId():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getPostsByCommunityFormat")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getPostsByCommunityFormat")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getPostsByCommunityFormated():
     _id = request.vars["id"]
@@ -86,7 +86,7 @@ def getCommunityPosts():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "post":"mandatory"}, "updatePostContent")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "updatePostContent")
 def updatePostContent():
     _id = request.vars["id"]
     _post = request.vars["post"]
@@ -94,13 +94,13 @@ def updatePostContent():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory"}, "like2Post")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "like2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def like2Post():
     return response.json(Core().PostOperation("like2Post", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory"}, "unlike2Post")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "unlike2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def unlike2Post():
     return response.json(Core().PostOperation("unlike2Post", dict(request.vars)))
@@ -108,7 +108,7 @@ def unlike2Post():
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory", "status":"mandatory"}, "likePost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "likePost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def likePost():
     return response.json(Core().PostOperation("likePost", dict(request.vars)))
@@ -116,7 +116,7 @@ def likePost():
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "post_id":"mandatory", "comment":"mandatory","files":"optional"}, "comment2Post")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "comment2Post")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def commentPost():
     core = Core()
@@ -125,7 +125,7 @@ def commentPost():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getCommentsByPost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getCommentsByPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommentsByPost():
     _id = request.vars["id"]
@@ -143,7 +143,7 @@ def newPost():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getMainCommunityById")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getMainCommunityById")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getMainCommunityById():
     _id = request.vars["id"]
@@ -153,7 +153,7 @@ def getMainCommunityById():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST"], request)
-#@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "checkSurveyByPostId")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "checkSurveyByPostId")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def checkSurveyByPostId():
     return response.json(Core().PostOperation("checkSurveyByPostId", dict(request.vars)))
@@ -161,14 +161,14 @@ def checkSurveyByPostId():
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"link":"mandatory"}, "checkContentTypeUrl")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "checkContentTypeUrl")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def checkContentTypeUrl():
     return response.json(Core().PostOperation("checkContentTypeUrl", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory","community_id":"mandatory","post_id":"mandatory"}, "checkContentTypeUrl")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "checkContentTypeUrl")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newRepost():
     return response.json(Core().PostOperation("newRepost", dict(request.vars)))
@@ -188,7 +188,7 @@ def countRepost():
     return response.json(Core().PostOperation("countRepost", {"post_id": _id}))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "countRepost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "countCommentsByPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def countComments():
     _id = request.vars["id"]
@@ -197,7 +197,14 @@ def countComments():
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "id":"mandatory", "status":"mandatory"}, "favPost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "favPost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def favPost():
     return response.json(Core().PostOperation("favPost", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
+@HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "newSurveyAnswer")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def newSurveyAnswer():
+    return response.json(Core().PostOperation("newSurveyAnswer", dict(request.vars)))
