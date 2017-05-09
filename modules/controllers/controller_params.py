@@ -3,14 +3,11 @@
 class ControllerParams (object):
     ######Community#########
     def newCommunity(self):
-        return {"creator_id":"mandatory", "community_type":"mandatory", "leaders[0]":"mandatory",
-                    "description":"mandatory", "administrators[0]":"mandatory", "administrators[1]":"optional",
-                    "administrators[2]":"optional", "administrators[3]":"optional", "administrators[4]":"optional",
-                    "administrators[5]":"optional", "administrators[6]":"optional", "administrators[7]":"optional",
-                    "administrators[8]":"optional", "administrators[9]":"optional",
-                    "enviroment_type":"mandatory", "name":"mandatory", "invitations[0]":"optional", "invitations[1]":"optional",
-                    "invitations[2]":"optional", "invitations[3]":"optional", "invitations[4]":"optional",
-                    "keywords[0]":"optional", "keywords[1]":"optional", "keywords[2]":"optional"
+        return {"creator_id":"mandatory", "community_type":"mandatory", "leaders":"mandatory",
+                    "description":"mandatory", "administrators":"mandatory_list",
+                    "environment_type":"mandatory", "name":"mandatory", "invitations":"optional",
+                    "keywords":"optional", "inscription_validation":"optional", "post_moderation":"optional",
+                    "comment_disabled":"optional", "masked_member_list":"optional"
                 }
 
     def getCommunities(self): return {"user_id":"mandatory","start":"optional","offset":"optional"}
@@ -20,6 +17,7 @@ class ControllerParams (object):
     def updateCommunity(self): return {"_id": "mandatory", "new_values": "mandatory"}
     def getAllCommunity(self): return {"user_id": "mandatory"}
     def getAllCommunities(self): return {"user_id": "mandatory", "start": "optional", "offset": "optional"}
+    def getCommunityPosts(self): return {"id": "mandatory", "user_id": "mandatory"}
 
     ######Post#########
     def getByIdPost(self): return {"id": "mandatory"}
@@ -55,3 +53,9 @@ class ControllerParams (object):
     def signup(self): return {"mail":"mandatory", "psswd":"mandatory", "name":"mandatory"}
     def updateUserProfile(self): return {"id":"mandatory", "profileImage":"optional"}
     def subscribeUser(self): return  {"user_id":"mandatory", "community_id":"mandatory", "status":"mandatory"}
+    def getFirstByFieldsUser(self): return {"_id": "optional"}
+    def getByIdUser(self): return {"_id":"mandatory"}
+    def deleteUser(self):return {"_id":"mandatory"}
+    def updateUser(self): return {"id":"mandatory", "new_values":"mandatory"}
+    def subscribeUser2Community(self): return {"user_id": "mandatory", "community_id": "mandatory"}
+    def getUser(self):return {"id":"mandatory"}

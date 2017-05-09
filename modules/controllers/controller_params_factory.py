@@ -28,13 +28,14 @@ class ControllerParamsFactory (object):
             "comment2Post"                  : self.controllerParams.comment2Post(),
             "getCommentsByPost"             : self.controllerParams.getCommentsByPost(),
             "getMainCommunityById"          : self.controllerParams.getMainCommunityById(),
-            "checkContentTypeUrl"           : self.controllerParams.checkContentTypeUrl(),
+            #"checkContentTypeUrl"           : self.controllerParams.checkContentTypeUrl(),
             "checkSurveyByPostId"           : self.controllerParams.checkSurveyByPostId(),
             "getRepost"                     : self.controllerParams.getRepost(),
             "countRepost"                   : self.controllerParams.countRepost(),
             "countCommentsByPost"           : self.controllerParams.countCommentsByPost(),
             "favPost"                       : self.controllerParams.favPost(),
             "newSurveyAnswer"               : self.controllerParams.newSurveyAnswer(),
+            "getCommunityPosts"             : self.controllerParams.getCommunityPosts(),
             ######Search#########
             "searchUserService"             : self.controllerParams.searchUserService(),
             "searchPostService"             : self.controllerParams.searchPostService(),
@@ -47,7 +48,14 @@ class ControllerParamsFactory (object):
             "loginUser"                     : self.controllerParams.loginUser(),
             "signup"                        : self.controllerParams.signup(),
             "updateUserProfile"             : self.controllerParams.updateUserProfile(),
-            "subscribeUser"                 : self.controllerParams.subscribeUser()
+            "subscribeUser"                 : self.controllerParams.subscribeUser(),
+            "getFirstByFieldsUser"          : self.controllerParams.getFirstByFieldsUser(),
+            "getByIdUser"                   : self.controllerParams.getByIdUser(),
+            "deleteUser"                    : self.controllerParams.deleteUser(),
+            "updateUser"                    : self.controllerParams.updateUser(),
+            "subscribeUser2Community"       : self.controllerParams.subscribeUser2Community(),
+            "getUser"                       : self.controllerParams.getUser()
+
         }
 
     def getParams(self, controllerName):

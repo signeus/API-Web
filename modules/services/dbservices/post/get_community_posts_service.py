@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from services.interfaces.i_service import IService
+from collections import OrderedDict
+
 
 class GetCommunityPostsService(IService):
     def __init__(self, core, parameters):
@@ -40,6 +42,8 @@ class GetCommunityPostsService(IService):
                 posts[key]["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
             # Favs
             favs = posts[key].pop("favs", [])
+            print "favs"
+            print favs
             for fav in favs:
                 posts[key]["favs"] = {}
                 posts[key]["favs"][str(fav)] = {'name': users[str(fav)].get("name", ""),
@@ -93,5 +97,6 @@ class GetCommunityPostsService(IService):
 
 
             resultPosts[key] = value
+        resultPosts = OrderedDict(sorted(resultPosts.items(), key=lambda t: t[1]["date_modified"], reverse=True))
 
         return resultPosts

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import types
+import pymongo
 from datetime import datetime
 from databases.mongo_database_manager import MongoDatabaseManager
 from casters.caster_object_id import CasterObjectId
@@ -111,7 +112,8 @@ class DBService:
 
     def getAllByFilter(self, collection, query, opt_filter={}, db=""):
         col = self.openCollection(collection, db)
-        values = col.find(query, opt_filter).sort("date_modified", -1)  # ASCENDING
+        #values = col.find(query, opt_filter).sort("date_modified", -1)  # ASCENDING
+        values = col.find(query, opt_filter).sort("date_modified", pymongo.DESCENDING)
         return [c for c in values]
 
     def updateFieldInside(self, collection, _id, fieldPath, value):
@@ -179,3 +181,5 @@ class DBService:
 
         return [c for c in resul]
 
+    def cleanDict(self,dic, keys):
+        return {x:dic[x] for x in dic if x not in keys}

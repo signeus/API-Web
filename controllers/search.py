@@ -45,7 +45,7 @@ def findUser():
     return response.json(Core().SearchOperation("findUser", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "find")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "find")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def find():
     return response.json(Core().SearchOperation("find", dict(request.vars)))

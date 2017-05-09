@@ -19,26 +19,24 @@ class NewCommunityService (IService):
                     if len(value)==0:
                         print k + " esta vacio"
                         fieldsKO.append(i)
-                #break
+
 
         if len(fieldsKO)>0:
             raise InvalidFieldsException(fieldsKO)
 
-
-        else:
-            for k, v in self.parameters.iteritems():
-                if k=="name":
-                    nameFound=DBService(self.core).getAllByFilter("Communities",
+        for k, v in self.parameters.iteritems():
+            if k=="name":
+                nameFound=DBService(self.core).getAllByFilter("Communities",
                                                         {k: v})
-                    if len(nameFound)>0:
-                        raise Exception("EL NOMBRE DE LA COMUNIDAD YA EXISTE")
-                elif k=="community_type":
-                    if int(v)>2:
-                        raise Exception("Exception: Invalid community_type")
-                elif k == "environment_type":
-                    if int(v)>1:
-                        raise Exception("Exception: Invalid environment_type")
-                break
+                if len(nameFound)>0:
+                    raise Exception("EL NOMBRE DE LA COMUNIDAD YA EXISTE")
+            elif k=="community_type":
+                if int(v)>2:
+                    raise Exception("Exception: Invalid community_type")
+            elif k == "environment_type":
+                if int(v)>1:
+                    raise Exception("Exception: Invalid environment_type")
+
 
         record = self.core.InternalOperation("createCommunity",self.parameters)
         userInfo = self.core.InternalOperation("subscribeUser2Community",

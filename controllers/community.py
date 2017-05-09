@@ -60,6 +60,7 @@ def updateCommunity():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "newCommunity")
 
 def newCommunity():
+    print dict(request.vars)
     return response.json(Core().CommunityOperation("newCommunity", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)

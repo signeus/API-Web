@@ -7,7 +7,7 @@ class DevSaray(IEnvironment):
                                 'ip_database':'kbdev',
                                 'port_database':'27017',
                                 'name_database':'warehouse',
-                                'ip_app': 'localhost',
+                                'ip_app': '10.0.40.92',
                                 'port_app':'8000',
                                 'name_app':'kayoo',
                                 'protocol_app':'http',

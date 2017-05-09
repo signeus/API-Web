@@ -22,11 +22,26 @@ class CHECK_PARAMETERS_DECORATOR:
             print params
             ### Mandatory Condition ###
             parameterMandatory = False
+
             for k, v in params.iteritems():
-                if (v == "mandatory" ) or (v =="mandatory_list"):
+
+                if (v == "mandatory" ):
                     if not k in reqVars:
                         parameterMandatory = True
                         break
+                if k=="administrators":
+                    for key, value in reqVars.iteritems():
+                        if key=="administrators":
+                            print value
+                            if "," in value:
+                                val=value.split(",")
+                                reqVars["administrators"]=val
+                                break
+                            else:
+                                reqVars["administrators"] = [value]
+
+                                break
+
             if parameterMandatory:
                 try:
                     raise CheckException(method, {k: v}, "MANDATORY")
@@ -51,5 +66,6 @@ class CHECK_PARAMETERS_DECORATOR:
                 except Exception as ex:
                     return ex
             return f(*args, **kwargs)
+
 
         return decorator

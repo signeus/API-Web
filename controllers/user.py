@@ -9,7 +9,7 @@ def createUser():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"optional"}, "getFirstByFieldsUser")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "getFirstByFieldsUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getFirstByFieldsUser():
     core = Core()
@@ -17,7 +17,7 @@ def getFirstByFieldsUser():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "getByIdUser")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "getByIdUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdUser():
     _id = request.vars["_id"]
@@ -33,7 +33,7 @@ def getUsers():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "deleteUser")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "deleteUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deleteUser():
     _id = request.vars["_id"]
@@ -45,7 +45,7 @@ def deleteUser():
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory", "new_values":"mandatory"}, "updateUser")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "updateUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def updateUser():
     _id = request.vars["_id"]
@@ -57,7 +57,7 @@ def updateUser():
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory", "community_id":"mandatory"}, "subscribeUser2Community")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "subscribeUser2Community")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def subscribeUser2Community():
     core = Core()
@@ -73,7 +73,7 @@ def unsubscribeUser2Community():
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getUser")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getUser():
     _id = request.vars["id"]

@@ -1,4 +1,17 @@
 # -*- coding: utf-8 -*-
+import json
+#import simplejson as json
+from collections import OrderedDict
+from gluon.serializers import custom_json
+from bson.objectid import ObjectId
+import datetime
+import decimal
+from gluon.storage import Storage
+from gluon.html import TAG, XmlComponent, xmlescape
+from gluon.languages import lazyT
+import gluon.contrib.rss2 as rss2
+import json as json_parser
+
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -75,6 +88,7 @@ def getPostsByCommunityFormated():
     return response.json(result)
 
 ##Used from Front##
+
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
@@ -82,7 +96,10 @@ def getPostsByCommunityFormated():
 def getCommunityPosts():
     _id = request.vars["id"]
     user_id = request.vars["user_id"]
-    return response.json(Core().PostOperation("getCommunityPosts", {"community_id": _id, "user_id":user_id}))
+    result=Core().PostOperation("getCommunityPosts", {"community_id": _id, "user_id":user_id})
+    
+    return response.json(result)
+     #OrderedDict(sorted(rp.items(), key=lambda t: t[1]["date_modified"], reverse=True))
 
 ##Used from Front##
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
@@ -176,14 +193,14 @@ def newRepost():
     return response.json(Core().PostOperation("newRepost", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "getRepost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "getRepost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getRepost():
     _id = request.vars["id"]
     return response.json(Core().PostOperation("getRepost", {"post_id": _id}))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"id":"mandatory"}, "countRepost")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "countRepost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def countRepost():
     _id = request.vars["id"]
@@ -206,15 +223,7 @@ def favPost():
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-<<<<<<< HEAD
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "newSurveyAnswer")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newSurveyAnswer():
     return response.json(Core().PostOperation("newSurveyAnswer", dict(request.vars)))
-=======
-@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def newSurveyAnswer():
-    return response.json({})
-    #return response.json(Core().PostOperation("newSurveyAnswer", dict(request.vars)))
-
->>>>>>> 5f5184fca359a273cbf5dade30208daf82cedc56

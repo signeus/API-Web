@@ -14,7 +14,8 @@ class GetDirImageByIdService(IService):
         _id = self.parameters.get("id", '0')
         response = self.parameters.get("response", None)
         if _id != '0':
-            name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images","ext":"png"})
+            name = _id + self.core.InternalOperation("getFileTypeService",{"type":"images", "ext":"png"})
+            #name = _id + self.core.InternalOperation("getFileTypeService")
         try:
             myfile = io.BytesIO(open(path + name, "rb").read())
         except Exception, ex:
