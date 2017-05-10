@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from k_exception.check_exception import CheckException
-from decorators.generic_decorator import GENERIC_DECORATOR
-from controllers.controller_params_factory import ControllerParamsFactory
+from k_exception.check_exception            import CheckException
+from decorators.generic_decorator           import GENERIC_DECORATOR
+from controllers.controller_params_factory  import ControllerParamsFactory
 
 class CHECK_PARAMETERS_DECORATOR:
     @staticmethod
@@ -11,7 +11,6 @@ class CHECK_PARAMETERS_DECORATOR:
         def decorator(*args, **kwargs):
 
             ### Empty parameters ###
-
             if len(reqVars) <= 0:
 
                 try:

@@ -148,6 +148,8 @@ from dbservices.validator.exists_url_service import ExistsUrlService
 
 from dbservices.validator.find_everything_service import FindEverythingService
 
+from dbservices.cleaner.clean_dictionary import CleanDictionaryService
+
 
 class ServiceFactory (object):
     def __init__(self, core):
@@ -304,8 +306,11 @@ class ServiceFactory (object):
             ###Validator###
             "validateUrl"				: ValidateUrlService,
             "existsUrl"                 : ExistsUrlService,
+            ###Cleaner###
+            "cleanDictionary"           : CleanDictionaryService,
             ##Others##
             "findEverything"            : FindEverythingService,
+
 
         }
 

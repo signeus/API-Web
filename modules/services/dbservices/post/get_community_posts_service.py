@@ -10,9 +10,14 @@ class GetCommunityPostsService(IService):
     def run(self):
         _community_id = self.parameters.get("community_id", None)
         _user_id = self.parameters.get("user_id", None)
+        user = self.core.InternalOperation("getByIdUser", {"_id": _user_id})
+        _community_ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _community_id})
+        user_communities_subscribed = user.get("communities_subscribed", [])
 
         if not _community_id:
             raise Exception("Empty community ID is not allowed.")
+        if not _community_ObjectId in user_communities_subscribed:
+            raise Exception("Community not visible for this  user ID.")
         if not _user_id:
             raise Exception("Empty user ID is not allowed.")
 
@@ -67,6 +72,9 @@ class GetCommunityPostsService(IService):
             repost = posts[key].get("repost", None)
             if repost != None:
                 repost = self.core.InternalOperation("getRepost", {"id": key})
+                print repost
+                print ":::::::::"
+
                 repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0], "post": repost[repost.keys()[0]]})
                 urlIm = repost[repost.keys()[0]].get("image", "")
                 if urlIm:
@@ -97,6 +105,11 @@ class GetCommunityPostsService(IService):
 
 
             resultPosts[key] = value
-        resultPosts = OrderedDict(sorted(resultPosts.items(), key=lambda t: t[1]["date_modified"], reverse=True))
+
+        #print "------ANTES ORDEN ------------"
+        #FALLA CUANDO ORDENA POST CON REPOST
+        #resultPosts = OrderedDict(sorted(resultPosts.items(), key=lambda t: t[1]["date_modified"], reverse=True))
+
+        #print "------FIN ------------"
 
         return resultPosts

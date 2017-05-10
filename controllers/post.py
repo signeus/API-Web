@@ -97,7 +97,7 @@ def getCommunityPosts():
     _id = request.vars["id"]
     user_id = request.vars["user_id"]
     result=Core().PostOperation("getCommunityPosts", {"community_id": _id, "user_id":user_id})
-    
+
     return response.json(result)
      #OrderedDict(sorted(rp.items(), key=lambda t: t[1]["date_modified"], reverse=True))
 
@@ -187,7 +187,7 @@ def checkContentTypeUrl():
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST", "OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "checkContentTypeUrl")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "newRepost")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def newRepost():
     return response.json(Core().PostOperation("newRepost", dict(request.vars)))

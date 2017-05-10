@@ -28,7 +28,7 @@ class ControllerParamsFactory (object):
             "comment2Post"                  : self.controllerParams.comment2Post(),
             "getCommentsByPost"             : self.controllerParams.getCommentsByPost(),
             "getMainCommunityById"          : self.controllerParams.getMainCommunityById(),
-            #"checkContentTypeUrl"           : self.controllerParams.checkContentTypeUrl(),
+            "checkContentTypeUrl"           : self.controllerParams.checkContentTypeUrl(),
             "checkSurveyByPostId"           : self.controllerParams.checkSurveyByPostId(),
             "getRepost"                     : self.controllerParams.getRepost(),
             "countRepost"                   : self.controllerParams.countRepost(),
@@ -36,6 +36,7 @@ class ControllerParamsFactory (object):
             "favPost"                       : self.controllerParams.favPost(),
             "newSurveyAnswer"               : self.controllerParams.newSurveyAnswer(),
             "getCommunityPosts"             : self.controllerParams.getCommunityPosts(),
+            "newRepost"                     : self.controllerParams.newRepost(),
             ######Search#########
             "searchUserService"             : self.controllerParams.searchUserService(),
             "searchPostService"             : self.controllerParams.searchPostService(),

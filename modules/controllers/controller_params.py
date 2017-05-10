@@ -11,7 +11,7 @@ class ControllerParams (object):
                 }
 
     def getCommunities(self): return {"user_id":"mandatory","start":"optional","offset":"optional"}
-    def getFirstByFieldsCommunity(self):return {"_id":"optional"}
+    def getFirstByFieldsCommunity(self):    return {"_id":"optional"}
     def getByIdCommunity(self):return {"_id": "mandatory"}
     def deleteCommunity(self):return {"_id": "mandatory"}
     def updateCommunity(self): return {"_id": "mandatory", "new_values": "mandatory"}
@@ -38,7 +38,8 @@ class ControllerParams (object):
     def countCommentsByPost(self): return {"id": "mandatory"}
     def favPost(self): return {"user_id": "mandatory", "id": "mandatory", "status": "mandatory"}
     def newSurveyAnswer(self): return {"user_id": "mandatory", "post_id": "mandatory", "answer_id": "mandatory"}
-
+    def checkContentTypeUrl(self): return {"link": "mandatory"}
+    def newRepost(self): return {"post_id": "mandatory", "community_id": "mandatory", "user_id": "mandatory"}
     ######Search#########
     def searchUserService(self): return {"search":"mandatory"}
     def searchPostService(self): return {"search": "mandatory"}

@@ -181,5 +181,4 @@ class DBService:
 
         return [c for c in resul]
 
-    def cleanDict(self,dic, keys):
-        return {x:dic[x] for x in dic if x not in keys}
+
