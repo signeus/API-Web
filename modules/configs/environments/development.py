@@ -7,11 +7,18 @@ class Development(IEnvironment):
                                 'ip_database':'127.0.0.1',
                                 'port_database':'27017',
                                 'name_database':'warehouse',
+                                'user_database': 'kayoo',
+                                'psswd_database': '-',
                                 'ip_app': 'kbdev',
                                 'port_app':'8000',
                                 'name_app':'kayoo',
                                 'protocol_app':'http',
-                                'media_folder':'/home/www/media/'
+                                'media_folder':'/home/www/media/',
+                                'ip_log_database':'127.0.0.1',
+                                'name_log_database':'logKayoo',
+                                'port_log_database':'27017',
+                                'user_log_database': 'kayoo',
+                                'psswd_log_database': '-',
                             }
 
     def config(self):

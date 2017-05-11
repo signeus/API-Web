@@ -27,7 +27,8 @@ class SaveDefaultBannerImageService(IService):
 
         if len(content_lis) <= 10:
             print "Hacemos el aleatorio del Kaiser Ainar"
-            content_lis = ["hey","pepe","tomas","kluiver","rodriguez","pez","bandera","big","data","analitycs","machine","learning","K","L","R","A","J"]
+            #content_lis = ["hey","pepe","tomas","kluiver","rodriguez","pez","bandera","big","data","analitycs","machine","learning","K","L","R","A","J"]
+            content_lis=self.core.InternalOperation("getRandomPostComment", "")
             #TODO Create method with random posts and generate
 
 

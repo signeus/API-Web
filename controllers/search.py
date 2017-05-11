@@ -9,43 +9,43 @@
 #     {"search": "Berenjena"}], "result":0})
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "searchUserService")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "searchUserService")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findUserService():
     return response.json(Core().SearchOperation("searchUserService", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "searchPostService")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "searchPostService")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findPostService():
     return response.json(Core().SearchOperation("searchPostService", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "searchCommunityService")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "searchCommunityService")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findCommunityService():
     return response.json(Core().SearchOperation("searchCommunityService", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "searchCommentService")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "searchCommentService")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findCommentService():
     return response.json(Core().SearchOperation("searchCommentService", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "searchAllService")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "searchAllService")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findAllService():
     return response.json(Core().SearchOperation("searchAllService", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "find")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "findUser")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findUser():
     return response.json(Core().SearchOperation("findUser", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"search":"mandatory"}, "find")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "find")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def find():
     return response.json(Core().SearchOperation("find", dict(request.vars)))
@@ -53,4 +53,4 @@ def find():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def findDic():
-    return response.json({"data":{"items":[{"name":"hola"},{"name":"caca"},{"name":"podaspo"}]}})
+    return response.json({"a":1, "b":2, "c":3})

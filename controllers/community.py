@@ -9,7 +9,7 @@ def createCommunity():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"optional"}, "getFirstByFieldsCommunity")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getFirstByFieldsCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getFirstByFieldsCommunity():
     core = Core()
@@ -17,7 +17,7 @@ def getFirstByFieldsCommunity():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "getByIdCommunity")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getByIdCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getByIdCommunity():
     _id = request.vars["_id"]
@@ -33,7 +33,7 @@ def getCommunities():
     return response.json(result)
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["DELETE"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory"}, "deleteCommunity")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "deleteCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def deleteCommunity():
     _id = request.vars["_id"]
@@ -44,7 +44,7 @@ def deleteCommunity():
     return "Failed"
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"_id":"mandatory", "new_values":"mandatory"}, "updateCommunity")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "updateCommunity")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def updateCommunity():
     _id = request.vars["_id"]
@@ -57,28 +57,31 @@ def updateCommunity():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"creator_id":"mandatory", "community_type":"mandatory", "leaders":"mandatory",
-                                                   "description":"mandatory" , "administrators":"mandatory","enviroment_type":"mandatory",
-                                                   "name":"mandatory", "invitations":"optional", "keywords":"optional"}, "newCommunity")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "newCommunity")
+
 def newCommunity():
+    print dict(request.vars)
     return response.json(Core().CommunityOperation("newCommunity", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory"}, "getAllCommunities")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars,  "getAllCommunities")
 def getAllCommunities():
     return response.json(Core().CommunityOperation("getAllCommunities", dict(request.vars)))
 
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["POST","OPTIONS"], request)
 @HTTP_METHOD_OPTION_CHECKER_DECORATOR.isOption(request, response)
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, {"user_id":"mandatory","start":"optional","offset":"optional"}, "getAllCommunities")
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getAllCommunities")
 def getCommunitiesByUser():
     return response.json(Core().CommunityOperation("getCommunities", dict(request.vars)))
 
+
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def countCommunityMembers():
     return response.json(Core().CommunityOperation("countCommunityMembers", dict(request.vars)))
 
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getCommunityService():
     return response.json(Core().CommunityOperation("getCommunityInfo", dict(request.vars)))

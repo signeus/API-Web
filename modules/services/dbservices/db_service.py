@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import types
+import pymongo
 from datetime import datetime
 from databases.mongo_database_manager import MongoDatabaseManager
 from casters.caster_object_id import CasterObjectId
@@ -24,9 +25,14 @@ class DBService:
             return data
         except Exception, e:
             return "Has been appears a issue with the Json 'Date_Modified'\n Exception: " + e.message
-	
-    def openCollection(self, collection):
-        db = MongoDatabaseManager(self.core.GetDatabaseResources()).connect2Database()
+
+    def open(self, database):
+        if database == "log":
+            return MongoDatabaseManager(self.core.GetDatabaseResources()).connect2LogDatabase()
+        return MongoDatabaseManager(self.core.GetDatabaseResources()).connect2Database()
+
+    def openCollection(self, collection, db=""):
+        db = self.open(db)
         collection = db[collection]
         return collection
 
@@ -104,9 +110,10 @@ class DBService:
         result = [c for c in values]
         return result
 
-    def getAllByFilter(self, collection, query, opt_filter={}):
-        col = self.openCollection(collection)
-        values = col.find(query, opt_filter).sort("date_modified", -1) #ASCENDING
+    def getAllByFilter(self, collection, query, opt_filter={}, db=""):
+        col = self.openCollection(collection, db)
+        #values = col.find(query, opt_filter).sort("date_modified", -1)  # ASCENDING
+        values = col.find(query, opt_filter).sort("date_modified", pymongo.DESCENDING)
         return [c for c in values]
 
     def updateFieldInside(self, collection, _id, fieldPath, value):
@@ -173,3 +180,5 @@ class DBService:
         resul = col.aggregate([{"$match":{"$or":lisDic}}])
 
         return [c for c in resul]
+
+

@@ -10,6 +10,8 @@ class GetAllUsersFiltered(IService):
 
     def run(self):
         result = DBService(self.core).getAllByFilter("Users", self.parameters.get('query', {}), self.parameters.get('filter',{}))
+
+
         result = CasterCursor().castList2FormatDictionary(result)
 
         for elems in result:

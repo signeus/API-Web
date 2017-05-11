@@ -6,7 +6,6 @@ class SearchCommunityService(IService):
         super(SearchCommunityService, self).__init__(core, parameters)
 
     def run(self):
-        print "Encontrar Community"
         name=self.parameters["search"]
         print name
         found = DBService(self.core).getAllByFilter("Communities",
