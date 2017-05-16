@@ -72,8 +72,7 @@ class GetCommunityPostsService(IService):
             repost = posts[key].get("repost", None)
             if repost != None:
                 repost = self.core.InternalOperation("getRepost", {"id": key})
-                print repost
-                print ":::::::::"
+
 
                 repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0], "post": repost[repost.keys()[0]]})
                 urlIm = repost[repost.keys()[0]].get("image", "")
