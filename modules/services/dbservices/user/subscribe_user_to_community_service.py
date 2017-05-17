@@ -24,9 +24,13 @@ class SubscribeUser2Community (IService):
             result = self.core.InternalOperation("updateInsideFieldsUser",
                                                        {"id": user["_id"], "field_path": "communities_subscribed",
                                                         "value": _CommunityObjectid})
+            community.pop("leaders",None)
+            community.pop("invitations",None)
+            community.pop("administrators",None)
+            community.pop("creator_id",None)
 
             if result.get("nModified", 0) == 1:
-                return {"id":_CommunityObjectid}
+                return community
 
         except Exception, ex:
             print "Subscribe User to Community has failed, " + ex.message
