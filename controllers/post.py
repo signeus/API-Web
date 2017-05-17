@@ -165,9 +165,7 @@ def newPost():
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getMainCommunityById")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def getMainCommunityById():
-    _id = request.vars["id"]
-    core = Core()
-    result = core.PostOperation("getMainCommunityById", {"user_id": _id})
+    result = Core().PostOperation("getMainCommunityById", dict(request.vars))
     return response.json(result)
 
 ##Used from Front##

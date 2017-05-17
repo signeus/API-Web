@@ -31,7 +31,7 @@ class ControllerParams (object):
     def likePost(self): return {"user_id": "mandatory", "id": "mandatory", "status": "mandatory"}
     def comment2Post(self): return {"user_id":"mandatory", "post_id":"mandatory", "comment":"mandatory","files":"optional"}
     def getCommentsByPost(self): return {"id":"mandatory"}
-    def getMainCommunityById(self): return {"id": "mandatory"}
+    def getMainCommunityById(self): return {"user_id": "mandatory"}
     def checkSurveyByPostId(self): return {"id":"mandatory"}
     def getRepost(self): return {"id": "mandatory"}
     def countRepost(self): return {"id":"mandatory"}
