@@ -55,7 +55,8 @@ class ControllerParamsFactory (object):
             "deleteUser"                    : self.controllerParams.deleteUser(),
             "updateUser"                    : self.controllerParams.updateUser(),
             "subscribeUser2Community"       : self.controllerParams.subscribeUser2Community(),
-            "getUser"                       : self.controllerParams.getUser()
+            "getUser"                       : self.controllerParams.getUser(),
+            "changeUserLanguage"            : self.controllerParams.changeUserLanguage()
 
         }
 

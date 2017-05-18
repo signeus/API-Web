@@ -60,3 +60,4 @@ class ControllerParams (object):
     def updateUser(self): return {"id":"mandatory", "new_values":"mandatory"}
     def subscribeUser2Community(self): return {"user_id": "mandatory", "community_id": "mandatory"}
     def getUser(self):return {"id":"mandatory"}
+    def changeUserLanguage(self):return {"id":"mandatory", "lang":"mandatory"}

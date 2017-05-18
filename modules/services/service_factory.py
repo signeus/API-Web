@@ -17,7 +17,9 @@ from dbservices.user.get_user_format_by_id_service import GetUserFormatByIdServi
 from dbservices.user.subscribe_user_service import SubscribeUserService
 from dbservices.user.update_inside_fields_user_service import UpdateInsideFieldsUserService
 from dbservices.user.extract_inside_fields_user_service import ExtractInsideFieldsUserService
+from dbservices.user.replace_inside_fields_user_service import ReplaceInsideFieldsUserService
 from dbservices.user.find_user_service import FindUserService
+from dbservices.user.change_user_language_service import ChangeUserLanguageService
 
 from dbservices.community.create_community_service import CreateCommunityService
 from dbservices.community.delete_community_service import DeleteCommunityService
@@ -174,7 +176,9 @@ class ServiceFactory (object):
             "subscribeUser"					: SubscribeUserService,
             "updateInsideFieldsUser"        : UpdateInsideFieldsUserService,
             "extractInsideFieldsUser"       : ExtractInsideFieldsUserService,
+            "replaceInsideFieldsUser"       : ReplaceInsideFieldsUserService,
             "findUser"						: FindUserService,
+            "changeUserLanguage"			: ChangeUserLanguageService,
             ######Communities#####
             "createCommunity" 			: CreateCommunityService,
             "updateCommunity"			: UpdateCommunityService,

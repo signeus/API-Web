@@ -138,3 +138,9 @@ def findUserService():
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
 def subscribeUser():
     return response.json(Core().UserOperation("subscribeUser", dict(request.vars)))
+
+@HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
+@CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "changeUserLanguage")
+@CROSS_DOMAIN_DECORATOR.changesHeaders(response)
+def changeUserLanguage():
+    return response.json(Core().UserOperation("changeUserLanguage", dict(request.vars)))

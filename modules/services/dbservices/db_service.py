@@ -116,6 +116,13 @@ class DBService:
         values = col.find(query, opt_filter).sort("date_modified", pymongo.DESCENDING)
         return [c for c in values]
 
+    def replaceFieldInside(self, collection, _id, fieldPath, value):
+        _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
+        col = self.openCollection(collection)
+        result = col.update({"_id": _ObjectId},
+                   {"$set":{fieldPath:value, "date_modified":datetime.utcnow()}})
+        return result
+
     def updateFieldInside(self, collection, _id, fieldPath, value):
         _ObjectId = self.core.InternalOperation("castHex2ObjectId", {"id": _id})
         col = self.openCollection(collection)
