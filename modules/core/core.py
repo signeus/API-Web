@@ -8,6 +8,9 @@ class Core:
         self.rm = ResourceManager(self)
         self.serviceFactory =  ServiceFactory(self)
 
+    def AdminOperation(self, serviceName, parameters):
+        return self.FactoryOperation(serviceName, parameters)
+
     def UserOperation(self, serviceName, parameters):
         return self.FactoryOperation(serviceName, parameters)
 

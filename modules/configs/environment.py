@@ -1,3 +1,3 @@
-env = "production"
+#env = "production"
 #env = "development"
-#env="dev_saray"
+env="dev_saray"

@@ -37,7 +37,7 @@ class CHECK_PARAMETERS_DECORATOR:
                                 reqVars["administrators"]=val
                                 break
                             else:
-                                reqVars["administrators"] = [value]
+                                reqVars["administrators"] = value
 
                                 break
 

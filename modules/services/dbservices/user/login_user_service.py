@@ -6,6 +6,7 @@ class LoginUserService (IService):
         super(LoginUserService, self).__init__(core, parameters)
 
     def run(self):
+
         _mail = self.parameters.get("mail","")
         _psswd = self.parameters.get("psswd", "")
         if _mail == "" or _psswd  == "":

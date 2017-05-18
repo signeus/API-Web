@@ -6,18 +6,12 @@ class GetInfoCommunityService (IService):
         super(GetInfoCommunityService, self).__init__(core, parameters)
 
     def run(self):
+        hide = ["leaders", "administrators", "invitations"]
         _ObjectId = self.parameters.get("community_id", "")
         _id = self.core.InternalOperation("castObjectId2Hex", {"id": _ObjectId})
         community = self.core.InternalOperation("getByIdCommunity", {"_id": _ObjectId})
-        lite_community = {}
-        lite_community["id"] = community["_id"]
-        lite_community["name"] = community.get("name", "")
-        lite_community["description"] = community.get("description", "")
-        lite_community["banner"] = self.core.InternalOperation("getMediaRoute", {"service": "getBannerById",
-                                                                                 "attribs": {"id": _id}})
 
-        lite_community["members"] = self.core.InternalOperation("countCommunityMembers", {"community_id": _id})
-        order = community.get("order", [])
-        if order:
-            lite_community["order"] = order
-        return lite_community
+        dic_clean = self.core.InternalOperation("cleanDictionary", {"dic": community, "keys": hide})
+
+        return dic_clean
+

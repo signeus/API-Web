@@ -11,3 +11,9 @@
 #    Workspace     #
 ####################
 .idea/workspace.xml
+
+*.pyc
+*.html
+*.js
+*.css
+*.json

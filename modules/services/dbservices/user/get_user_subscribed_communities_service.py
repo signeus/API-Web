@@ -12,4 +12,5 @@ class GetUserSubscribedCommunitiesService (IService):
             #communities = [self.retrieve_communities(elem_id) for elem_id in communities_ids]
             communities = [self.core.InternalOperation("getInfoCommunity", {"community_id": elem_id}) for elem_id in communities_ids]
             user["communities_subscribed"] = communities
+
         return user

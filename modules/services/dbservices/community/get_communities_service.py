@@ -19,6 +19,8 @@ class GetCommunitiesService(IService):
         user_communities = user.get("communities_subscribed",[])
         if len(user_communities) > 0:
             for community in communities:
+                print community
+                print "-------------------"
                 if community["_id"] in user_communities:
                     community["subscribed"] = True
                 else:
