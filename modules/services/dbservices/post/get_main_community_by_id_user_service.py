@@ -8,7 +8,6 @@ class GetMainCommunityByIdService(IService):
     def run(self):
         userId = self.parameters.get("user_id","")
         user = self.core.InternalOperation("getUserSubscribedCommunities", {"_id": userId})
-        allUsers = self.core.InternalOperation("getAllUsersFiltered", {'query': {}, 'filter': {'name': 1, 'nick': 1}})
         communities = user.get("communities_subscribed",[])
         if len(communities) == 0:
             return ""

@@ -164,7 +164,7 @@ def newPost():
 @HTTP_METHOD_CONSTRAINT_DECORATOR.isAllowed(["GET"], request)
 @CHECK_PARAMETERS_DECORATOR.checkIt(request.vars, "getMainCommunityById")
 @CROSS_DOMAIN_DECORATOR.changesHeaders(response)
-def getMainCommunityById():
+def getMainCommunity():
     result = Core().PostOperation("getMainCommunityById", dict(request.vars))
     return response.json(result)
 

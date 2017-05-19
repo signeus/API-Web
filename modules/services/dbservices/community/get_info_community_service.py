@@ -8,8 +8,10 @@ class GetInfoCommunityService (IService):
     def run(self):
         hide = ["leaders", "administrators", "invitations"]
         _ObjectId = self.parameters.get("community_id", "")
-        _id = self.core.InternalOperation("castObjectId2Hex", {"id": _ObjectId})
         community = self.core.InternalOperation("getByIdCommunity", {"_id": _ObjectId})
-       dic_clean = self.core.InternalOperation("cleanDictionary", {"dic": community, "keys": hide})
+        if community:
+            community["id"] = community.pop("_id", None)
+
+        dic_clean = self.core.InternalOperation("cleanDictionary", {"dic": community, "keys": hide})
 
         return dic_clean
