@@ -16,17 +16,17 @@ class PostAttachmentService (IService):
         if self.core.InternalOperation("existsPostImage", {"id": _id}):  ##If exists...
             image = self.core.InternalOperation("getMediaRoute",
                                                 {"service": "getPostImageById", "attribs": {"id": _id}})
-            post["image"] = {'url': image}
+            post["image"] = {'url': image, 'external':False}
         ##Video
         if self.core.InternalOperation("existsPostVideo", {"id": _id}):
             video = self.core.InternalOperation("getMediaRoute",
                                                 {"service": "getPostVideoById", "attribs": {"id": _id}})
-            post["video"] = {'url': video}
+            post["video"] = {'url': video, 'external':False}
         ##Audio
         if self.core.InternalOperation("existsPostAudio", {"id": _id}):
             audio = self.core.InternalOperation("getMediaRoute",
                                                 {"service": "getPostAudioById", "attribs": {"id": _id}})
-            post["audio"] = {'url': audio}
+            post["audio"] = {'url': audio, 'external':False}
         ##Files
         files = self.core.InternalOperation("getPostFiles", {"id": _id})
         if files:

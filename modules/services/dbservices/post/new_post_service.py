@@ -6,13 +6,17 @@ class NewPostService (IService):
         super(NewPostService, self).__init__(core, parameters)
 
     def run(self):
-        _comment_id = self.parameters.get("community_id", None)
-        if _comment_id:
-            self.parameters["community_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _comment_id})
-
+        _community_id = self.parameters.get("community_id", None)
         _user_id = self.parameters.get("user_id", None)
-        if _user_id:
-            self.parameters["user_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _user_id})
+        if not _community_id or not _user_id:
+            raise Exception("You need to an user and community to post.")
+
+        self.parameters["community_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _community_id})
+        self.parameters["user_id"] = self.core.InternalOperation("castHex2ObjectId", {"id": _user_id})
+
+        user = self.core.InternalOperation("getByIdUser", {"_id": _user_id})
+        if not self.parameters["community_id"] in user.get("communities_subscribed",{}):
+            raise Exception("The user has not subscribed to the community to post.")
 
         video = self.parameters.pop("video", {})
         image = self.parameters.pop("image", {})

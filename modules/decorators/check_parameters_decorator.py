@@ -18,7 +18,6 @@ class CHECK_PARAMETERS_DECORATOR:
                 except Exception as ex:
                     return ex
             params=ControllerParamsFactory().getParams(method)
-            print params
             ### Mandatory Condition ###
             parameterMandatory = False
 
@@ -31,13 +30,12 @@ class CHECK_PARAMETERS_DECORATOR:
                 if k=="administrators":
                     for key, value in reqVars.iteritems():
                         if key=="administrators":
-                            print value
                             if "," in value:
                                 val=value.split(",")
                                 reqVars["administrators"]=val
                                 break
                             else:
-                                reqVars["administrators"] = [value]
+                                reqVars["administrators"] = value
 
                                 break
 

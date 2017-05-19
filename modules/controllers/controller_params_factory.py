@@ -6,6 +6,8 @@ class ControllerParamsFactory (object):
         self.controllerParams=ControllerParams()
 
         self.controllers = {
+            ######Admin#########
+            "adminManageSubscriptions"      : self.controllerParams.adminManageSubscriptions(),
             ######Community#########
             "newCommunity"      			: self.controllerParams.newCommunity(),
             "getCommunities"                : self.controllerParams.getCommunities(),
@@ -15,6 +17,7 @@ class ControllerParamsFactory (object):
             "updateCommunity"               : self.controllerParams.updateCommunity(),
             "getAllCommunity"               : self.controllerParams.getAllCommunity(),
             "getAllCommunities"             : self.controllerParams.getAllCommunities(),
+            "askForSubscribeCommunity"      : self.controllerParams.askForSubscribeCommunity(),
             ######Post#########
             "getByIdPost"                   : self.controllerParams.getByIdPost(),
             "deletePost"                    : self.controllerParams.deletePost(),
@@ -55,7 +58,8 @@ class ControllerParamsFactory (object):
             "deleteUser"                    : self.controllerParams.deleteUser(),
             "updateUser"                    : self.controllerParams.updateUser(),
             "subscribeUser2Community"       : self.controllerParams.subscribeUser2Community(),
-            "getUser"                       : self.controllerParams.getUser()
+            "getUser"                       : self.controllerParams.getUser(),
+            "changeUserLanguage"            : self.controllerParams.changeUserLanguage()
 
         }
 

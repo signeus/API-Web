@@ -47,8 +47,6 @@ class GetCommunityPostsService(IService):
                 posts[key]["likes"][str(like)]  = {'name': users[str(like)].get("name", ""), 'nick': users[str(like)].get("nick", "")}
             # Favs
             favs = posts[key].pop("favs", [])
-            print "favs"
-            print favs
             for fav in favs:
                 posts[key]["favs"] = {}
                 posts[key]["favs"][str(fav)] = {'name': users[str(fav)].get("name", ""),
@@ -72,10 +70,6 @@ class GetCommunityPostsService(IService):
             repost = posts[key].get("repost", None)
             if repost != None:
                 repost = self.core.InternalOperation("getRepost", {"id": key})
-                print repost
-                print ":::::::::"
-
-                repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0], "post": repost[repost.keys()[0]]})
                 urlIm = repost[repost.keys()[0]].get("image", "")
                 if urlIm:
                     repost[repost.keys()[0]]["image"] = {'url': repost[repost.keys()[0]]["image"], 'external': True}
@@ -86,6 +80,9 @@ class GetCommunityPostsService(IService):
                 if urlAu:
                     repost[repost.keys()[0]]["audio"] = {'url': repost[repost.keys()[0]]["audio"], 'external': True}
 
+                repost[repost.keys()[0]] = self.core.InternalOperation("postAttachment", {"post_id": repost.keys()[0],
+                                                                                          "post": repost[
+                                                                                              repost.keys()[0]]})
                 # Likes
                 lik = repost[repost.keys()[0]].pop("likes", [])
                 for like in lik:
