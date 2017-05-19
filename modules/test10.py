@@ -33,10 +33,18 @@ Core()
 #result = Core().InternalOperation("castReplaceText", "Este. texto, de prueba: tenia! muchas? cosas... incluso www.loquesea.com y tambien un@email.es y las cosas con tildes no sé no sé")
 #result = Core().InternalOperation("castSeparateText", "Este. texto, de prueba: tenia! muchas? cosas... incluso www.loquesea.com y tambien un@email.es")
 #resul=Core().InternalOperation("castDiacritics2Normalize", "quiero quitar las tildes de no sé no sé")
-result = Core().InternalOperation("getCommunityPosts", {"community_id":"58f61094481f343de6d5dc17", "user_id":"5891cced481f3416aa786783"})
+#result = Core().InternalOperation("getCommunityPosts", {"community_id":"58f61094481f343de6d5dc17", "user_id":"5891cced481f3416aa786783"})
 
 #result = Core().InternalOperation("newSurveyAnswer", {"post_id":"58e209db481f340e18c0beb4", "user_id":"5891cc74481f3416aa78677c", "answer_id":"0"})
-#result=Core().CommunityOperation("getAllCommunities", {"user_id":"5891cd89481f3416aa786789"})
+#result=Core().CommunityOperation("getAllCommunities", {"user_id":"5891cc74481f3416aa78677c"})
+
+
+#result=Core().UserOperation("loginUser", {"mail":"kayoo2@business", "psswd": "123"})
+
+
+#result=Core().CommunityOperation("askForSubscribeCommunity", {"user_id":"5891cced481f3416aa786783","community_id":"5910365d4aef6839536c79e5", "status":"false"})
+result=Core().AdminOperation("adminManageSubscriptions", {"user_id":"58d3d0d8481f345f3cb3e3e6","community_id":"591165614aef680b35dfa676","request_user":"5891cced481f3416aa786783", "subscription" : True})
+
 #print dict(result)
 #p=pprint.PrettyPrinter(indent=4)
 #p.pprint(dict(result)) 

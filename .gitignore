@@ -22,5 +22,9 @@
 .idea/workspace.xml
 
 
-
+*.pyc
+*.html
+*.js
+*.css
+*.json
 modules/core/*.pyc

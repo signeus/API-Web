@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from dbservices.admin.admin_manage_subscriptions import AdminManageSubscriptionsService
+from dbservices.admin.admin_accept_subscription import AdminAcceptSubscriptionService
+from dbservices.admin.admin_reject_subsription import AdminRejectSubscriptionService
+
 from dbservices.user.create_user_service import CreateUserService
 from dbservices.user.update_user_service import UpdateUserService
 from dbservices.user.delete_user_service import DeleteUserService
@@ -37,6 +41,8 @@ from dbservices.community.count_community_members_service import CountCommunityM
 from dbservices.community.get_community_info_service import GetCommunityInfoService
 from dbservices.community.get_community_users_service import GetCommunityUsersService
 from dbservices.community.get_info_community_service import GetInfoCommunityService
+from dbservices.community.ask_for_subscribe_community_service import AskForSubscribeCommunityService
+from dbservices.community.update_inside_fields_community_service import UpdateInsideFieldsCommunityService
 
 from dbservices.post.create_post_service import CreatePostService
 from dbservices.post.update_post_service import UpdatePostService
@@ -151,12 +157,17 @@ from dbservices.validator.exists_url_service import ExistsUrlService
 from dbservices.validator.find_everything_service import FindEverythingService
 
 from dbservices.cleaner.clean_dictionary import CleanDictionaryService
-
+from dbservices.cleaner.clean_dictionary_list import CleanDictionaryListService
 
 class ServiceFactory (object):
     def __init__(self, core):
         self.core = core
         self.services = {
+            ######Admin#########
+            "adminManageSubscriptions"  : AdminManageSubscriptionsService,
+            "adminAcceptSubscription"   : AdminAcceptSubscriptionService,
+            "adminRejectSubscription"   : AdminRejectSubscriptionService,
+
             ######Users#########
             "createUser"      			: CreateUserService,
             "updateUser"					: UpdateUserService,
@@ -196,6 +207,8 @@ class ServiceFactory (object):
             "getInfoCommunity"          : GetInfoCommunityService,
             "getCommunityInfo"			: GetCommunityInfoService,
             "getCommunityUsers"			: GetCommunityUsersService,
+            "askForSubscribeCommunity"  : AskForSubscribeCommunityService,
+            "updateInsideFieldsCommunity" :UpdateInsideFieldsCommunityService,
             ######Posts########
             "createPost" 			: CreatePostService,
             "updatePost"			: UpdatePostService,
@@ -312,6 +325,7 @@ class ServiceFactory (object):
             "existsUrl"                 : ExistsUrlService,
             ###Cleaner###
             "cleanDictionary"           : CleanDictionaryService,
+            "cleanDictionaryList"       : CleanDictionaryListService,
             ##Others##
             "findEverything"            : FindEverythingService,
 
