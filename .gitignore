@@ -28,3 +28,5 @@
 *.css
 *.json
 modules/core/*.pyc
+modules/services/*.pyc
+modules/services/dbservices/*.pyc

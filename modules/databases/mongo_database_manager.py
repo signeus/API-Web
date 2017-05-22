@@ -8,10 +8,12 @@ class MongoDatabaseManager:
 
 	def connect2Database(self):
 		self.con = MongoDatabaseConnector(self.rm).getConnection()
+		self.con.admin.authenticate(self.rm["user_database"], self.rm["psswd_database"], mechanism='SCRAM-SHA-1')
 		self.db = self.con[self.rm["name_database"]]
 		return self.db
 
 	def connect2LogDatabase(self):
 		self.con = MongoLogDatabaseConnector(self.rm).getConnection()
+		self.con.admin.authenticate(self.rm["user_log_database"], self.rm["psswd_log_database"], mechanism='SCRAM-SHA-1')
 		self.db = self.con[self.rm["name_log_database"]]
 		return self.db

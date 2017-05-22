@@ -6,31 +6,27 @@ class SubscribeUser2Community (IService):
         super(SubscribeUser2Community, self).__init__(core, parameters)
 
     def run(self):
-        try:
-            _creator = self.parameters.get("creator_id",None)
-            _user_id = self.parameters.get("user_id",None)
-            if not _user_id:
-                raise Exception("Subscribe User to Community: Empty user_id not allowed.")
+        #Retrieve the data about user and community.
+        _community = self.parameters.get("community", {})
+        _user = self.parameters.get("user", {})
+        _creator = self.parameters.get("creator_id","")
 
-            user = self.core.InternalOperation("getByIdUser", {"_id":_user_id})
-            _CommunityObjectid = self.core.InternalOperation("castHex2ObjectId", {"id": self.parameters.get("community_id", "")})
+        #Check if the community is not public or User is not the creator.
+        if (_community.get("community_type", 0) > 0) and not _creator:
+            raise Exception("It is not allowed to subscribe to the non-public community.")
 
-            community = self.core.InternalOperation("getByIdCommunity", {"_id":_CommunityObjectid})
+        result = self.core.InternalOperation("updateInsideFieldsUser",
+                                                   {"id": _user["_id"], "field_path": "communities_subscribed",
+                                                    "value": _community["_id"]})
 
+        #Inserting the User Id inside Communities Subscribe
+        _user["communities_subscribed"] = _user["communities_subscribed"] +  [_community["_id"]]
+        _community.pop("leaders",None)
+        _community.pop("invitations",None)
+        _community.pop("administrators",None)
+        _community.pop("creator_id",None)
 
-            if (community.get("community_type", 0) > 0) and not _creator:
-                raise Exception("Subscribe User to Community: Join to the private community is not allowed without permission.")
+        #Correct and modified.
+        if result.get("nModified", 0) == 1:
+            return _community
 
-            result = self.core.InternalOperation("updateInsideFieldsUser",
-                                                       {"id": user["_id"], "field_path": "communities_subscribed",
-                                                        "value": _CommunityObjectid})
-            community.pop("leaders",None)
-            community.pop("invitations",None)
-            community.pop("administrators",None)
-            community.pop("creator_id",None)
-
-            if result.get("nModified", 0) == 1:
-                return community
-
-        except Exception, ex:
-            print "Subscribe User to Community has failed, " + ex.message

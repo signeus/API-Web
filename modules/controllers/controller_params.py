@@ -180,8 +180,7 @@ class ControllerParams (object):
 
     def subscribeUser(self):
         return  {"user_id"      :   "mandatory",
-                 "community_id" :   "mandatory",
-                 "status"       :   "mandatory"
+                 "community_id" :   "mandatory"
                  }
 
     def getFirstByFieldsUser(self):
