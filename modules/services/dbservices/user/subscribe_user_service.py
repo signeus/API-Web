@@ -25,7 +25,6 @@ class SubscribeUserService (IService):
 
         self.parameters["community"] = community
         self.parameters["user"] = user
-        ObjectId("5922d70f4186232c22f1cf67")
         if communitiesSubscribed > 0:
             if _CommunityObjectid in communitiesSubscribed:
                 return self.core.InternalOperation("unsubscribeUser2Community", self.parameters)
